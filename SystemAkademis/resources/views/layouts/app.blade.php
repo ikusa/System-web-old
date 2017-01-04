@@ -12,6 +12,9 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
 
     <!-- Scripts -->
     <script>
@@ -19,6 +22,9 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
 </head>
 <body>
     <div id="app">
