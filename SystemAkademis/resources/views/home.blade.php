@@ -16,10 +16,16 @@
       <a href="#">Home</a>
     </li>
     <li>
-      <a href="#">Biodata</a>
+      <a href="#">Pengumuman</a>
     </li>
     <li >
+      <a href="#">Biodata</a>
+    </li>
+    <li>
       <a href="#">Nilai</a>
+    </li>
+    <li>
+      <a href="#">KRS</a>
     </li>
 
   </ul>
@@ -39,24 +45,24 @@
             <td>
               Nama
             </td>
-            <td>
-              01/04/2012
+            <td id='Nama'>
+
             </td>
           </tr>
           <tr >
             <td>
               NIM
             </td>
-            <td>
-              01/04/2012
+            <td id='NIM'>
+
             </td>
           </tr>
           <tr >
             <td>
               Program Studi
             </td>
-            <td>
-              02/04/2012
+            <td id='ProgramStudi'>
+
             </td>
           </tr>
           <tr >
@@ -64,7 +70,7 @@
               IPK
             </td>
             <td>
-              03/04/2012
+              UnderConstrutction
             </td>
           </tr>
 
@@ -78,7 +84,7 @@
     Pertemuan Mahasiswa
   </h2>
   <p>
-    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+    UnderConstruction
   </p>
   <p>
     <a class="btn" href="#">View details »</a>
@@ -88,4 +94,19 @@
 </div>
 </div>
 </div>
+<script>
+  $(document).ready(function(){
+    console.log($('#Email').html())
+    $.get("http://" + window.location.host + "/data?email="+$('#Email').html(),
+    function(data, status) {
+            $("#Nama").html(data[0].nama);
+            $("#NIM").html(data[0].program_studi);
+            $("#ProgramStudi").html(data[0].nim);
+    });
+
+
+
+    });
+
+</script>
 @endsection
