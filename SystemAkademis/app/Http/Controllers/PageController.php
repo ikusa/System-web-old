@@ -15,4 +15,5 @@ class PageController extends Controller
     {
         return view('testing');
     }
+
 }

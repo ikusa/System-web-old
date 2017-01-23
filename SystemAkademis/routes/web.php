@@ -18,3 +18,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('/data', 'HomeController@data');
+Route::get('/biodata', 'BiodataController@index');
