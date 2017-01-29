@@ -28,16 +28,16 @@ class BiodataController extends Controller
       $columns = DB::getSchemaBuilder()->getColumnListing('mahasiswa');
       return view('Biodata',['name' => $columns]);
     }
-    public function data(Request $request)
+    public function coloumn(Request $request)
     {
       $email = $request->input('email');
 
 
-      $mahasiswa = \app\mahasiswa::select('nama','program_studi','nim')
+      $table = \app\mahasiswa::select('*')
              ->where('email', $email)
              ->orderBy('id', 'desc')
              ->take(1)
              ->get();
-        return $mahasiswa ;
+        return $table ;
     }
 }

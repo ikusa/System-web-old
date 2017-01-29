@@ -15,7 +15,9 @@ Route::get('/','PageController@welcome' );
 Route::get('/test','PageController@test');
 
 Auth::routes();
-
+//homepage
 Route::get('/home', 'HomeController@index');
 Route::get('/data', 'HomeController@data');
+//biodatapage
 Route::get('/biodata', 'BiodataController@index');
+Route::get('/coloumn', 'BiodataController@coloumn');
