@@ -12,7 +12,7 @@
 */
 
 Route::get('/','PageController@welcome' );
-Route::get('/test','PageController@test');
+Route::get('/test','PageController@welcome');
 
 Auth::routes();
 //homepage
@@ -21,3 +21,17 @@ Route::get('/data', 'HomeController@data');
 //biodatapage
 Route::get('/biodata', 'BiodataController@index');
 Route::get('/coloumn', 'BiodataController@coloumn');
+
+Route::get('/help',function(){
+   return view('help');
+});
+Route::get('/setting',function(){
+   return view('setting');
+});
+
+Route::get('/krs',function(){
+   return view('krs');
+});
+Route::get('/khs',function(){
+   return view('khs');
+});
