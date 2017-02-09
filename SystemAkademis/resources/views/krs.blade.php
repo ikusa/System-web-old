@@ -157,62 +157,157 @@
 
           </div>
           <br />
-
-          
+		  <a href="" class="btn btn-info btn-lg btn-block"><i class="fa fa-pencil"></i>Tambah Matakuliah</a>
+          <div class="">
             
+            
+            <div class="clearfix"></div>
 
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2>Recent Activities <small>Sessions</small></h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a>
-                        </li>
-                        <li><a href="#">Settings 2</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <div class="dashboard-widget-content">
-
-                    <ul class="list-unstyled timeline widget">
-                      <li>
-                        <div class="block">
-                          <div class="block_content">
-                            <h2 class="title">
-                                              <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
-                                          </h2>
-                            <div class="byline">
-                              <span>13 hours ago</span> by <a>Jane Smith</a>
-                            </div>
-                            <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
-                            </p>
-                          </div>
-                        </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Kartu Rencana Studi</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
-                      
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
                     </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <p>Simple table with project listing with progress and editing options</p>
+
+                    <!-- start project list -->
+                    <table class="table table-striped projects">
+                      <thead>
+                        <tr>
+                          <th style="width: 1%">No</th>
+                          <th style="width: 20%">Kode Mata Kuliah</th>
+                          <th>Nama Mata Kuliah</th>
+                          <th>SKS</th>
+                          <th>Pengajar</th>
+                          <th>Status</th>
+                          <th style="width: 20%">#Edit</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>#</td>
+                          <td>
+                            <a>Pesamakini Backend UI</a>
+                            <br />
+                            <small>Created 01.01.2015</small>
+                          </td>
+                          <td>
+                            <ul class="list-inline">
+                              <li>
+                                <img src="images/user.png" class="avatar" alt="Avatar">
+                              </li>
+                              <li>
+                                <img src="images/user.png" class="avatar" alt="Avatar">
+                              </li>
+                              <li>
+                                <img src="images/user.png" class="avatar" alt="Avatar">
+                              </li>
+                              <li>
+                                <img src="images/user.png" class="avatar" alt="Avatar">
+                              </li>
+                            </ul>
+                          </td>
+                          <td class="project_progress">
+                            <div class="progress progress_sm">
+                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="57"></div>
+                            </div>
+                            <small>57% Complete</small>
+                          </td>
+						  <td class="project_progress">
+                            <div class="progress progress_sm">
+                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="57"></div>
+                            </div>
+                            <small>57% Complete</small>
+                          </td>
+                          <td>
+                            <button type="button" class="btn btn-warning btn-xs">Menunggu Submit</button>
+                          </td>
+                          <td>
+                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>#</td>
+                          <td>
+                            <a>Pesamakini Backend UI</a>
+                            <br />
+                            <small>Created 01.01.2015</small>
+                          </td>
+                          <td>
+                            <ul class="list-inline">
+                              <li>
+                                <img src="images/user.png" class="avatar" alt="Avatar">
+                              </li>
+                              <li>
+                                <img src="images/user.png" class="avatar" alt="Avatar">
+                              </li>
+                            </ul>
+                          </td>
+                          <td class="project_progress">
+                            <div class="progress progress_sm">
+                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="47"></div>
+                            </div>
+                            <small>47% Complete</small>
+                          </td>
+						  <td class="project_progress">
+                            <div class="progress progress_sm">
+                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="57"></div>
+                            </div>
+                            <small>57% Complete</small>
+                          </td>
+                          <td>
+                            <button type="button" class="btn btn-success btn-xs">Success</button>
+                          </td>
+                          <td>
+                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
+                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
+                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                          </td>
+                        </tr>
+                        
+                      </tbody>
+                    </table>
+                    <!-- end project list -->
+
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+        
+
+          
+            
+
+          
 
 
             
             </div>
           </div>
         </div>
+		
         <!-- /page content -->
 
         <!-- footer content -->
