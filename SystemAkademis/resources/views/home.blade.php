@@ -47,7 +47,7 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2>{{ $biodata[0]->nama }}</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -95,7 +95,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="{{env('URL_HOME')}}" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="images/img.jpg" alt="">{{ $biodata[0]->nama }}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -124,23 +124,23 @@
           <div class="row tile_count">
             <div class="col-md-4 col-sm-6 col-xs-8 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Nama</span>
-              <div class="count">John Doe</div>
-              <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+              <div class="count">{{ $biodata[0]->nama }}</div>
+              
             </div>
             <div class="col-md-4 col-sm-6 col-xs-8 tile_stats_count">
               <span class="count_top"><i class="fa fa-clock-o"></i> NIM</span>
-              <div class="count">1400910099</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
+              <div class="count">{{ $biodata[0]->nim }}</div>
+              
             </div>
             <div class="col-md-2 col-sm-2 col-xs-2 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Program Studi</span>
-              <div class="count green">HCI</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+              <div class="count green">{{ $biodata[0]->program_studi }}</div>
+              
             </div>
             <div class="col-md-2 col-sm-2 col-xs-2 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> IPK</span>
-              <div class="count">4</div>
-              <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
+              <div class="count">{{ $biodata[0]->ipk }}</div>
+              
             </div>
            
           </div>
@@ -165,21 +165,11 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Recent Activities <small>Sessions</small></h2>
+                  <h2>Pengumuman </h2>
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a>
-                        </li>
-                        <li><a href="#">Settings 2</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
+                    
                   </ul>
                   <div class="clearfix"></div>
                 </div>
@@ -187,21 +177,22 @@
                   <div class="dashboard-widget-content">
 
                     <ul class="list-unstyled timeline widget">
-                      <li>
+                      @foreach ($pengumuman as $info)
+					  <li>
                         <div class="block">
                           <div class="block_content">
                             <h2 class="title">
-                                              <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
+                                              <a>{{ $info->judul }}</a>
                                           </h2>
                             <div class="byline">
-                              <span>13 hours ago</span> by <a>Jane Smith</a>
+                              <span>{{ $info->date }}</span> by <a>{{ $info->id }}</a>
                             </div>
-                            <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
+                            <p class="excerpt">{{ $info->isi }}
                             </p>
                           </div>
                         </div>
                       </li>
-                      
+                      @endforeach
                     </ul>
                   </div>
                 </div>
@@ -218,7 +209,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            {{env('COPYRIGHT')}}
           </div>
           <div class="clearfix"></div>
         </footer>

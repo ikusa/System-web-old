@@ -23,10 +23,15 @@ class BiodataController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-      $columns = DB::getSchemaBuilder()->getColumnListing('mahasiswa');
-      return view('Biodata',['name' => $columns]);
+		$id = $request->cookie('id');
+		$biodata = \app\mahasiswa::select('*')
+             ->where('id', $id)
+             ->orderBy('id', 'desc')
+             ->take(1)
+             ->get();
+		return view('biodata',['biodata'=>$biodata]);
     }
     public function coloumn(Request $request)
     {

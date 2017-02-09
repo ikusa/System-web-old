@@ -47,7 +47,7 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2>{{ $biodata[0]->nama }}</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -95,7 +95,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="{{env('URL_HOME')}}" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="images/img.jpg" alt="">{{ $biodata[0]->nama }}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -124,23 +124,23 @@
           <div class="row tile_count">
             <div class="col-md-4 col-sm-6 col-xs-8 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Nama</span>
-              <div class="count">John Doe</div>
-              <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+              <div class="count">{{ $biodata[0]->nama }}</div>
+              
             </div>
             <div class="col-md-4 col-sm-6 col-xs-8 tile_stats_count">
               <span class="count_top"><i class="fa fa-clock-o"></i> NIM</span>
-              <div class="count">1400910099</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
+              <div class="count">{{ $biodata[0]->nim }}</div>
+              
             </div>
             <div class="col-md-2 col-sm-2 col-xs-2 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Program Studi</span>
-              <div class="count green">HCI</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+              <div class="count green">{{ $biodata[0]->program_studi }}</div>
+              
             </div>
             <div class="col-md-2 col-sm-2 col-xs-2 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> IPK</span>
-              <div class="count">4</div>
-              <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
+              <div class="count">{{ $biodata[0]->ipk }}</div>
+              
             </div>
            
           </div>
@@ -267,7 +267,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            {{env('COPYRIGHT')}}
           </div>
           <div class="clearfix"></div>
         </footer>

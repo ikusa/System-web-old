@@ -47,7 +47,7 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2>{{ $biodata[0]->nama }}</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -95,7 +95,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="{{env('URL_HOME')}}" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="images/img.jpg" alt="">{{ $biodata[0]->nama }}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -124,23 +124,23 @@
           <div class="row tile_count">
             <div class="col-md-4 col-sm-6 col-xs-8 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Nama</span>
-              <div class="count">John Doe</div>
-              <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+              <div class="count">{{ $biodata[0]->nama }}</div>
+              
             </div>
             <div class="col-md-4 col-sm-6 col-xs-8 tile_stats_count">
               <span class="count_top"><i class="fa fa-clock-o"></i> NIM</span>
-              <div class="count">1400910099</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
+              <div class="count">{{ $biodata[0]->nim }}</div>
+              
             </div>
             <div class="col-md-2 col-sm-2 col-xs-2 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Program Studi</span>
-              <div class="count green">HCI</div>
-              <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+              <div class="count green">{{ $biodata[0]->program_studi }}</div>
+              
             </div>
             <div class="col-md-2 col-sm-2 col-xs-2 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> IPK</span>
-              <div class="count">4</div>
-              <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
+              <div class="count">{{ $biodata[0]->ipk }}</div>
+              
             </div>
            
           </div>
@@ -167,119 +167,119 @@
                         <tr>
                           <th>1</th>
                           <th>Nama</th>
-						  <td>Joshua Setiawan</td>
+						  <td>{{ $biodata[0]->nama }}</td>
                         </tr>
                       
                      
                         <tr>
                           <th>2</th>
                           <th>NIM</th>
-						  <td>1500910005</td>
+						  <td>{{ $biodata[0]->nim }}</td>
                           
                         </tr>
 						
 						 <tr>
                           <th>3</th>
                           <th>Program Studi</th>
-						  <td>1500910005</td>
+						  <td>{{ $biodata[0]->program_studi }}</td>
                           
                         </tr>
 						<tr>
                           <th>4</th>
                           <th>Email</th>
-						  <td>1500910005</td>
+						  <td>{{ $biodata[0]->email }}</td>
                           
                         </tr>
                         <tr>
                           <th>5</th>
                           <th>Agama</th>
-						  <td>HCI</td>
+						  <td>{{ $biodata[0]->agama }}</td>
                         </tr>
 						<tr>
                           <th>6</th>
-                          <th>Tempat lahir</th>
-						  <td>1500910005</td>
+                          <th>Tempat Lahir</th>
+						  <td>{{ $biodata[0]->tempat_lahir }}</td>
                           
                         </tr>
                         <tr>
                           <th>7</th>
                           <th>Jenis Kelamin</th>
-						  <td>HCI</td>
+						  <td>{{ $biodata[0]->jenis_kelamin }}</td>
                         </tr>
 						<tr>
                           <th>8</th>
                           <th>Nama Ibu</th>
-						  <td>HCI</td>
+						  <td>{{ $biodata[0]->nama_ibu }}</td>
                         </tr>
 						<tr>
                           <th>9</th>
                           <th>Tanggal Lahir</th>
-						  <td>HCI</td>
+						  <td>{{ $biodata[0]->tanggal_lahir }}</td>
                         </tr>
 						<tr>
                           <th>10</th>
                           <th>NISN</th>
-						  <td>HCI</td>
+						  <td>{{ $biodata[0]->nisn }}</td>
                         </tr>
 						<tr>
                           <th>11</th>
                           <th>NIK</th>
-						  <td>HCI</td>
+						  <td>{{ $biodata[0]->nik }}</td>
                         </tr>
 						<tr>
                           <th>12</th>
                           <th>NPWP</th>
-						  <td>HCI</td>
+						  <td>{{ $biodata[0]->npwp }}</td>
                         </tr>
 						<tr>
                           <th>13</th>
                           <th>Kewarganegaraan</th>
-						  <td>HCI</td>
+						  <td>{{ $biodata[0]->kewarganegaraan }}</td>
                         </tr>
 						<tr>
                           <th>14</th>
                           <th>Jalan</th>
-						  <td>HCI</td>
+						  <td>{{ $biodata[0]->jalan }}</td>
                         </tr>
 						<tr>
                           <th>15</th>
                           <th>Dusun</th>
-						  <td>HCI</td>
+						  <td>{{ $biodata[0]->dusun }}</td>
                         </tr>
 						<tr>
                           <th>16</th>
                           <th>RT</th>
-						  <td>HCI</td>
+						  <td>{{ $biodata[0]->rt }}</td>
                         </tr>
 						<tr>
                           <th>17</th>
                           <th>RW</th>
-						  <td>HCI</td>
+						  <td>{{ $biodata[0]->rw }}</td>
                         </tr>
 						<tr>
                           <th>18</th>
                           <th>Kodepos</th>
-						  <td>HCI</td>
+						  <td>{{ $biodata[0]->kodepos }}</td>
                         </tr>
 						<tr>
                           <th>19</th>
-                          <th>Kelurahan</th>
-						  <td>HCI</td>
+                          <th>Keluarahan</th>
+						  <td>{{ $biodata[0]->kelurahan }}</td>
                         </tr>
 						<tr>
                           <th>20</th>
                           <th>Kecamatan</th>
-						  <td>HCI</td>
+						  <td>{{ $biodata[0]->kecamatan }}</td>
                         </tr>
 						<tr>
                           <th>21</th>
                           <th>Jenis Tinggal</th>
-						  <td>HCI</td>
+						  <td>{{ $biodata[0]->jenis_tinggal }}</td>
                         </tr>
 						<tr>
                           <th>22</th>
                           <th>Transportasi</th>
-						  <td>HCI</td>
+						  <td>{{ $biodata[0]->transportasi }}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -296,7 +296,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            {{env('COPYRIGHT')}}
           </div>
           <div class="clearfix"></div>
         </footer>

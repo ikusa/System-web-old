@@ -157,17 +157,11 @@
 
           </div>
           <br />
-		  <a href="{{env('URL_TAMBAH_KRS')}}" class="btn btn-info btn-lg btn-block"><i class="fa fa-pencil"></i>Tambah Matakuliah</a>
-          <div class="">
-            
-            
-            <div class="clearfix"></div>
 
-            <div class="row">
-              <div class="col-md-12">
+          <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Kartu Rencana Studi</h2>
+                    <h2>Plus Table Design</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -186,128 +180,51 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-
-                    <p>Simple table with project listing with progress and editing options</p>
-
-                    <!-- start project list -->
-                    <table class="table table-striped projects">
+                    <p class="text-muted font-13 m-b-30">
+                      DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function: <code>$().DataTable();</code>
+                    </p>
+                    <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action">
                       <thead>
                         <tr>
-                          <th style="width: 1%">No</th>
-                          <th style="width: 20%">Kode Mata Kuliah</th>
-                          <th>Nama Mata Kuliah</th>
+                          <th>
+							 <th><input type="checkbox" id="check-all" class="flat"></th>
+						  </th>
+                          <th>Kode</th>
+                          <th>Nama</th>
                           <th>SKS</th>
-                          <th>Pengajar</th>
-                          <th>Status</th>
-                          <th style="width: 20%">#Edit</th>
+                          <th>Semester</th>
+                          <th>Dosen</th>
+                          <th>Prodi</th>
                         </tr>
                       </thead>
+
+
                       <tbody>
+					  @foreach ($course as $pelajaran)
                         <tr>
-                          <td>#</td>
                           <td>
-                            <a>Pesamakini Backend UI</a>
-                            <br />
-                            <small>Created 01.01.2015</small>
-                          </td>
-                          <td>
-                            <ul class="list-inline">
-                              <li>
-                                <img src="images/user.png" class="avatar" alt="Avatar">
-                              </li>
-                              <li>
-                                <img src="images/user.png" class="avatar" alt="Avatar">
-                              </li>
-                              <li>
-                                <img src="images/user.png" class="avatar" alt="Avatar">
-                              </li>
-                              <li>
-                                <img src="images/user.png" class="avatar" alt="Avatar">
-                              </li>
-                            </ul>
-                          </td>
-                          <td class="project_progress">
-                            <div class="progress progress_sm">
-                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="57"></div>
-                            </div>
-                            <small>57% Complete</small>
-                          </td>
-						  <td class="project_progress">
-                            <div class="progress progress_sm">
-                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="57"></div>
-                            </div>
-                            <small>57% Complete</small>
-                          </td>
-                          <td>
-                            <button type="button" class="btn btn-warning btn-xs">Menunggu Submit</button>
-                          </td>
-                          <td>
-                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                          </td>
+							 <th><input type="checkbox" id="check-all" class="flat"></th>
+						  </td>
+                          <td>{{ $pelajaran->kodeMK }}</td>
+                          <td>{{ $pelajaran->namaMK }}</td>
+                          <td>{{ $pelajaran->sks }}</td>
+                          <td>{{ $pelajaran->id_term }}</td>
+                          <td>{{ $pelajaran->id_dosen }}</td>
+                          <td>{{ $pelajaran->program_studi }}</td>
                         </tr>
-                        <tr>
-                          <td>#</td>
-                          <td>
-                            <a>Pesamakini Backend UI</a>
-                            <br />
-                            <small>Created 01.01.2015</small>
-                          </td>
-                          <td>
-                            <ul class="list-inline">
-                              <li>
-                                <img src="images/user.png" class="avatar" alt="Avatar">
-                              </li>
-                              <li>
-                                <img src="images/user.png" class="avatar" alt="Avatar">
-                              </li>
-                            </ul>
-                          </td>
-                          <td class="project_progress">
-                            <div class="progress progress_sm">
-                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="47"></div>
-                            </div>
-                            <small>47% Complete</small>
-                          </td>
-						  <td class="project_progress">
-                            <div class="progress progress_sm">
-                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="57"></div>
-                            </div>
-                            <small>57% Complete</small>
-                          </td>
-                          <td>
-                            <button type="button" class="btn btn-success btn-xs">Success</button>
-                          </td>
-                          <td>
-                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                          </td>
-                        </tr>
-                        
+                        @endforeach
                       </tbody>
                     </table>
-                    <!-- end project list -->
-
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        
 
-          
             
-
-          
-
 
             
             </div>
           </div>
         </div>
-		
         <!-- /page content -->
 
         <!-- footer content -->

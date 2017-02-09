@@ -2,11 +2,12 @@
 
 namespace app\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use app\Mahasiswa;
+use app\Course;
 
-class HomeController extends Controller
+class KRSStudentController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -31,23 +32,20 @@ class HomeController extends Controller
              ->orderBy('id', 'desc')
              ->take(1)
              ->get();
-		 $pengumuman = DB::table('pengumuman')
-                     ->select(DB::raw('user_id as id,judul as judul,isi as isi,date_create as date'))
-                     ->where('isActive', '=', 1)
-                     ->orderBy('date_create','DESC')
-                     ->get();
-        return view('home', ['pengumuman' => $pengumuman,'biodata'=>$biodata]);
+		$course = \app\course::select('*')
+             ->get();
+		return view('krsstudent',['biodata'=>$biodata,'course'=>$course]);
     }
-    public function data(Request $request)
+    public function coloumn(Request $request)
     {
       $email = $request->input('email');
 
 
-      $mahasiswa = \app\mahasiswa::select('nama','program_studi','nim')
+      $table = \app\mahasiswa::select('*')
              ->where('email', $email)
              ->orderBy('id', 'desc')
              ->take(1)
              ->get();
-        return $mahasiswa ;
+        return $table ;
     }
 }
