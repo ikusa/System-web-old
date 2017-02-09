@@ -36,5 +36,6 @@ Route::get('/setting','SettingController@index');
 Route::get('/krsstudent','KRSStudentController@index');
 Route::get('/login','LoginController@index');
 Route::get('/krs','KRSController@index');
+Route::post('/submit','SubmitController@index');
 
 Route::get('/khs','KHSController@index');

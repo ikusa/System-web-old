@@ -12,6 +12,7 @@ class LoginController extends Controller
     public function index()
     {
 		$response = new Response('Hello World');
+		$cars = array("Volvo", "BMW", "Toyota");
 		$response->withCookie(cookie('id', '1', 60));
 		return $response;
 	}

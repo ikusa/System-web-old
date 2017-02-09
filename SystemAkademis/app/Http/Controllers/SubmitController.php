@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use app\Mahasiswa;
 use app\Course;
 
-class KRSStudentController extends Controller
+class SubmitController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,16 +26,15 @@ class KRSStudentController extends Controller
      */
     public function index(Request $request)
     {
-		$id = $request->cookie('id');
-		$biodata = \app\mahasiswa::select('*')
-             ->where('id', $id)
-             ->orderBy('id', 'desc')
-             ->take(1)
-             ->get();
-		$course = \app\course::select('*')
-			 ->where('program_studi', $biodata[0]->program_studi)
-             ->get();
-		return view('krsstudent',['biodata'=>$biodata,'course'=>$course]);
+		
+		$length=count($request->input());
+		$arrays=array("a");
+		for($i=1;$i<$length;$i++)
+		{
+			array_push($arrays,$request->input('checkbox'.i));
+			
+		}
+		print_r($a);
     }
     public function coloumn(Request $request)
     {
