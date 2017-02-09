@@ -32,9 +32,24 @@ class KRSController extends Controller
              ->orderBy('id', 'desc')
              ->take(1)
              ->get();
-		$course = \app\course::select('*')
-             ->get();
-		return view('krs',['biodata'=>$biodata,'course'=>$course]);
+			 if($request->cookie('mkrs')!=null)
+			 {
+				 $idKRS = $request->cookie('mkrs');
+				 $array=array();
+				 foreach($idKRS as $idK)
+				 {
+					 $course = \app\course::select('*')
+							->where('id', $idK)
+							->get();
+					array_push($array,$course);
+				 }
+
+			 }
+			 else
+			 {
+				 return 0;
+			 }
+		return view('krs',['biodata'=>$biodata,'course'=>$array]);
     }
     public function coloumn(Request $request)
     {

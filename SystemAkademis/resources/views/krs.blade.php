@@ -178,7 +178,7 @@
                   </div>
                   <div class="x_content">
 
-                    <p>Simple table with project listing with progress and editing options</p>
+                    <p>Pastikan mata kuliah yang dipilih sudah benar lalu tekan tombol submit</p>
 
                     <!-- start project list -->
                     <table class="table table-striped projects">
@@ -194,21 +194,22 @@
                         </tr>
                       </thead>
                       <tbody>
+					  @foreach ($course as $kuliah)
                         <tr>
-                          <td>1</td>
+                          <td>{{$kuliah[0]->kodeMK}}</td>
                           <td>
-                            <a>Pesamakini Backend UI</a>
+                            <a>{{$kuliah[0]->namaMK}}</a>
                             <br />
-                            <small>Created 01.01.2015</small>
+                            
                           </td>
                           <td>
-                            <a>Pesamakini Backend UI</a>
+                            <a>{{$kuliah[0]->sks}}</a>
                           </td>
                           <td class="project_progress">
-                            <a>Pesamakini Backend UI</a>
+                            <a>{{$kuliah[0]->id_term}}</a>
                           </td>
 						  <td class="project_progress">
-                            <a>Pesamakini Backend UI</a>
+                            <a>{{$kuliah[0]->id_dosen}}</a>
                           </td>
                           <td>
                             <button type="button" class="btn btn-warning btn-xs">Menunggu Submit</button>
@@ -217,15 +218,19 @@
                             <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                           </td>
                         </tr>
-                        
+                        @endforeach
                       </tbody>
                     </table>
                     <!-- end project list -->
-
                   </div>
                 </div>
               </div>
             </div>
+
+			<form method='post'>
+				<input type='submit' class="btn btn-success btn-lg" name='submit' value='Submit' onclick="return confirm('Mata kuliah yang sudah disubmit tidak bisa diubah.\nApakah anda yakin ingin submit mata kuliah?')"/>
+			</form>
+
           </div>
         
 

@@ -28,13 +28,13 @@ class SubmitController extends Controller
     {
 		
 		$length=count($request->input());
-		$arrays=array("a");
+		$array=array();
 		for($i=1;$i<$length;$i++)
 		{
-			array_push($arrays,$request->input('checkbox'.i));
+			array_push($array,$request->input('checkbox'.$i));
 			
 		}
-		print_r($a);
+		return redirect('krs')->withCookie(cookie('mkrs', $array, 600));
     }
     public function coloumn(Request $request)
     {
