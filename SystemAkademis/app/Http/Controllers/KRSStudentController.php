@@ -32,8 +32,20 @@ class KRSStudentController extends Controller
              ->orderBy('id', 'desc')
              ->take(1)
              ->get();
+    //looping course yang sudah diambil
+    $idKRS=\app\student_course::select('id_course')
+                ->where('id_mahasiswa',$id)
+                ->get();
+    $array=array();
+    foreach($idKRS as $idK)
+      {
+        array_push($array,$idK->id_course);
+      }
+
+    //ambil course dari database
 		$course = \app\course::select('*')
 			 ->where('program_studi', $biodata[0]->program_studi)
+       ->whereNotIn('id', $array)//menghindari menampilkan course yang sudah diambil
              ->get();
 		return view('krsstudent',['biodata'=>$biodata,'course'=>$course]);
     }

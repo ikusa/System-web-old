@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use app\Mahasiswa;
 use app\Course;
+use Illuminate\Support\Facades\Log;
 
 class KRSController extends Controller
 {
@@ -32,7 +33,7 @@ class KRSController extends Controller
              ->orderBy('id', 'desc')
              ->take(1)
              ->get();
-			 if($request->cookie('mkrs')!=null)
+			 /*if($request->cookie('mkrs')!=null)
 			 {
 				 $idKRS = $request->cookie('mkrs');
 				 $array=array();
@@ -48,7 +49,19 @@ class KRSController extends Controller
 			 else
 			 {
 				 return 0;
-			 }
+			 }*/
+       $idKRS = \app\student_course::select('id_course')
+              ->where('id_mahasiswa',$id)
+              ->get();
+       $array=array();
+       foreach($idKRS as $idK)
+       {
+         $course = \app\course::select('*')
+            ->where('id', $idK->id_course)
+            ->get();
+        array_push($array,$course);
+       }
+
 		return view('krs',['biodata'=>$biodata,'course'=>$array]);
     }
     public function coloumn(Request $request)

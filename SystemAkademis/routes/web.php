@@ -14,7 +14,7 @@
 Route::get('/','PageController@welcome' );
 Route::get('/test','PageController@welcome');
 
-//Auth::routes();
+Auth::routes();
 //homepage
 Route::get('/home', 'HomeController@index');
 Route::get('/data', 'HomeController@data');
@@ -23,18 +23,13 @@ Route::get('/biodata', 'BiodataController@index');
 Route::get('/coloumn', 'BiodataController@coloumn');
 
 
-Route::get('/krs',function(){
-   return view('krs');
-});
-Route::get('/khs',function(){
-   return view('khs');
-});
+
 
 Route::get('/help','HelpController@index');
 
 Route::get('/setting','SettingController@index');
 Route::get('/krsstudent','KRSStudentController@index');
-Route::get('/login','LoginController@index');
+//Route::get('/login','LoginController@index');
 Route::get('/krs','KRSController@index');
 Route::post('/submit','SubmitController@index');
 

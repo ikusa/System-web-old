@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use app\Mahasiswa;
 use app\Course;
-
+use Illuminate\Support\Facades\Log;
 class SubmitController extends Controller
 {
     /**
@@ -26,16 +26,21 @@ class SubmitController extends Controller
      */
     public function index(Request $request)
     {
-		
+    $id = $request->cookie('id');
 		$length=count($request->input());
-		$array=array();
+
+    //loop insert array id_course ke table student_course
 		for($i=1;$i<$length;$i++)
 		{
-			array_push($array,$request->input('checkbox'.$i));
-			
+      DB::table('student_course')->insert(
+        ['id_mahasiswa' => $id, 'id_course' => $request->input('checkbox'.$i)]
+      );
+
 		}
-		return redirect('krs')->withCookie(cookie('mkrs', $array, 600));
+
+		return redirect('krs');
     }
+
     public function coloumn(Request $request)
     {
       $email = $request->input('email');

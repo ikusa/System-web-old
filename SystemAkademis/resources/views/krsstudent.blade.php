@@ -17,7 +17,7 @@
     <link href="{{ url('../vendors/nprogress/nprogress.css') }}" rel="stylesheet">
     <!-- iCheck -->
     <link href="{{ url('../vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
-	
+
     <!-- bootstrap-progressbar -->
     <link href="{{ url('../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
     <!-- JQVMap -->
@@ -60,26 +60,26 @@
                 <h3>Menu Utama</h3>
                 <ul class="nav side-menu">
                   <li><a href="{{env('URL_HOME')}}"><i class="fa fa-home"></i> Home </a>
-                    
+
                   </li>
                   <li><a href="{{env('URL_KHS')}}"><i class="fa fa-edit"></i> KHS </a>
-                   
+
                   </li>
                   <li><a href="{{env('URL_KRS')}}"><i class="fa fa-desktop"></i> KRS </a>
-                    
+
                   </li>
                   <li><a href="{{env('URL_BIODATA')}}"><i class="fa fa-table"></i> BIODATA </a>
-                    
+
                   </li>
-                               
-                  
+
+
               </div>
 
             </div>
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
-            
+
             <!-- /menu footer buttons -->
           </div>
         </div>
@@ -99,10 +99,10 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                   
+
                     <li>
                       <a href="{{env('URL_SETTING')}}">
-                       
+
                         <span>Settings</span>
                       </a>
                     </li>
@@ -111,7 +111,7 @@
                   </ul>
                 </li>
 
-                
+
               </ul>
             </nav>
           </div>
@@ -125,24 +125,24 @@
             <div class="col-md-4 col-sm-6 col-xs-8 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Nama</span>
               <div class="count">{{ $biodata[0]->nama }}</div>
-              
+
             </div>
             <div class="col-md-4 col-sm-6 col-xs-8 tile_stats_count">
               <span class="count_top"><i class="fa fa-clock-o"></i> NIM</span>
               <div class="count">{{ $biodata[0]->nim }}</div>
-              
+
             </div>
             <div class="col-md-2 col-sm-2 col-xs-2 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Program Studi</span>
               <div class="count green">{{ $biodata[0]->program_studi }}</div>
-              
+
             </div>
             <div class="col-md-2 col-sm-2 col-xs-2 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> IPK</span>
               <div class="count">{{ $biodata[0]->ipk }}</div>
-              
+
             </div>
-           
+
           </div>
           <!-- /top tiles -->
 
@@ -150,7 +150,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="dashboard_graph">
 
-                
+
                 <div class="clearfix"></div>
               </div>
             </div>
@@ -165,7 +165,7 @@
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
-                      
+
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -177,9 +177,9 @@
                     <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action">
                       <thead>
                         <tr>
-                          
+
 							 <th>Add</th>
-						  
+
                           <th>Kode</th>
                           <th>Nama</th>
                           <th>SKS</th>
@@ -192,7 +192,7 @@
 
                       <tbody>
 					  <form action = "/submit" method = "post">
-					  <input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>">
+					   {{ csrf_field() }}
 
 					  @foreach ($course as $pelajaran)
                         <tr>
@@ -218,7 +218,7 @@
                   </form>
 
 
-            
+
             </div>
           </div>
         </div>
@@ -275,6 +275,6 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-	
+
   </body>
 </html>
