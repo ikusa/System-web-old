@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 09 Feb 2017 pada 14.38
--- Versi Server: 5.6.27-log
--- PHP Version: 7.0.4
+-- Generation Time: Feb 19, 2017 at 03:54 PM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `websu`
+-- Database: `systemwebsu`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `course`
+-- Table structure for table `course`
 --
 
 CREATE TABLE `course` (
@@ -38,18 +38,18 @@ CREATE TABLE `course` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `course`
+-- Dumping data for table `course`
 --
 
 INSERT INTO `course` (`id`, `kodeMK`, `namaMK`, `sks`, `id_term`, `id_dosen`, `status`, `program_studi`) VALUES
-(1, 123, 'dasd', 3, 1, 1, '1', 'HCI'),
-(2, 234, 'asdasd', 2, 1, 1, '1', 'HCI'),
-(3, 324, 'dsfsdf', 2, 1, 1, '1', 'CHE');
+(1, 123, 'Pemograman Dasar\r\n', 3, 1, 1, '1', 'HCI'),
+(2, 234, 'Pengantar Informatika', 2, 1, 1, '1', 'HCI'),
+(3, 324, 'Pengantar Kimia', 2, 1, 1, '1', 'CHE');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `dosen`
+-- Table structure for table `dosen`
 --
 
 CREATE TABLE `dosen` (
@@ -59,7 +59,7 @@ CREATE TABLE `dosen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `dosen`
+-- Dumping data for table `dosen`
 --
 
 INSERT INTO `dosen` (`id`, `nama`, `program_studi`) VALUES
@@ -68,7 +68,7 @@ INSERT INTO `dosen` (`id`, `nama`, `program_studi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `mahasiswa`
+-- Table structure for table `mahasiswa`
 --
 
 CREATE TABLE `mahasiswa` (
@@ -76,13 +76,15 @@ CREATE TABLE `mahasiswa` (
   `user_id` varchar(45) DEFAULT NULL,
   `nama` text NOT NULL,
   `nim` int(11) NOT NULL,
-  `program_studi` text NOT NULL,
+  `program_studi` varchar(45) NOT NULL,
   `email` text NOT NULL,
+  `no_telephone` text,
   `agama` text,
   `tempat_lahir` text,
   `jenis_kelamin` enum('Laki-Laki','Perempuan') DEFAULT NULL,
   `ipk` double DEFAULT NULL,
   `nama_ibu` text,
+  `nama_ayah` text,
   `tanggal_lahir` date DEFAULT NULL,
   `nisn` text,
   `nik` text,
@@ -97,24 +99,24 @@ CREATE TABLE `mahasiswa` (
   `kecamatan` text,
   `jenis_tinggal` text,
   `transportasi` text,
-  `telpon` text,
   `hp` text,
   `status_kps` text,
-  `no_kps` text
+  `no_kps` text,
+  `angkatan` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `mahasiswa`
+-- Dumping data for table `mahasiswa`
 --
 
-INSERT INTO `mahasiswa` (`id`, `user_id`, `nama`, `nim`, `program_studi`, `email`, `agama`, `tempat_lahir`, `jenis_kelamin`, `ipk`, `nama_ibu`, `tanggal_lahir`, `nisn`, `nik`, `npwp`, `kewarganegaraan`, `jalan`, `dusun`, `rt`, `rw`, `kodepos`, `kelurahan`, `kecamatan`, `jenis_tinggal`, `transportasi`, `telpon`, `hp`, `status_kps`, `no_kps`) VALUES
-(1, '1', 'Joshua Setiawan', 1500910005, 'HCI', 'joshuasetiawan@ymail.com', 'asdd', 'czxv', 'Laki-Laki', 4, 'zvdsf', NULL, 'dsfasdfa', 'fasdfas', 'fsadfas', 'fsafsadf', 'sdf', 'asdfasdf', 'sdfasf', 'asdfadsf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, '2', 'Adi Budi Charlie', 1432310002, 'HCI', 'abcde@abcde.com', 'anjkkdn', 'bkbaskbfd', 'Laki-Laki', 2.5, 'jhjasjdb', NULL, 'andnsjkabd', 'kjbkbsak ', 'kjnkjnsajkdnk', 'nkjnkjasandkjn', 'njnsnnkj', 'jnksankn', 'jknaasdjk', 'jknsnkj', 'jnkjnasdjk', 'kjadns', 'jknjasdjn', 'njasdjkn', 'kjnnkasd', 'kjnaskjdnjk', 'jknjasdnj', '', NULL);
+INSERT INTO `mahasiswa` (`id`, `user_id`, `nama`, `nim`, `program_studi`, `email`, `no_telephone`, `agama`, `tempat_lahir`, `jenis_kelamin`, `ipk`, `nama_ibu`, `nama_ayah`, `tanggal_lahir`, `nisn`, `nik`, `npwp`, `kewarganegaraan`, `jalan`, `dusun`, `rt`, `rw`, `kodepos`, `kelurahan`, `kecamatan`, `jenis_tinggal`, `transportasi`, `hp`, `status_kps`, `no_kps`, `angkatan`) VALUES
+(1, '1', 'Joshua Setiawan', 1500910005, 'HCI', 'joshuasetiawan@ymail.com', NULL, 'asdd', 'czxv', 'Laki-Laki', 4, 'zvdsf', NULL, NULL, 'dsfasdfa', 'fasdfas', 'fsadfas', 'fsafsadf', 'sdf', 'asdfasdf', 'sdfasf', 'asdfadsf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, '2', 'Adi Budi Charlie', 1432310002, 'HCI', 'abcde@abcde.com', NULL, 'anjkkdn', 'bkbaskbfd', 'Laki-Laki', 2.5, 'jhjasjdb', NULL, NULL, 'andnsjkabd', 'kjbkbsak ', 'kjnkjnsajkdnk', 'nkjnkjasandkjn', 'njnsnnkj', 'jnksankn', 'jknaasdjk', 'jknsnkj', 'jnkjnasdjk', 'kjadns', 'jknjasdjn', 'njasdjkn', 'kjnnkasd', 'jknjasdnj', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -124,7 +126,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -134,7 +136,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `nilai`
+-- Table structure for table `nilai`
 --
 
 CREATE TABLE `nilai` (
@@ -150,7 +152,7 @@ CREATE TABLE `nilai` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `password_resets`
+-- Table structure for table `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -160,7 +162,7 @@ CREATE TABLE `password_resets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `password_resets`
+-- Dumping data for table `password_resets`
 --
 
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
@@ -169,7 +171,7 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengumuman`
+-- Table structure for table `pengumuman`
 --
 
 CREATE TABLE `pengumuman` (
@@ -182,7 +184,7 @@ CREATE TABLE `pengumuman` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data untuk tabel `pengumuman`
+-- Dumping data for table `pengumuman`
 --
 
 INSERT INTO `pengumuman` (`id`, `user_id`, `judul`, `isi`, `date_create`, `isActive`) VALUES
@@ -194,7 +196,28 @@ INSERT INTO `pengumuman` (`id`, `user_id`, `judul`, `isi`, `date_create`, `isAct
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `term`
+-- Table structure for table `student_course`
+--
+
+CREATE TABLE `student_course` (
+  `id` int(11) NOT NULL,
+  `id_mahasiswa` int(11) DEFAULT NULL,
+  `id_course` int(11) DEFAULT NULL,
+  `final` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `student_course`
+--
+
+INSERT INTO `student_course` (`id`, `id_mahasiswa`, `id_course`, `final`) VALUES
+(3, 1, 1, NULL),
+(4, 1, 2, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `term`
 --
 
 CREATE TABLE `term` (
@@ -204,7 +227,7 @@ CREATE TABLE `term` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `term`
+-- Dumping data for table `term`
 --
 
 INSERT INTO `term` (`id`, `term`, `kode_dikti`) VALUES
@@ -216,7 +239,7 @@ INSERT INTO `term` (`id`, `term`, `kode_dikti`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -230,7 +253,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
@@ -290,6 +313,14 @@ ALTER TABLE `pengumuman`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `student_course`
+--
+ALTER TABLE `student_course`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_mahasiswa` (`id_mahasiswa`),
+  ADD KEY `id_course` (`id_course`);
+
+--
 -- Indexes for table `term`
 --
 ALTER TABLE `term`
@@ -337,6 +368,11 @@ ALTER TABLE `nilai`
 ALTER TABLE `pengumuman`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
+-- AUTO_INCREMENT for table `student_course`
+--
+ALTER TABLE `student_course`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT for table `term`
 --
 ALTER TABLE `term`
@@ -347,22 +383,29 @@ ALTER TABLE `term`
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `course`
+-- Constraints for table `course`
 --
 ALTER TABLE `course`
   ADD CONSTRAINT `course_ibfk_1` FOREIGN KEY (`id_term`) REFERENCES `term` (`id`),
   ADD CONSTRAINT `course_ibfk_2` FOREIGN KEY (`id_dosen`) REFERENCES `dosen` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `nilai`
+-- Constraints for table `nilai`
 --
 ALTER TABLE `nilai`
   ADD CONSTRAINT `nilai_ibfk_1` FOREIGN KEY (`id_mahasiswa`) REFERENCES `mahasiswa` (`id`),
   ADD CONSTRAINT `nilai_ibfk_2` FOREIGN KEY (`id_course`) REFERENCES `course` (`id`);
+
+--
+-- Constraints for table `student_course`
+--
+ALTER TABLE `student_course`
+  ADD CONSTRAINT `student_course_ibfk_1` FOREIGN KEY (`id_mahasiswa`) REFERENCES `mahasiswa` (`id`),
+  ADD CONSTRAINT `student_course_ibfk_2` FOREIGN KEY (`id_course`) REFERENCES `course` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
