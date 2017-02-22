@@ -23,18 +23,17 @@ Route::get('/biodata', 'BiodataController@index');
 Route::get('/coloumn', 'BiodataController@coloumn');
 
 
-Route::get('/krs',function(){
-   return view('krs');
-});
-Route::get('/khs',function(){
-   return view('khs');
-});
+
 
 Route::get('/help','HelpController@index');
 
 Route::get('/setting','SettingController@index');
 Route::get('/krsstudent','KRSStudentController@index');
+<<<<<<< HEAD
 //Route::get('/login','LoginController@index');
+=======
+//login','LoginController@index');
+>>>>>>> origin/master
 Route::get('/krs','KRSController@index');
 Route::post('/submit','SubmitController@index');
 
