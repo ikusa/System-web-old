@@ -27,20 +27,20 @@ class SubmitController extends Controller
     public function index(Request $request)
     {
     $id = $request->cookie('id');
-		$length=count($request->input());
-
+		$length=count($request->input('checkbox'));
+    //input array id krs ke variable idkrs
+    $idkrs = $request->input('checkbox');
     //loop insert array id_course ke table student_course
-		for($i=1;$i<$length;$i++)
+		for($i=0;$i<$length;$i++)
 		{
       DB::table('student_course')->insert(
-        ['id_mahasiswa' => $id, 'id_course' => $request->input('checkbox'.$i)]
+        ['id_mahasiswa' => $id, 'id_course' => $idkrs[$i]]
       );
 
 		}
-
 		return redirect('krs');
     }
-
+    //ini buat apa ya ? EXTRA ATTENTION HERE
     public function coloumn(Request $request)
     {
       $email = $request->input('email');

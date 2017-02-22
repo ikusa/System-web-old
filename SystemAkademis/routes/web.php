@@ -29,7 +29,7 @@ Route::get('/help','HelpController@index');
 
 Route::get('/setting','SettingController@index');
 Route::get('/krsstudent','KRSStudentController@index');
-//Route::get('/login','LoginController@index');
+//login','LoginController@index');
 Route::get('/krs','KRSController@index');
 Route::post('/submit','SubmitController@index');
 

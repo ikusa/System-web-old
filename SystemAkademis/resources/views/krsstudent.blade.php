@@ -198,7 +198,7 @@
                         <tr>
                           <td>
 
-							 <input type="checkbox"  name="checkbox{{ $pelajaran->id }}" value="{{ $pelajaran->id }}">
+							 <input type="checkbox"  name="checkbox[]" value="{{ $pelajaran->id }}">
 							 <span ><i ></i></span>
 						  </td>
                           <td>{{ $pelajaran->kodeMK }}</td>

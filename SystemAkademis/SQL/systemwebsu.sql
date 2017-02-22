@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 19, 2017 at 03:54 PM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 5.6.24
+-- Generation Time: Feb 22, 2017 at 11:22 AM
+-- Server version: 10.1.10-MariaDB
+-- PHP Version: 7.0.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -33,7 +33,7 @@ CREATE TABLE `course` (
   `sks` int(11) NOT NULL,
   `id_term` int(11) NOT NULL,
   `id_dosen` int(11) NOT NULL,
-  `status` varchar(1) NOT NULL,
+  `status_terbuka` varchar(1) NOT NULL,
   `program_studi` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -41,7 +41,7 @@ CREATE TABLE `course` (
 -- Dumping data for table `course`
 --
 
-INSERT INTO `course` (`id`, `kodeMK`, `namaMK`, `sks`, `id_term`, `id_dosen`, `status`, `program_studi`) VALUES
+INSERT INTO `course` (`id`, `kodeMK`, `namaMK`, `sks`, `id_term`, `id_dosen`, `status_terbuka`, `program_studi`) VALUES
 (1, 123, 'Pemograman Dasar\r\n', 3, 1, 1, '1', 'HCI'),
 (2, 234, 'Pengantar Informatika', 2, 1, 1, '1', 'HCI'),
 (3, 324, 'Pengantar Kimia', 2, 1, 1, '1', 'CHE');
@@ -54,7 +54,7 @@ INSERT INTO `course` (`id`, `kodeMK`, `namaMK`, `sks`, `id_term`, `id_dosen`, `s
 
 CREATE TABLE `dosen` (
   `id` int(11) NOT NULL,
-  `nama` text NOT NULL,
+  `namaDosen` text NOT NULL,
   `program_studi` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -62,8 +62,8 @@ CREATE TABLE `dosen` (
 -- Dumping data for table `dosen`
 --
 
-INSERT INTO `dosen` (`id`, `nama`, `program_studi`) VALUES
-(1, 'asdas', 'HCI');
+INSERT INTO `dosen` (`id`, `namaDosen`, `program_studi`) VALUES
+(1, 'Handri Santoso', 'HCI');
 
 -- --------------------------------------------------------
 
@@ -149,6 +149,14 @@ CREATE TABLE `nilai` (
   `status` varchar(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `nilai`
+--
+
+INSERT INTO `nilai` (`id`, `id_mahasiswa`, `id_course`, `id_tipenilai`, `percentage`, `nilai`, `status`) VALUES
+(1, 1, 1, NULL, NULL, 86, NULL),
+(2, 1, 2, NULL, NULL, 80, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -211,8 +219,7 @@ CREATE TABLE `student_course` (
 --
 
 INSERT INTO `student_course` (`id`, `id_mahasiswa`, `id_course`, `final`) VALUES
-(3, 1, 1, NULL),
-(4, 1, 2, NULL);
+(30, 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -361,7 +368,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `nilai`
 --
 ALTER TABLE `nilai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `pengumuman`
 --
@@ -371,7 +378,7 @@ ALTER TABLE `pengumuman`
 -- AUTO_INCREMENT for table `student_course`
 --
 ALTER TABLE `student_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `term`
 --

@@ -45,6 +45,7 @@ class KRSStudentController extends Controller
     //ambil course dari database
 		$course = \app\course::select('*')
 			 ->where('program_studi', $biodata[0]->program_studi)
+       ->where('status_terbuka',1)
        ->whereNotIn('id', $array)//menghindari menampilkan course yang sudah diambil
              ->get();
 		return view('krsstudent',['biodata'=>$biodata,'course'=>$course]);
