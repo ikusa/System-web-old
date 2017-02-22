@@ -14,7 +14,7 @@
 Route::get('/','PageController@welcome' );
 Route::get('/test','PageController@welcome');
 
-//Auth::routes();
+Auth::routes();
 //homepage
 Route::get('/home', 'HomeController@index');
 Route::get('/data', 'HomeController@data');
@@ -34,7 +34,7 @@ Route::get('/help','HelpController@index');
 
 Route::get('/setting','SettingController@index');
 Route::get('/krsstudent','KRSStudentController@index');
-Route::get('/login','LoginController@index');
+//Route::get('/login','LoginController@index');
 Route::get('/krs','KRSController@index');
 Route::post('/submit','SubmitController@index');
 
