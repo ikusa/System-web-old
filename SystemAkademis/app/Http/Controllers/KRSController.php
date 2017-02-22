@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use app\Mahasiswa;
 use app\Course;
+use Illuminate\Support\Facades\Log;
 
 class KRSController extends Controller
 {
@@ -32,7 +33,9 @@ class KRSController extends Controller
              ->orderBy('id', 'desc')
              ->take(1)
              ->get();
-			 if($request->cookie('mkrs')!=null)
+
+             //bekas testing dengan cookies
+        /*if($request->cookie('mkrs')!=null)
 			 {
 				 $idKRS = $request->cookie('mkrs');
 				 $array=array();
@@ -48,8 +51,28 @@ class KRSController extends Controller
 			 else
 			 {
 				 return 0;
-			 }
-		return view('krs',['biodata'=>$biodata,'course'=>$array]);
+			 }*/
+
+       /*SELECT kodeMK, namaMK, sks, nama, status_terbuka
+       FROM student_course
+       INNER JOIN course ON course.id = student_course.id_course
+       INNER JOIN dosen ON dosen.id = course.id_dosen
+       WHERE id_mahasiswa = 1*/
+       $KRS = \app\student_course::join('course', 'course.id', '=', 'student_course.id_course')
+              ->join('dosen', 'dosen.id', '=', 'course.id_dosen')
+              ->select('kodeMK', 'namaMK', 'sks', 'namaDosen', 'status_terbuka')
+              ->where('id_mahasiswa',$id)
+              ->get();
+       /*$array=array();
+       foreach($idKRS as $idK)
+       {
+         $course = \app\course::select('*')
+            ->where('id', $idK->id_course)
+            ->get();
+        array_push($array,$course);
+      }*/
+
+		return view('krs',['biodata'=>$biodata,'course'=>$KRS]);
     }
     public function coloumn(Request $request)
     {
