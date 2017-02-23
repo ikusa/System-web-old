@@ -1,21 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Generation Time: Feb 22, 2017 at 11:22 AM
--- Server version: 10.1.10-MariaDB
--- PHP Version: 7.0.4
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Database: `systemwebsu`
 --
@@ -29,22 +11,25 @@ SET time_zone = "+00:00";
 CREATE TABLE `course` (
   `id` int(11) NOT NULL,
   `kodeMK` int(11) NOT NULL,
-  `namaMK` text NOT NULL,
+  `namaMK` varchar(50) NOT NULL,
   `sks` int(11) NOT NULL,
   `id_term` int(11) NOT NULL,
   `id_dosen` int(11) NOT NULL,
   `status_terbuka` varchar(1) NOT NULL,
-  `program_studi` varchar(45) DEFAULT NULL
+  `program_studi` varchar(45) DEFAULT NULL,
+  `ruang` varchar(20) DEFAULT NULL,
+  `hari` varchar(8) DEFAULT NULL,
+  `jam` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `course`
 --
 
-INSERT INTO `course` (`id`, `kodeMK`, `namaMK`, `sks`, `id_term`, `id_dosen`, `status_terbuka`, `program_studi`) VALUES
-(1, 123, 'Pemograman Dasar\r\n', 3, 1, 1, '1', 'HCI'),
-(2, 234, 'Pengantar Informatika', 2, 1, 1, '1', 'HCI'),
-(3, 324, 'Pengantar Kimia', 2, 1, 1, '1', 'CHE');
+INSERT INTO `course` (`id`, `kodeMK`, `namaMK`, `sks`, `id_term`, `id_dosen`, `status_terbuka`, `program_studi`, `ruang`, `hari`, `jam`) VALUES
+(1, 123, 'Pemograman Dasar\r\n', 3, 1, 1, '1', 'HCI', NULL, NULL, NULL),
+(2, 234, 'Pengantar Informatika', 2, 1, 1, '1', 'HCI', NULL, NULL, NULL),
+(3, 324, 'Pengantar Kimia', 2, 1, 1, '1', 'CHE', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
