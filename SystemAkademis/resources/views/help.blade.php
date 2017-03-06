@@ -17,7 +17,7 @@
     <link href="{{ url('../vendors/nprogress/nprogress.css') }}" rel="stylesheet">
     <!-- iCheck -->
     <link href="{{ url('../vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
-	
+
     <!-- bootstrap-progressbar -->
     <link href="{{ url('../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
     <!-- JQVMap -->
@@ -27,6 +27,11 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ url('../build/css/custom.min.css') }}" rel="stylesheet">
+    <style>
+    #logout:hover {
+    background-color: #f2f2f2;"
+    }
+</style>
   </head>
 
   <body class="nav-md">
@@ -60,26 +65,29 @@
                 <h3>Menu Utama</h3>
                 <ul class="nav side-menu">
                   <li><a href="{{env('URL_HOME')}}"><i class="fa fa-home"></i> Home </a>
-                    
+
+                  </li>
+                  <li><a href="{{env('URL_PENGUMUMAN')}}"><i class="fa fa-newspaper-o"></i> PENGUMUMAN </a>
+
                   </li>
                   <li><a href="{{env('URL_KHS')}}"><i class="fa fa-edit"></i> KHS </a>
-                   
+
                   </li>
                   <li><a href="{{env('URL_KRS')}}"><i class="fa fa-desktop"></i> KRS </a>
-                    
+
                   </li>
                   <li><a href="{{env('URL_BIODATA')}}"><i class="fa fa-table"></i> BIODATA </a>
-                    
+
                   </li>
-                               
-                  
+
+
               </div>
 
             </div>
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
-            
+
             <!-- /menu footer buttons -->
           </div>
         </div>
@@ -99,19 +107,26 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                   
+
                     <li>
                       <a href="{{env('URL_SETTING')}}">
-                       
+
                         <span>Settings</span>
                       </a>
                     </li>
                     <li><a href="{{env('URL_HELP')}}">Help</a></li>
-                    <li><a href="{{env('URL_LOGOUT')}}"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li>
+                    <form id="myForm" action="/logout" method="post">
+                      {{ csrf_field() }}
+                    <div id="logout" align="center" style="cursor: pointer;"   onclick="myForm.submit();">
+                    <i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                  </div>
+                  </form>
+                  </li>
                   </ul>
                 </li>
 
-                
+
               </ul>
             </nav>
           </div>
@@ -121,7 +136,7 @@
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
-            
+
             <div class="clearfix"></div>
 
             <div class="row">
@@ -133,8 +148,8 @@
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
-                      
-                      
+
+
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -289,6 +304,6 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{ url('/build/js/custom.min.js') }}"></script>
-	
+
   </body>
 </html>

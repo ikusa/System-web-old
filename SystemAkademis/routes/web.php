@@ -29,12 +29,14 @@ Route::get('/help','HelpController@index');
 
 Route::get('/setting','SettingController@index');
 Route::get('/krsstudent','KRSStudentController@index');
-<<<<<<< HEAD
+//<<<<<<< HEAD
 //Route::get('/login','LoginController@index');
-=======
+//=======
 //login','LoginController@index');
->>>>>>> origin/master
+//>>>>>>> origin/master
 Route::get('/krs','KRSController@index');
+Route::post('/delete','KRSController@delete');
 Route::post('/submit','SubmitController@index');
+Route::get('/pengumuman','PengumumanController@index');
 
 Route::get('/khs','KHSController@index');

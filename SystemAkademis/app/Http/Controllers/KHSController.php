@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use app\Mahasiswa;
 use app\Course;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+
 
 class KHSController extends Controller
 {
@@ -26,15 +29,26 @@ class KHSController extends Controller
      */
     public function index(Request $request)
     {
-		$id = $request->cookie('id');
+		$id = Auth::id();
 		$biodata = \app\mahasiswa::select('*')
              ->where('id', $id)
              ->orderBy('id', 'desc')
              ->take(1)
              ->get();
-		$course = \app\course::select('*')
-             ->get();
-		return view('khs',['biodata'=>$biodata,'course'=>$course]);
+    $term = \app\nilai::join('course', 'course.id', '=', 'nilai.id_course')
+            ->join('term', 'term.id', '=', 'course.id_term')
+            ->select('term','term.id')
+            ->where('id_mahasiswa',$id)
+            ->distinct()
+            ->get();
+		$nilai = \app\nilai::join('course', 'course.id', '=', 'nilai.id_course')
+            ->join('term', 'term.id', '=', 'course.id_term')
+            ->join('dosen', 'dosen.id', '=', 'course.id_dosen')
+            ->select('kodeMK','namaMK','namaDosen','sks','nilai','term.id','term')
+            ->where('id_mahasiswa',$id)
+            ->where('id_tipenilai',4)
+            ->get();
+		return view('khs',['biodata'=>$biodata,'nilai'=>$nilai,'term'=>$term]);
     }
     public function coloumn(Request $request)
     {

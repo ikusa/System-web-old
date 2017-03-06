@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use app\Mahasiswa;
 use app\Course;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+
 class SubmitController extends Controller
 {
     /**
@@ -26,7 +28,11 @@ class SubmitController extends Controller
      */
     public function index(Request $request)
     {
-    $id = $request->cookie('id');
+    $idArray =\app\mahasiswa::select('id')
+             ->where('user_id', Auth::id())
+             ->take(1)
+             ->get();
+    $id = $idArray[0]->id;
 		$length=count($request->input('checkbox'));
     //input array id krs ke variable idkrs
     $idkrs = $request->input('checkbox');

@@ -175,72 +175,69 @@
 
 
 
-
           <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-                  <div class="x_title">
-                    <h2><i class="fa fa-align-left"></i> Kartu Hasil Studi</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
+                  <h1>Blog Post Title</h1>
 
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
+                  <!-- Author -->
+                  <p class="lead">
+                      by <a href="#">Start Bootstrap</a>
+                  </p>
 
-                    <!-- start accordion -->
-                    <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                  <hr>
 
+                  <!-- Date/Time -->
+                  <p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p>
 
-                      <div class="panel">
-                              <!-- foreach panel(bagian abu abunya) -->
-                        @foreach ($term as $semester)
-                          <a class="panel-heading" role="tab" id="heading" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$semester->id}}" aria-expanded="true" aria-controls="collapse{{$semester->id}}">
-                            <h4 class="panel-title"> {{$semester->term}}</h4>
-                          </a>
-                          <div id="collapse{{$semester->id}}" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="heading{{$semester->id}}">
-                            <div class="panel-body">
-                              <table class="table table-bordered">
-                                <thead>
-                                  <tr>
+                  <hr>
 
-                                    <th>Kode Mata Kuliah</th>
-                                    <th>Nama Mata Kuliah</th>
-                                    <th>Dosen Pengajar</th>
-                               <th>SKS</th>
-                                <th>Nilai</th>
-                               <th>Nilai Huruf</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <!-- foreach matkul table -->
-                                  @foreach ($nilai as $value)
-                                    @if ($value->term == $semester->term)
-                                      <tr>
+                  <!-- Preview Image -->
+                  <img class="img-responsive" src="http://placehold.it/900x300" alt="">
 
-                                        <td>{{$value->kodeMK}}</td>{{--kodeMK--}}
-                                        <td>{{$value->namaMK}}</td>{{--namaMK--}}
-                                        <td>{{$value->namaDosen}}</td>{{--dosenpengajar--}}
-                                        <td>{{$value->sks}}</td>{{--sks--}}
-                                        <td>{{$value->nilai}}</td>{{--nilai--}}
-                                        <td>{{$value->nilai}}</td>{{--nilaihuruf--}}
-                                      </tr>
-                                    @endif
-                                  @endforeach
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                        </div>
+                  <hr>
+
+                  <!-- Post Content -->
+                  <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
+
+                  <hr>
+              </div>
 
 
 
-                        @endforeach
-                  </div>
-                  <!-- end of accordion -->
-                </div>
+            </div>
+          <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <h1>Blog Post Title</h1>
+
+                  <!-- Author -->
+                  <p class="lead">
+                      by <a href="#">Start Bootstrap</a>
+                  </p>
+
+                  <hr>
+
+                  <!-- Date/Time -->
+                  <p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p>
+
+                  <hr>
+
+                  <!-- Preview Image -->
+                  <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+
+                  <hr>
+
+                  <!-- Post Content -->
+                  <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
+
+                  <hr>
               </div>
 
 
