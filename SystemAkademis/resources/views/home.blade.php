@@ -193,7 +193,7 @@
 
                     <ul class="list-unstyled timeline widget">
                       @foreach ($pengumuman as $info)
-					  <li>
+					              <li>
                         <div class="block">
                           <div class="block_content">
                             <h2 class="title">
