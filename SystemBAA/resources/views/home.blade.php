@@ -48,7 +48,7 @@
           <div class="x_panel">
             <!-- searchbox -->
             <div class="col-md-9 col-md-push-1">
-            <h3 class="text-center">Manage Users</h3>
+            <h3 class="text-center">Search Biodata</h3>
             <div class="container">
             <div class="row">
             <div class="col-xs-8 col-xs-offset-2">

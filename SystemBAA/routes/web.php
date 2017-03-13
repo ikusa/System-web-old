@@ -18,4 +18,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-Route::get('/biodata',)
+Route::get('/biodata','BiodataController@index');
+Route::post('/submitbiodata','BiodataController@submit');

@@ -2,6 +2,7 @@
 
 namespace app\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use app\Mahasiswa;
@@ -29,7 +30,8 @@ class BiodataController extends Controller
              ->where('user_id', Auth::id())
              ->take(1)
              ->get();
-		$id = $idArray[0]->id;
+    $id = $request->input('id', '*');
+
 		$biodata = \app\mahasiswa::select('*')
              ->where('id', $id)
              ->orderBy('id', 'desc')
@@ -37,16 +39,23 @@ class BiodataController extends Controller
              ->get();
 		return view('biodata',['biodata'=>$biodata]);
     }
-    public function coloumn(Request $request)
+    public function submit(Request $request)
     {
-      $email = $request->input('email');
-
-
-      $table = \app\mahasiswa::select('*')
-             ->where('email', $email)
-             ->orderBy('id', 'desc')
-             ->take(1)
-             ->get();
-        return $table ;
+      $input = $request->all();
+      $id = $request->input('id');
+      unset($input['_token']);
+      // foreach ($input as $key => $value) {
+      //   Log::info('Special super debug : '.print_r($key, true));
+      //
+      //   DB::table('mahasiswa')
+      //         ->where('id', $id)
+      //         ->update([$key=>$value]);
+      // }
+      DB::table('mahasiswa')
+            ->where('id', $id)
+            ->update($input);
+      return redirect()->action(
+          'BiodataController@index', ['id' => $id]
+      );
     }
 }
