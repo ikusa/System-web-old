@@ -16,7 +16,11 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+//search mahasiswa
 Route::get('/home', 'HomeController@index');
+//view dan edit biodata
 Route::get('/biodata','BiodataController@index');
-Route::post('/submitbiodata','BiodataController@submit');
+Route::post('/submitbiodata','BiodataController@edit');
+//insert new biodata
+Route::get('/createbiodata','BiodataController@create');
+Route::post('/submitcreatebiodata','BiodataController@submitcreate');
