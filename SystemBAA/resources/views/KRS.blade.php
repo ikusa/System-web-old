@@ -24,11 +24,11 @@
           <div class="x_panel">
             <!-- searchbox -->
             <div class="col-md-9 col-md-push-1">
-            <h3 class="text-center">Search Mahasiswa</h3>
+            <h3 class="text-center">Search Biodata</h3>
             <div class="container">
             <div class="row">
             <div class="col-xs-8 col-xs-offset-2">
-                <form action="/home" method="get" id="searchForm" class="input-group">
+                <form action="/krs" method="get" id="searchForm" class="input-group">
 
                     <div class="input-group-btn search-panel">
                         <select name="search_param" id="search_param" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -93,10 +93,8 @@
               <div class="col-xs-8 col-xs-offset-2">
 
                 <a href="/createbiodata" class="btn btn-info" role="button">New Biodata Mahasiswa</a>
-                <a href="/createnewcourse" class="btn btn-info" role="button">New Course</a>
                 <a href="/createbiodatadosen" class="btn btn-info" role="button">New Biodata Dosen</a>
                 <a href="/createterm" class="btn btn-info" role="button">New Term</a>
-
               </div><!-- end col-xs-8 -->
               </div><!-- end row -->
               </div><!-- end container -->

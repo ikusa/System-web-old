@@ -24,7 +24,8 @@
     <link href="{{ url('../vendors/jqvmap/dist/jqvmap.min.css') }}" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="{{ url('../vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
-
+    <!-- chosen -->
+    <link href="{{ url('../vendors/chosen/chosen.min.css') }}" rel="stylesheet"/>
     <!-- Custom Theme Style -->
     <link href="{{ url('../build/css/custom.min.css') }}" rel="stylesheet">
     <style>
@@ -49,11 +50,11 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                <img src="{{ url('../images/img.jpg') }}" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>{{ $biodata[0]->nama }}</h2>
+                <h2>{{ $biodata[0]->name }}</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -71,10 +72,10 @@
                   <li><a href="{{env('URL_PENGUMUMAN')}}"><i class="fa fa-newspaper-o"></i> PENGUMUMAN </a>
 
                   </li>
-                  <li><a href="{{env('URL_KHS')}}"><i class="fa fa-edit"></i> KHS </a>
+                  <li><a href="{{env('URL_KHS')}}"><i class="fa fa-edit"></i> NILAI </a>
 
                   </li>
-                  <li><a href="{{env('URL_KRS')}}"><i class="fa fa-desktop"></i> KRS </a>
+                  <li><a href="{{env('URL_KRS')}}"><i class="fa fa-desktop"></i> COURSE </a>
 
                   </li>
                   <li><a href="{{env('URL_BIODATA')}}"><i class="fa fa-table"></i> BIODATA </a>
@@ -104,7 +105,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="{{env('URL_HOME')}}" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">{{ $biodata[0]->nama }}
+                    <img src="{{ url('../images/img.jpg') }}" alt="">{{ $biodata[0]->name }}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -137,12 +138,7 @@
     @yield('content')
 
         <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            {{env('COPYRIGHT')}}
-          </div>
-          <div class="clearfix"></div>
-        </footer>
+
         <!-- /footer content -->
       </div>
     </div>
@@ -184,9 +180,11 @@
     <!-- bootstrap-daterangepicker -->
     <script src="../vendors/moment/min/moment.min.js"></script>
     <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- chosen -->
+    <script src="../vendors/chosen/chosen.jquery.min.js" type="text/javascript"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-
+    @yield('scripts');
   </body>
 </html>

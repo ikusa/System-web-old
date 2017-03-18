@@ -33,8 +33,8 @@ class HomeController extends Controller
     $id = $idArray[0]->id;
     $search_param = $request->input('search_param', 'null');
     $input= $request->input('x','null');
-		$biodata = \app\mahasiswa::select('*')
-             ->where('id', $id)
+		$biodata = \app\user::select('name')
+             ->where('id', Auth::id())
              ->orderBy('id', 'desc')
              ->take(1)
              ->get();

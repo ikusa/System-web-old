@@ -24,3 +24,16 @@ Route::post('/submitbiodata','BiodataController@edit');
 //insert new biodata
 Route::get('/createbiodata','BiodataController@create');
 Route::post('/submitcreatebiodata','BiodataController@submitcreate');
+//insert new dosen
+Route::get('/createbiodatadosen','DosenController@create');
+Route::post('/submitcreatedosen','DosenController@submit');
+//insert new term
+Route::get('/createterm','TermController@create');
+Route::post('/submitterm','TermController@submit');
+//insert course
+Route::get('/createnewcourse','KRSController@create');
+Route::post('/submitcourse','KRSController@submit');
+//insert nilai
+Route::get('/nilai', 'nilaiController@index');
+Route::get('/nilai/input', 'nilaiController@edit');
+Route::post('/nilai/submit', 'nilaiController@submit');

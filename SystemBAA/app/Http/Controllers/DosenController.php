@@ -9,7 +9,7 @@ use app\Mahasiswa;
 use app\User;
 
 
-class BiodataController extends Controller
+class DosenController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,14 +26,10 @@ class BiodataController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // acces /biodata?id=*
+
     public function index(Request $request)
     {
-    $idArray =\app\mahasiswa::select('id')
-             ->where('user_id', Auth::id())
-             ->take(1)
-             ->get();
-    $id = $request->input('id', '*');
+
 
     $biodata = \app\user::select('name')
              ->where('id', Auth::id())
@@ -42,21 +38,17 @@ class BiodataController extends Controller
              ->get();
 		return view('biodata',['biodata'=>$biodata]);
     }
-    // acces /createbiodata
+
     public function create(Request $request)
     {
-      $idArray =\app\mahasiswa::select('id')
-               ->where('user_id', Auth::id())
-               ->take(1)
-               ->get();
-      $id = $idArray[0]->id;
+
 
       $biodata = \app\user::select('name')
                ->where('id', Auth::id())
                ->orderBy('id', 'desc')
                ->take(1)
                ->get();
-  		return view('insertbiodata',['biodata'=>$biodata]);
+  		return view('insertdosen',['biodata'=>$biodata]);
     }
 
     public function edit(Request $request)
@@ -71,25 +63,16 @@ class BiodataController extends Controller
           'BiodataController@index', ['id' => $id]
       );
     }
-    public function submitcreate(Request $request)
+    public function submit(Request $request)
     {
       $input = $request->all();
       unset($input['_token']);
-      $nama = $input['nama'];
-      $email = $input['email'];
-      $password = $input['password'];
-      unset($input['password']);
-      User::create([
-          'name' => $nama,
-          'email' => $email,
-          'password' => bcrypt($password),
-      ]);
-      $id =\app\user::select('id')
-               ->where('email', $email)
-               ->take(1)
-               ->get();
-      $input['user_id'] = $id[0]->id;
-      DB::table('mahasiswa')->insert($input);
+      if ($input['email'] == null) {
+        # code...
+
+      }
+
+      DB::table('dosen')->insert($input);
 
       return redirect()->action('HomeController@index');
     }

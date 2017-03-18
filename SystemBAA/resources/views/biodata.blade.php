@@ -4,31 +4,7 @@
 <div class="container">
   <!-- page content -->
   <div class="right_col" role="main">
-      <!-- top tiles -->
-      <div class="row tile_count">
-          <div class="col-md-4 col-sm-6 col-xs-8 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Nama</span>
-              <div class="count">{{ $biodata[0]->nama }}</div>
 
-          </div>
-          <div class="col-md-4 col-sm-6 col-xs-8 tile_stats_count">
-              <span class="count_top"><i class="fa fa-clock-o"></i> NIM</span>
-              <div class="count">{{ $biodata[0]->nim }}</div>
-
-          </div>
-          <div class="col-md-2 col-sm-2 col-xs-2 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Program Studi</span>
-              <div class="count green">{{ $biodata[0]->program_studi }}</div>
-
-          </div>
-          <div class="col-md-2 col-sm-2 col-xs-2 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> IPK</span>
-              <div class="count">{{ $biodata[0]->ipk }}</div>
-
-          </div>
-
-      </div>
-      <!-- /top tiles -->
 
       <div class="row">
           <div class="col-md-12 col-sm-12 col-xs-12">
