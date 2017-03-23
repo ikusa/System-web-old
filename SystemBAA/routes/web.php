@@ -19,13 +19,13 @@ Auth::routes();
 //search mahasiswa
 Route::get('/home', 'HomeController@index');
 //view dan edit biodata
-Route::get('/biodata','BiodataController@index');
+Route::get('/biodata/edit','BiodataController@index');
 Route::post('/submitbiodata','BiodataController@edit');
 //insert new biodata
-Route::get('/createbiodata','BiodataController@create');
+Route::get('/biodata/create','BiodataController@create');
 Route::post('/submitcreatebiodata','BiodataController@submitcreate');
 //insert new dosen
-Route::get('/createbiodatadosen','DosenController@create');
+Route::get('/biodata/create','DosenController@create');
 Route::post('/submitcreatedosen','DosenController@submit');
 //insert new term
 Route::get('/createterm','TermController@create');

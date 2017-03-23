@@ -38,7 +38,7 @@
 
 
 
-
+      <div class="x_panel">
       <div class="x_content">
           <table class="table table-hover">
               <tbody>
@@ -106,7 +106,7 @@
       </div>
 
 
-
+    </div>
   </div>
 </div>
 </div>

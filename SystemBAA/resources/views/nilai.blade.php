@@ -68,7 +68,7 @@
                     <td>{{$key->kodeMK}}</td>
                     <td>{{$key->namaMK}}</td>
                     <td>{{$key->term}}</td>
-                    <td>{{$key->namaDosen}}</td>
+                    <td>{{$key->dosen}}</td>
                     <td>{{$key->sks}}</td>
                     <td> <button class="btn btn-success" onclick=" window.open('{{env('URL_KHS')}}/input?id={{$key->id}}','_blank')"> More</button></td>
                   </tr>

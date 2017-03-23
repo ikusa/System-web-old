@@ -37,6 +37,7 @@ Route::get('/krsstudent','KRSStudentController@index');
 Route::get('/krs','KRSController@index');
 Route::post('/delete','KRSController@delete');
 Route::post('/submit','SubmitController@index');
+Route::post('/final','SubmitController@final');
 Route::get('/pengumuman','PengumumanController@index');
 
 Route::get('/khs','KHSController@index');

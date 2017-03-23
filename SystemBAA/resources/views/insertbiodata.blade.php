@@ -5,7 +5,7 @@
   <!-- page content -->
   <div class="right_col" role="main">
       <!-- top tiles -->
-    
+
       <!-- /top tiles -->
 
       <div class="row">
@@ -25,7 +25,7 @@
 
 
 
-
+      <div class="x_panel">
       <div class="x_content">
           <table class="table table-hover">
               <tbody>
@@ -245,7 +245,7 @@
           </table>
 
       </div>
-
+    </div>
 
 
   </div>

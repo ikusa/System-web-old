@@ -198,6 +198,7 @@
                           <th>Kode</th>
                           <th>Nama</th>
                           <th>SKS</th>
+                          <th>angkatan</th>
                           <th>Semester</th>
                           <th>Dosen</th>
                           <th>Prodi</th>
@@ -219,8 +220,9 @@
                           <td>{{ $pelajaran->kodeMK }}</td>
                           <td>{{ $pelajaran->namaMK }}</td>
                           <td>{{ $pelajaran->sks }}</td>
-                          <td>{{ $pelajaran->id_term }}</td>
-                          <td>{{ $pelajaran->id_dosen }}</td>
+                          <td>{{ $pelajaran->angkatan }}</td>
+                          <td>{{ $pelajaran->term }}</td>
+                          <td>{{ $pelajaran->dosen }}</td>
                           <td>{{ $pelajaran->program_studi }}</td>
                         </tr>
                         @endforeach

@@ -37,9 +37,9 @@ class NilaiController extends Controller
     if ($search_param!='null') {
       $table = \app\Course::select('*')
                ->join('term', 'term.id', '=', 'course.id_term')
-               ->join('dosen', 'dosen.id', '=', 'course.id_dosen')
                ->where($search_param,'like', '%'.$input.'%')
                ->get();
+      Log::info('Special super debug : '.$table);
 
 
     }

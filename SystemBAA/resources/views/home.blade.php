@@ -70,7 +70,7 @@
                     <td>{{$key->nim}}</td>
                     <td>{{$key->program_studi}}</td>
                     <td>{{$key->email}}</td>
-                    <td> <button class="btn btn-success" onclick=" window.open('{{env('URL_BIODATA')}}?id={{$key->id}}','_blank')"> More</button></td>
+                    <td> <button class="btn btn-success" onclick=" window.open('{{env('URL_BIODATA')}}/edit?id={{$key->id}}','_blank')"> More</button></td>
                   </tr>
                 @endforeach
 

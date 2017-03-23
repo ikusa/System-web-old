@@ -40,7 +40,12 @@ class BiodataController extends Controller
              ->orderBy('id', 'desc')
              ->take(1)
              ->get();
-		return view('biodata',['biodata'=>$biodata]);
+    $data = \app\mahasiswa::select('*')
+             ->where('id', $id)
+             ->orderBy('id', 'desc')
+             ->take(1)
+             ->get();
+		return view('biodata',['biodata'=>$biodata,'data'=>$data]);
     }
     // acces /createbiodata
     public function create(Request $request)

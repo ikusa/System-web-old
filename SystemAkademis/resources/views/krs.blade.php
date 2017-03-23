@@ -220,7 +220,7 @@
                             <a>{{$kuliah->sks}}</a>
                           </td>
                           <td class="project_progress">
-                            <a>{{$kuliah->namaDosen}}</a>
+                            <a>{{$kuliah->dosen}}</a>
                           </td>
 						              <td class="project_progress">
                             <a>{{$kuliah->status_terbuka}}</a>

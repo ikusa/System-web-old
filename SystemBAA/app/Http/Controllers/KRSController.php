@@ -50,7 +50,7 @@ class KRSController extends Controller
                ->orderBy('id', 'desc')
                ->take(1)
                ->get();
-      Log::info('Special super debug : '.$dosen);
+  
 
   		return view('insertcourse',['biodata'=>$biodata,'dosen'=>$dosen,'term'=>$term]);
     }

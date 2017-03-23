@@ -26,11 +26,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-    $idArray =\app\mahasiswa::select('id')
-             ->where('user_id', Auth::id())
-             ->take(1)
-             ->get();
-    $id = $idArray[0]->id;
+
     $search_param = $request->input('search_param', 'null');
     $input= $request->input('x','null');
 		$biodata = \app\user::select('name')
