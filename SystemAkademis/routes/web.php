@@ -28,7 +28,7 @@ Route::get('/coloumn', 'BiodataController@coloumn');
 Route::get('/help','HelpController@index');
 
 Route::get('/setting','SettingController@index');
-Route::get('/krsstudent','KRSStudentController@index');
+Route::get('/krs/tambah','KRSStudentController@index');
 //<<<<<<< HEAD
 //Route::get('/login','LoginController@index');
 //=======
@@ -37,7 +37,7 @@ Route::get('/krsstudent','KRSStudentController@index');
 Route::get('/krs','KRSController@index');
 Route::post('/delete','KRSController@delete');
 Route::post('/submit','SubmitController@index');
-Route::post('/final','SubmitController@final');
+Route::post('/final','SubmitController@submit');
 Route::get('/pengumuman','PengumumanController@index');
 
 Route::get('/khs','KHSController@index');

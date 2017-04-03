@@ -46,17 +46,29 @@ class SubmitController extends Controller
 		}
 		return redirect('krs');
     }
-    //ini buat apa ya ? EXTRA ATTENTION HERE
-    public function coloumn(Request $request)
+
+    public function submit(Request $request)
     {
-      $email = $request->input('email');
-
-
-      $table = \app\mahasiswa::select('*')
-             ->where('email', $email)
-             ->orderBy('id', 'desc')
+    $idArray =\app\mahasiswa::select('id')
+             ->where('user_id', Auth::id())
              ->take(1)
              ->get();
-        return $table ;
+    $id = $idArray[0]->id;
+
+
+    $id_krs = $request->input('data');
+    for ($i=0; $i < sizeof($id_krs) ; $i++) {
+      DB::table('student_course')
+            ->where('id', $id_krs[$i])
+            ->update(['final'=>1]);
     }
+    DB::table('mahasiswa')
+          ->where('id', $id)
+          ->update(['status_krs'=>0]);
+
+
+		return ('succes');
+    }
+
+
 }
