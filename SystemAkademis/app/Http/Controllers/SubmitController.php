@@ -58,16 +58,32 @@ class SubmitController extends Controller
 
     $id_krs = $request->input('data');
     for ($i=0; $i < sizeof($id_krs) ; $i++) {
+      //update final krs
       DB::table('student_course')
             ->where('id', $id_krs[$i])
             ->update(['final'=>1]);
+      //create di nilai dengan value kosong
+      $id_course =\app\student_course::select('id_course')
+               ->where('id', $id_krs[$i])
+               ->take(1)
+               ->get();
+      for ($j=1; $j <6 ; $j++) {
+        DB::table('nilai')->insert(
+            ['id_mahasiswa' => $id, 'id_course' => $id_course[0]->id_course,'id_tipenilai'=>$j]
+        );
+      }
+
     }
+    //ganti eligible status isi krs
     DB::table('mahasiswa')
           ->where('id', $id)
           ->update(['status_krs'=>0]);
+          return response()->json([
+          'name' => 'Abigail',
+          'state' => 'CA'
+      ]);
 
 
-		return ('succes');
     }
 
 

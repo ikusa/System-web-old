@@ -44,7 +44,6 @@ class KRSController extends Controller
        INNER JOIN dosen ON dosen.id = course.id_dosen
        WHERE id_mahasiswa = 1*/
        $KRS = \app\student_course::join('course', 'course.id', '=', 'student_course.id_course')
-
               ->select('student_course.id','kodeMK', 'namaMK', 'sks', 'dosen', 'status_terbuka')
               ->where('id_mahasiswa',$id)
               ->get();

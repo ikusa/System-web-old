@@ -46,15 +46,21 @@ class KRSStudentController extends Controller
       {
         array_push($array,$idK->id_course);
       }
-
+    //ambil term aktif
+    $idTerm=\app\term::select('id')
+                ->where('current',1)
+                ->get();
     //ambil course dari database
 		$course = \app\course::select('*')
 			 ->where('program_studi', $biodata[0]->program_studi)
-       ->where('status_terbuka',1)
+       ->where('status_terbuka','terbuka')
+       ->where('id_term',$idTerm[0]->id)
        ->whereNotIn('id', $array)//menghindari menampilkan course yang sudah diambil
              ->get();
 		return view('krsstudent',['biodata'=>$biodata,'course'=>$course]);
     }
+
+
     public function coloumn(Request $request)
     {
       $email = $request->input('email');

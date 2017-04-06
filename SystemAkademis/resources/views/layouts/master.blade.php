@@ -1,4 +1,3 @@
-<<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,7 +8,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 
-    <title>Surya University </title>
 
     <!-- Bootstrap -->
     <link href="{{ url('../vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -33,7 +31,9 @@
     #logout:hover {
     background-color: #f2f2f2;"
     }
-</style>
+    </style>
+    <title>Surya University </title>
+
   </head>
 
   <body class="nav-md">
@@ -42,7 +42,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"> <span>Surya University</span></a>
+              <div class="site_title"> <span>Surya University</span></div>
             </div>
 
             <div class="clearfix"></div>
@@ -50,7 +50,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="{{ url('../images/img.jpg') }}" alt="..." class="img-circle profile_img">
+                <img src="{{ url('../images/user.png') }}" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
@@ -105,7 +105,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="{{env('URL_HOME')}}" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ url('../images/img.jpg') }}" alt="">{{ $biodata[0]->nama }}
+                    <img src="{{ url('../images/user.png') }}" alt="">{{ $biodata[0]->nama }}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -116,7 +116,7 @@
                         <span>Settings</span>
                       </a>
                     </li>
-                    <li><a href="{{env('URL_HELP')}}">Help</a></li>
+                      <li><a href="{{env('URL_HELP')}}">Help</a></li>
                     <li>
                     <form id="myForm" action="/logout" method="post">
                       {{ csrf_field() }}
@@ -155,7 +155,7 @@
             </div>
             <div class="col-md-2 col-sm-2 col-xs-2 tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> IPK</span>
-              <div class="count" style="font-size:200%;">4</div>
+              <div class="count" style="font-size:200%;">-</div>
 
             </div>
 

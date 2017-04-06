@@ -37,7 +37,7 @@
                   </div>
                   <div class="x_content">
                     @if ($biodata[0]->status_krs==1)
-                    <p>Pastikan mata kuliah yang dipilih sudah benar lalu tekan tombol submit</p>          
+                    <p>Pastikan mata kuliah yang dipilih sudah benar lalu tekan tombol submit</p>
                     @endif
 
 
@@ -98,7 +98,8 @@
 
         @endif
         @if ($biodata[0]->status_krs==0)
-          <input type='submit' class="btn btn-success btn-lg" name='print' value='print' onclick="press()"/>
+
+          <button class="btn btn-success btn-lg" name='print' value='print' onclick="location.href='/print_krs'"> PRINT</button>
 
         @endif
 
@@ -119,18 +120,19 @@ id_krs.push('{{$kuliah->id}}')
 @endforeach
 
 function press(){
-  confirm('Mata kuliah yang sudah disubmit tidak bisa diubah.\nApakah anda yakin ingin submit mata kuliah?');
+  var r =  confirm('Mata kuliah yang sudah disubmit tidak bisa diubah.\nApakah anda yakin ingin submit mata kuliah?');
   var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-  $.ajax({
-    url: '/final',
-    type: 'POST',
-    data: {_token: CSRF_TOKEN,data: id_krs},
-    dataType: 'JSON',
-    success: function (data) {
-        console.log(data);
-        location.reload;
-    }
-});
+  if(r==true){  $.ajax({
+      url: '/final',
+      type: 'POST',
+      data: {_token: CSRF_TOKEN,data: id_krs},
+      dataType: 'JSON',
+      success: function (data) {
+          console.log(data);
+          location.reload();
+      }
+  });}
+
 
 }
 </script>

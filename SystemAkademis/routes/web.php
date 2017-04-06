@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/','PageController@welcome' );
-Route::get('/test','PageController@welcome');
 
+Route::get('/', function () {
+    return redirect('/home');
+});
 Auth::routes();
 //homepage
 Route::get('/home', 'HomeController@index');
@@ -25,19 +26,28 @@ Route::get('/coloumn', 'BiodataController@coloumn');
 
 
 
-Route::get('/help','HelpController@index');
-
-Route::get('/setting','SettingController@index');
+// Route::get('/help','HelpController@index');
+//
+// Route::get('/setting','SettingController@index');
+Route::get('/help', function () {
+    return redirect('/home');
+});
+Route::get('/setting', function () {
+    return redirect('/home');
+});
 Route::get('/krs/tambah','KRSStudentController@index');
-//<<<<<<< HEAD
-//Route::get('/login','LoginController@index');
-//=======
-//login','LoginController@index');
-//>>>>>>> origin/master
+
 Route::get('/krs','KRSController@index');
 Route::post('/delete','KRSController@delete');
 Route::post('/submit','SubmitController@index');
 Route::post('/final','SubmitController@submit');
-Route::get('/pengumuman','PengumumanController@index');
+// Route::get('/pengumuman','PengumumanController@index');
+Route::get('/pengumuman', function () {
+    return redirect('/home');
+});
+Route::get('/print_krs','PrintController@index');
 
-Route::get('/khs','KHSController@index');
+// Route::get('/khs','KHSController@index');
+Route::get('/khs', function () {
+    return redirect('/home');
+});

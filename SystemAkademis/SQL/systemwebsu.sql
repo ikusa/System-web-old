@@ -1,21 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Apr 03, 2017 at 06:22 PM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 5.6.30
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Database: `systemwebsu`
 --
@@ -1800,7 +1782,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `nilai` (
-  `id` int(11) NOT NULL,
+  `id` int(255) NOT NULL,
   `id_mahasiswa` int(11) NOT NULL,
   `id_course` int(11) NOT NULL,
   `id_tipenilai` int(11) DEFAULT NULL,
@@ -1808,6 +1790,72 @@ CREATE TABLE `nilai` (
   `nilai` double DEFAULT NULL,
   `status` varchar(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nilai`
+--
+
+INSERT INTO `nilai` (`id`, `id_mahasiswa`, `id_course`, `id_tipenilai`, `percentage`, `nilai`, `status`) VALUES
+(206, 6567, 799, 1, NULL, NULL, NULL),
+(207, 6567, 799, 2, NULL, NULL, NULL),
+(208, 6567, 799, 3, NULL, NULL, NULL),
+(209, 6567, 799, 4, NULL, NULL, NULL),
+(210, 6567, 799, 5, NULL, NULL, NULL),
+(211, 6567, 788, 1, NULL, NULL, NULL),
+(212, 6567, 788, 2, NULL, NULL, NULL),
+(213, 6567, 788, 3, NULL, NULL, NULL),
+(214, 6567, 788, 4, NULL, NULL, NULL),
+(215, 6567, 788, 5, NULL, NULL, NULL),
+(216, 6567, 810, 1, NULL, NULL, NULL),
+(217, 6567, 810, 2, NULL, NULL, NULL),
+(218, 6567, 810, 3, NULL, NULL, NULL),
+(219, 6567, 810, 4, NULL, NULL, NULL),
+(220, 6567, 810, 5, NULL, NULL, NULL),
+(221, 6567, 811, 1, NULL, NULL, NULL),
+(222, 6567, 811, 2, NULL, NULL, NULL),
+(223, 6567, 811, 3, NULL, NULL, NULL),
+(224, 6567, 811, 4, NULL, NULL, NULL),
+(225, 6567, 811, 5, NULL, NULL, NULL),
+(226, 6567, 812, 1, NULL, NULL, NULL),
+(227, 6567, 812, 2, NULL, NULL, NULL),
+(228, 6567, 812, 3, NULL, NULL, NULL),
+(229, 6567, 812, 4, NULL, NULL, NULL),
+(230, 6567, 812, 5, NULL, NULL, NULL),
+(231, 6567, 813, 1, NULL, NULL, NULL),
+(232, 6567, 813, 2, NULL, NULL, NULL),
+(233, 6567, 813, 3, NULL, NULL, NULL),
+(234, 6567, 813, 4, NULL, NULL, NULL),
+(235, 6567, 813, 5, NULL, NULL, NULL),
+(236, 6567, 814, 1, NULL, NULL, NULL),
+(237, 6567, 814, 2, NULL, NULL, NULL),
+(238, 6567, 814, 3, NULL, NULL, NULL),
+(239, 6567, 814, 4, NULL, NULL, NULL),
+(240, 6567, 814, 5, NULL, NULL, NULL),
+(241, 6567, 815, 1, NULL, NULL, NULL),
+(242, 6567, 815, 2, NULL, NULL, NULL),
+(243, 6567, 815, 3, NULL, NULL, NULL),
+(244, 6567, 815, 4, NULL, NULL, NULL),
+(245, 6567, 815, 5, NULL, NULL, NULL),
+(246, 6567, 816, 1, NULL, NULL, NULL),
+(247, 6567, 816, 2, NULL, NULL, NULL),
+(248, 6567, 816, 3, NULL, NULL, NULL),
+(249, 6567, 816, 4, NULL, NULL, NULL),
+(250, 6567, 816, 5, NULL, NULL, NULL),
+(251, 6567, 817, 1, NULL, NULL, NULL),
+(252, 6567, 817, 2, NULL, NULL, NULL),
+(253, 6567, 817, 3, NULL, NULL, NULL),
+(254, 6567, 817, 4, NULL, NULL, NULL),
+(255, 6567, 817, 5, NULL, NULL, NULL),
+(256, 6567, 818, 1, NULL, NULL, NULL),
+(257, 6567, 818, 2, NULL, NULL, NULL),
+(258, 6567, 818, 3, NULL, NULL, NULL),
+(259, 6567, 818, 4, NULL, NULL, NULL),
+(260, 6567, 818, 5, NULL, NULL, NULL),
+(261, 6567, 787, 1, NULL, NULL, NULL),
+(262, 6567, 787, 2, NULL, NULL, NULL),
+(263, 6567, 787, 3, NULL, NULL, NULL),
+(264, 6567, 787, 4, NULL, NULL, NULL),
+(265, 6567, 787, 5, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1843,16 +1891,6 @@ CREATE TABLE `pengumuman` (
   `isActive` varchar(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `pengumuman`
---
-
-INSERT INTO `pengumuman` (`id`, `user_id`, `judul`, `isi`, `date_create`, `isActive`) VALUES
-(1, 12, 'Kartu Ujian', 'Silahkan mengambil kartu ujian di BAA', '2017-02-08 19:28:34', '1'),
-(2, 15, 'Surat Magang', 'Silahkan mengumpulkan surat magang', '2017-02-08 19:38:06', '1'),
-(3, 17, 'Biodata', 'Silahkan melengkapi biodata', '2017-02-08 19:38:06', '1'),
-(4, 10, 'Surat Edaran', 'Silahkan mengambil surat edaran di BAA', '2017-02-08 19:52:28', '1');
-
 -- --------------------------------------------------------
 
 --
@@ -1872,7 +1910,17 @@ CREATE TABLE `student_course` (
 
 INSERT INTO `student_course` (`id`, `id_mahasiswa`, `id_course`, `final`) VALUES
 (47, 6567, 799, 1),
-(49, 6567, 788, 1);
+(49, 6567, 788, 1),
+(50, 6567, 810, 1),
+(51, 6567, 811, 1),
+(52, 6567, 812, 1),
+(53, 6567, 813, 1),
+(54, 6567, 814, 1),
+(55, 6567, 815, 1),
+(56, 6567, 816, 1),
+(57, 6567, 817, 1),
+(58, 6567, 818, 1),
+(59, 6567, 787, 1);
 
 -- --------------------------------------------------------
 
@@ -1897,27 +1945,6 @@ INSERT INTO `term` (`id`, `term`, `kode_dikti`, `current`) VALUES
 (3, '2014/2015-ganjil', '34567', '0'),
 (4, '2014/2015-genap', '45678', '0'),
 (5, '2016/2017-genap', '213142', '1');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tipe_nilai`
---
-
-CREATE TABLE `tipe_nilai` (
-  `id` int(11) NOT NULL,
-  `tipe` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tipe_nilai`
---
-
-INSERT INTO `tipe_nilai` (`id`, `tipe`) VALUES
-(1, 'tugas'),
-(2, 'UTS'),
-(3, 'UAS'),
-(4, 'Akhir');
 
 -- --------------------------------------------------------
 
@@ -2240,7 +2267,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `creat
 (1490, 'Grace Melody Kristanti', 'grace.kristanti15@student.surya.ac.id', '$2y$10$yhhv.oreA0WO7qgaWLUX3O0RjDPtjzM3da43sQFw0o4B3hLtm.TBO', NULL, '2017-03-23 09:59:09', '2017-03-23 09:59:09'),
 (1491, 'Jason Nugraha Derahim', 'jason.derahim15@student.surya.ac.id', '$2y$10$XJuJmmU.tMjJi5xfyW22eOxHwdgMsViObTuz3Q7WxaeovFnpKH3zi', NULL, '2017-03-23 09:59:10', '2017-03-23 09:59:10'),
 (1492, 'Jonathan Radot Fernando', 'jonathan.fernando15@student.surya.ac.id', '$2y$10$fMSfqEoTMH4/PTxzf3Lh6OgnYpGbGtohvk9s/5GsPN3jT4QMTq2kW', NULL, '2017-03-23 09:59:10', '2017-03-23 09:59:10'),
-(1493, 'Joshua Setiawan', 'joshua.setiawan15@student.surya.ac.id', '$2y$10$CgmGFUD4WQxjTzxP/GM8M.ASXZWrwtzOvexdFY5ROKs2MuJiO.tGW', 'F0ZxJ9yeQoVdxuRjoxFzKSvK6n36aWgsMLNHGCCk3QOMG7zJ3MLIjC4YgDxC', '2017-03-23 09:59:10', '2017-03-27 10:03:17'),
+(1493, 'Joshua Setiawan', 'joshua.setiawan15@student.surya.ac.id', '$2y$10$CgmGFUD4WQxjTzxP/GM8M.ASXZWrwtzOvexdFY5ROKs2MuJiO.tGW', 'Strj0XE5S8x0U1xuJTZzMsKgj6BwfidFwm5bwSiVPxKqLyPRydGCUroqkeYF', '2017-03-23 09:59:10', '2017-04-06 03:46:50'),
 (1494, 'Juan Habakuk Sabanari', 'juan.sabanari15@student.surya.ac.id', '$2y$10$kWyI4p1iEw27PNte9FnRqOjIR0Q3RILHQGHeAWLwJz/oQG1Gr14Mu', NULL, '2017-03-23 09:59:10', '2017-03-23 09:59:10'),
 (1495, 'Katherine Philip', 'katherine.philip15@student.surya.ac.id', '$2y$10$ggEv4M6O6.iwDcnpYooyNe6UpWgNWjPE./rau5PRYtVUH8xmPNYBi', NULL, '2017-03-23 09:59:10', '2017-03-23 09:59:10'),
 (1496, 'Misael Andre', 'misael.somadjaja15@student.surya.ac.id', '$2y$10$K4NpDbbJVc44MALc9ocXpe0ZW9EnhVDmA2zfatLV2u6rcBZV0Avq2', NULL, '2017-03-23 09:59:10', '2017-03-23 09:59:10'),
@@ -3198,31 +3225,6 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `creat
 (2445, 'Imral Lathif Nasution', 'imral.nasution14@student.surya.ac.id', '$2y$10$otedCm64BBy1bg/o64hhpO9qe8aNLwOPW5/AkBKSYJzeu8UYM.JMm', NULL, '2017-03-23 10:02:13', '2017-03-23 10:02:13'),
 (2446, 'Mut Geisler Sokoy', 'mut16@student.surya.ac.id', '$2y$10$feNuU/GMncm6mVFMUdget.1cDFohP6Es75FFSPFYL6xWRk54FEnX6', NULL, '2017-03-23 10:02:14', '2017-03-23 10:02:14');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `users_baa`
---
-
-CREATE TABLE `users_baa` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `users_baa`
---
-
-INSERT INTO `users_baa` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'ikusa', 'joshuasetiawan@ymail.com', '$2y$10$o5mvqAfAf8xhfI6qKQZzV.2gTfnuwUsZw9n7E3.PZh6kkTg/Jxd2O', '0Rhznj6wB76PahxZUfPS2hKT1lzTpqFHCQoG8wPV3OTYszmpXhMvmmTvoWNF', '2017-01-03 19:55:06', '2017-03-10 05:44:53'),
-(2, 'testing', 'abc@dispostable.com', '$2y$10$SzdUOkq3sxGv7nBLvC9BG.lIWf3OLhQqq5tWHyLBHC.Q/SF5CIF2K', '5uEShUbQbok1V96zT5Uz4yOP4ahnPjBtJr9YuWGI8igycet3bVppnVQNF2WJ', '2017-02-07 19:25:43', '2017-02-07 21:49:42'),
-(9, 'Teagan Haratua', 'sos@email.com', '$2y$10$nczXvsHjNM4mqHcFDfqXsee.fNLbEyBhi2uD9WCdW2HutPH/XHBNO', NULL, '2017-03-13 08:54:15', '2017-03-13 08:54:15');
-
 --
 -- Indexes for dumped tables
 --
@@ -3288,24 +3290,11 @@ ALTER TABLE `term`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tipe_nilai`
---
-ALTER TABLE `tipe_nilai`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
-
---
--- Indexes for table `users_baa`
---
-ALTER TABLE `users_baa`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -3335,7 +3324,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `nilai`
 --
 ALTER TABLE `nilai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=266;
 --
 -- AUTO_INCREMENT for table `pengumuman`
 --
@@ -3345,27 +3334,17 @@ ALTER TABLE `pengumuman`
 -- AUTO_INCREMENT for table `student_course`
 --
 ALTER TABLE `student_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 --
 -- AUTO_INCREMENT for table `term`
 --
 ALTER TABLE `term`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT for table `tipe_nilai`
---
-ALTER TABLE `tipe_nilai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2447;
---
--- AUTO_INCREMENT for table `users_baa`
---
-ALTER TABLE `users_baa`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- Constraints for dumped tables
 --
