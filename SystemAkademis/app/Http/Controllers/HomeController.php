@@ -25,12 +25,12 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-    $idArray =\app\mahasiswa::select('id')
+    $idArray =\app\Mahasiswa::select('id')
              ->where('user_id', Auth::id())
              ->take(1)
              ->get();
     $id = $idArray[0]->id;
-		$biodata = \app\mahasiswa::select('*')
+		$biodata = \app\Mahasiswa::select('*')
              ->where('id', $id)
              ->orderBy('id', 'desc')
              ->take(1)
@@ -42,16 +42,5 @@ class HomeController extends Controller
                      ->get();
         return view('home', ['pengumuman' => $pengumuman,'biodata'=>$biodata]);
     }
-    public function data(Request $request)
-    {
-      $email = $request->input('email');
 
-
-      $mahasiswa = \app\mahasiswa::select('nama','program_studi','nim')
-             ->where('email', $email)
-             ->orderBy('id', 'desc')
-             ->take(1)
-             ->get();
-        return $mahasiswa ;
-    }
 }

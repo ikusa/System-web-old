@@ -29,12 +29,12 @@ class PrintController extends Controller
     public function index(Request $request)
     {
 
-      $idArray =\app\mahasiswa::select('id')
+      $idArray =\app\Mahasiswa::select('id')
                ->where('user_id', Auth::id())
                ->take(1)
                ->get();
       $id = $idArray[0]->id;
-      $biodata = \app\mahasiswa::select('*')
+      $biodata = \app\Mahasiswa::select('*')
                ->where('id', $id)
                ->orderBy('id', 'desc')
                ->take(1)
@@ -52,7 +52,7 @@ class PrintController extends Controller
                 ->where('id_mahasiswa',$id)
                 ->get();
 
-      
+
 
       return view('print_krs',['biodata'=>$biodata,'course'=>$KRS,'term'=>$idTerm]);
 

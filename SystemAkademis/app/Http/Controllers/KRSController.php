@@ -28,12 +28,12 @@ class KRSController extends Controller
      */
     public function index(Request $request)
     {
-    $idArray =\app\mahasiswa::select('id')
+    $idArray =\app\Mahasiswa::select('id')
              ->where('user_id', Auth::id())
              ->take(1)
              ->get();
     $id = $idArray[0]->id;
-		$biodata = \app\mahasiswa::select('*')
+		$biodata = \app\Mahasiswa::select('*')
              ->where('id', $id)
              ->orderBy('id', 'desc')
              ->take(1)
@@ -58,16 +58,5 @@ class KRSController extends Controller
 
 		return redirect('/krs');
     }
-    public function coloumn(Request $request)
-    {
-      $email = $request->input('email');
 
-
-      $table = \app\mahasiswa::select('*')
-             ->where('email', $email)
-             ->orderBy('id', 'desc')
-             ->take(1)
-             ->get();
-        return $table ;
-    }
 }

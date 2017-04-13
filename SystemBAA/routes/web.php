@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 //search mahasiswa
 Route::get('/home', 'HomeController@index');
+Route::get('/pengumuman', 'HomeController@index');
+
 //view dan edit biodata
 Route::get('/biodata/edit','BiodataController@index');
 Route::post('/submitbiodata','BiodataController@edit');

@@ -50,7 +50,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="{{ url('../images/img.jpg') }}" alt="..." class="img-circle profile_img">
+                <img src="{{ url('../images/user.png') }}" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
@@ -105,7 +105,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="{{env('URL_HOME')}}" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ url('../images/img.jpg') }}" alt="">{{ $biodata[0]->name }}
+                    <img src="{{ url('../images/user.png') }}" alt="">{{ $biodata[0]->name }}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">

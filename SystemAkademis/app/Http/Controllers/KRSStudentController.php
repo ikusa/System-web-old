@@ -27,12 +27,12 @@ class KRSStudentController extends Controller
      */
     public function index(Request $request)
     {
-    $idArray =\app\mahasiswa::select('id')
+    $idArray =\app\Mahasiswa::select('id')
              ->where('user_id', Auth::id())
              ->take(1)
              ->get();
     $id = $idArray[0]->id;
-		$biodata = \app\mahasiswa::select('*')
+		$biodata = \app\Mahasiswa::select('*')
              ->where('id', $id)
              ->orderBy('id', 'desc')
              ->take(1)
@@ -51,7 +51,7 @@ class KRSStudentController extends Controller
                 ->where('current',1)
                 ->get();
     //ambil course dari database
-		$course = \app\course::select('*')
+		$course = \app\Course::select('*')
 			 ->where('program_studi', $biodata[0]->program_studi)
        ->where('status_terbuka','terbuka')
        ->where('id_term',$idTerm[0]->id)
@@ -61,16 +61,5 @@ class KRSStudentController extends Controller
     }
 
 
-    public function coloumn(Request $request)
-    {
-      $email = $request->input('email');
 
-
-      $table = \app\mahasiswa::select('*')
-             ->where('email', $email)
-             ->orderBy('id', 'desc')
-             ->take(1)
-             ->get();
-        return $table ;
-    }
 }
