@@ -4,8 +4,8 @@ namespace app\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use app\Mahasiswa;
-use app\Course;
+use app\mahasiswa;
+use app\course;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 

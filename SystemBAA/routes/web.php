@@ -27,14 +27,14 @@ Route::post('/submitbiodata','BiodataController@edit');
 Route::get('/biodata/create','BiodataController@create');
 Route::post('/submitcreatebiodata','BiodataController@submitcreate');
 //insert new dosen
-Route::get('/biodata/create','DosenController@create');
-Route::post('/submitcreatedosen','DosenController@submit');
+Route::get('/dosen/create','DosenController@create');
+Route::post('/dosen/create/submit','DosenController@submit');
 //insert new term
-Route::get('/createterm','TermController@create');
-Route::post('/submitterm','TermController@submit');
+Route::get('/term/create','TermController@create');
+Route::post('/term/submit','TermController@submit');
 //insert course
-Route::get('/createnewcourse','KRSController@create');
-Route::post('/submitcourse','KRSController@submit');
+Route::get('/course/create','KRSController@create');
+Route::post('/course/create/submit','KRSController@submit');
 //insert nilai
 Route::get('/nilai', 'nilaiController@index');
 Route::get('/nilai/input', 'nilaiController@edit');

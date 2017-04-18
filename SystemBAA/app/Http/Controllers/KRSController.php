@@ -43,15 +43,13 @@ class KRSController extends Controller
 
       $term  = \app\term::select('*')
                ->get();
-      $dosen = \app\dosen::select('*')
+      $dosen = \app\Dosen::select('*')
                ->get();
       $biodata = \app\user::select('name')
                ->where('id', Auth::id())
                ->orderBy('id', 'desc')
                ->take(1)
                ->get();
-  
-
   		return view('insertcourse',['biodata'=>$biodata,'dosen'=>$dosen,'term'=>$term]);
     }
 

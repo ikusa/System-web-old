@@ -4,8 +4,8 @@ namespace app\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use app\Mahasiswa;
-use app\Course;
+use app\mahasiswa;
+use app\course;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,12 +28,12 @@ class KRSController extends Controller
      */
     public function index(Request $request)
     {
-    $idArray =\app\Mahasiswa::select('id')
+    $idArray =\app\mahasiswa::select('id')
              ->where('user_id', Auth::id())
              ->take(1)
              ->get();
     $id = $idArray[0]->id;
-		$biodata = \app\Mahasiswa::select('*')
+		$biodata = \app\mahasiswa::select('*')
              ->where('id', $id)
              ->orderBy('id', 'desc')
              ->take(1)

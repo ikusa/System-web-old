@@ -4,10 +4,10 @@ namespace app;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Mahasiswa extends Model
+class mahasiswa extends Model
 {
     //
     protected $table = 'mahasiswa';
-	
+
     public $timestamps = false;
 }

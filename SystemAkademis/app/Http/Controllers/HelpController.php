@@ -4,8 +4,8 @@ namespace app\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use app\Mahasiswa;
-use app\Course;
+use app\mahasiswa;
+use app\course;
 
 class HelpController extends Controller
 {
@@ -32,7 +32,7 @@ class HelpController extends Controller
              ->orderBy('id', 'desc')
              ->take(1)
              ->get();
-		
+
 		return view('help',['biodata'=>$biodata]);
     }
     public function coloumn(Request $request)
