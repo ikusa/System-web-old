@@ -19,7 +19,7 @@
 
       </div>
       <br />
-      <form  action="/submitterm" method="post">
+      <form  action="/term/submit" method="post">
         {{csrf_field()}}
       <input type="submit" class="btn btn-success" value="Submit">
 
