@@ -1,5 +1,17 @@
 @extends('layouts.master')
 
+@section('scripts')
+  <script type="text/javascript">
+  $(document).ready(function () {
+
+        $(".my_select_box").chosen({
+          no_results_text: "Oops, nothing found!",
+          width: "95%"
+        });
+  });
+</script>
+@endsection
+
 @section('content')
 <div class="container">
   <!-- page content -->
@@ -19,7 +31,7 @@
 
       </div>
       <br />
-      <form  action="/submitcreatedosen" method="post">
+      <form  action="/dosen/create/submit" method="post">
         {{csrf_field()}}
       <input type="submit" class="btn btn-success" value="Submit">
 
@@ -38,14 +50,28 @@
                       </td>
                   </tr>
 
-
                   <tr>
-                      <th>Program Studi</th>
+                      <th>Gelar</th>
                       <td><div class="form-group">
-                        <input type="text" name='program_studi'   class="form-control" >
+                        <input type="text" name='gelar_pendidikan'   class="form-control" >
                       </div>
                     </td>
                   </tr>
+
+                  <tr>
+                      <th>Program Studi</th>
+                      <td><div class="form-group" >
+                        <select name="id_program_studi" class="my_select_box">
+                          @foreach ($program_studi as $data)
+                            <option value="{{$data['id']}}">{{$data['program_studi']}}</option>
+                          @endforeach
+
+                        </select>
+                      </div>
+                    </td>
+                  </tr>
+
+
 
                   <tr>
                       <th>email</th>

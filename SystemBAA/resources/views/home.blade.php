@@ -92,10 +92,10 @@
               <div class="row">
               <div class="col-xs-8 col-xs-offset-2">
 
-                <a href="/createbiodata" class="btn btn-info" role="button">New Biodata Mahasiswa</a>
-                <a href="/createnewcourse" class="btn btn-info" role="button">New Course</a>
-                <a href="/createbiodatadosen" class="btn btn-info" role="button">New Biodata Dosen</a>
-                <a href="/createterm" class="btn btn-info" role="button">New Term</a>
+                <a href="/biodata/create" class="btn btn-info" role="button">New Biodata Mahasiswa</a>
+                <a href="/course/create" class="btn btn-info" role="button">New Course</a>
+                <a href="/dosen/create" class="btn btn-info" role="button">New Biodata Dosen</a>
+                <a href="/term/create" class="btn btn-info" role="button">New Term</a>
 
               </div><!-- end col-xs-8 -->
               </div><!-- end row -->

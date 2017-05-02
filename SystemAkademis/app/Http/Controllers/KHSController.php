@@ -43,8 +43,7 @@ class KHSController extends Controller
             ->get();
 		$nilai = \app\nilai::join('course', 'course.id', '=', 'nilai.id_course')
             ->join('term', 'term.id', '=', 'course.id_term')
-            ->join('dosen', 'dosen.id', '=', 'course.id_dosen')
-            ->select('kodeMK','namaMK','namaDosen','sks','nilai','term.id','term')
+            ->select('kodeMK','namaMK','dosen','sks','nilai','term.id','term')
             ->where('id_mahasiswa',$id)
             ->where('id_tipenilai',4)
             ->get();

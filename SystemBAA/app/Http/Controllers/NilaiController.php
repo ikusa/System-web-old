@@ -39,8 +39,6 @@ class NilaiController extends Controller
                ->join('term', 'term.id', '=', 'course.id_term')
                ->where($search_param,'like', '%'.$input.'%')
                ->get();
-      Log::info('Special super debug : '.$table);
-
 
     }
 
@@ -56,7 +54,6 @@ class NilaiController extends Controller
     {
 
     $search_param = $request->input('id', 'null');
-    $input= $request->input('x','null');
 		$biodata = \app\user::select('name')
              ->where('id', Auth::id())
              ->orderBy('id', 'desc')

@@ -67,7 +67,7 @@ class SubmitController extends Controller
                ->where('id', $id_krs[$i])
                ->take(1)
                ->get();
-      for ($j=1; $j <6 ; $j++) {
+      for ($j=1; $j <9 ; $j++) {
         DB::table('nilai')->insert(
             ['id_mahasiswa' => $id, 'id_course' => $id_course[0]->id_course,'id_tipenilai'=>$j]
         );

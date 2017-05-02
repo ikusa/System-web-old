@@ -50,7 +50,10 @@
                           <th>SKS</th>
                           <th>Pengajar</th>
                           <th>Status</th>
+                          @if ($biodata[0]->status_krs==1)
                           <th style="width: 10%">Delete</th>
+                          @endif
+
                         </tr>
                       </thead>
                       <tbody>

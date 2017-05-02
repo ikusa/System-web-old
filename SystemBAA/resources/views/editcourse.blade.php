@@ -31,9 +31,11 @@
 
       </div>
       <br />
-      <form  action="/course/create/submit" method="post">
+      <form  action="/course/edit/submit" method="post">
         {{csrf_field()}}
       <input type="submit" class="btn btn-success" value="Submit">
+      <input type="hidden" name='id' value='{{$table[0]->id }}'  class="form-control" >
+
       <input type="hidden" name='status_terbuka' value='1'  class="form-control" >
 
 
@@ -46,21 +48,21 @@
                   <tr>
                       <th>Kode MK</th>
                       <td><div class="form-group">
-                          <input type="text" name='kodeMK'   class="form-control" >
+                          <input type="text" name='kodeMK'   class="form-control" value='{{$table[0]->kodeMK}}' >
                         </div>
                       </td>
                   </tr>
                   <tr>
                       <th>Nama MK</th>
                       <td><div class="form-group">
-                          <input type="text" name='namaMK'   class="form-control" >
+                          <input type="text" name='namaMK'   class="form-control" value='{{$table[0]->namaMK}}' >
                         </div>
                       </td>
                   </tr>
                   <tr>
                       <th>SKS</th>
                       <td><div class="form-group">
-                          <input type="number" name='sks'   class="form-control" >
+                          <input type="number" name='sks'   class="form-control" value='{{$table[0]->sks}}'>
                         </div>
                       </td>
                   </tr>
@@ -69,7 +71,9 @@
                       <td><div class="form-group" >
                         <select name="id_program_studi" class="my_select_box">
                           @foreach ($program_studi as $data)
-                            <option value="{{$data['id']}}">{{$data['program_studi']}}</option>
+                            <option value="{{$data['id']}}" @if ($data['id']==$table[0]->id_program_studi)
+                              selected
+                            @endif>{{$data['program_studi']}}</option>
                           @endforeach
 
                         </select>
@@ -82,7 +86,9 @@
                       <td><div class="form-group" >
                         <select name="id_term" class="my_select_box">
                           @foreach ($term as $data)
-                            <option value="{{$data['id']}}">{{$data['term']}}</option>
+                            <option value="{{$data['id']}}" @if ($data['term']==$table[0]->term)
+                              selected
+                            @endif>{{$data['term']}}</option>
                           @endforeach
 
                         </select>
@@ -95,7 +101,9 @@
                       <td><div class="form-group" >
                         <select multiple name="id_dosen[]" class="my_select_box">
                           @foreach ($dosen as $data)
-                            <option value="{{$data['id']}}">{{$data['namaDosen']}}</option>
+                            <option value="{{$data['id']}}" @if (in_array($data['id'],$table[0]->dosen))
+                              selected
+                            @endif>{{$data['namaDosen']}}</option>
                           @endforeach
 
                         </select>
@@ -105,35 +113,35 @@
                   <tr>
                       <th>Ruang</th>
                       <td><div class="form-group">
-                          <input type="text" name='ruang'   class="form-control" >
+                          <input type="text" name='ruang'   class="form-control" value='{{$table[0]->ruang}}'>
                         </div>
                       </td>
                   </tr>
                   <tr>
                       <th>Hari</th>
                       <td><div class="form-group">
-                          <input type="text" name='hari'   class="form-control" >
+                          <input type="text" name='hari'   class="form-control" value='{{$table[0]->hari}}'>
                         </div>
                       </td>
                   </tr>
                   <tr>
                       <th>Jam</th>
                       <td><div class="form-group">
-                          <input type="text" name='jam'   class="form-control" >
+                          <input type="text" name='jam'   class="form-control" value='{{$table[0]->jam}}'>
                         </div>
                       </td>
                   </tr>
                   <tr>
                       <th>Angkatan</th>
                       <td><div class="form-group">
-                          <input type="number" name='angkatan'   class="form-control" >
+                          <input type="number" name='angkatan'   class="form-control" value='{{$table[0]->angkatan}}'>
                         </div>
                       </td>
                   </tr>
                   <tr>
                       <th>Jumlah Maksimal</th>
                       <td><div class="form-group">
-                          <input type="number" name='max_peserta'   class="form-control" >
+                          <input type="number" name='max_peserta'   class="form-control" value='{{$table[0]->max_peserta}}'>
                         </div>
                       </td>
                   </tr>

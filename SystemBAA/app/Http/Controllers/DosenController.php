@@ -42,13 +42,14 @@ class DosenController extends Controller
     public function create(Request $request)
     {
 
-
+      $program_studi = \app\program_studi::select('*')
+                       ->get();
       $biodata = \app\user::select('name')
                ->where('id', Auth::id())
                ->orderBy('id', 'desc')
                ->take(1)
                ->get();
-  		return view('insertdosen',['biodata'=>$biodata]);
+  		return view('insertdosen',['biodata'=>$biodata,'program_studi'=>$program_studi]);
     }
 
     public function edit(Request $request)
