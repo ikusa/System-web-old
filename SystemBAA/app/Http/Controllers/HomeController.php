@@ -37,7 +37,7 @@ class HomeController extends Controller
     if ($search_param!='null') {
 
       $table = \app\mahasiswa::select('*')
-               ->join('program_studi', 'program_studi.id', '=', 'mahasiswa.id_program_studi')
+               ->join('studi_program', 'program_studi.id', '=', 'mahasiswa.id_program_studi')
                ->where($search_param,'like', '%'.$input.'%')
                ->get();
     }

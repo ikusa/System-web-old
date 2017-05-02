@@ -1,3 +1,21 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: May 02, 2017 at 10:43 AM
+-- Server version: 10.1.10-MariaDB
+-- PHP Version: 7.0.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
 -- Database: `systemwebsu`
 --
@@ -37,6 +55,18 @@ CREATE TABLE `dosen` (
   `id_program_studi` int(11) DEFAULT NULL,
   `gelar_pendidikan` text,
   `email` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dosen_course`
+--
+
+CREATE TABLE `dosen_course` (
+  `id` int(11) NOT NULL,
+  `id_course` int(11) DEFAULT NULL,
+  `id_dosen` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1455,6 +1485,36 @@ CREATE TABLE `student_course` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `studi_program`
+--
+
+CREATE TABLE `studi_program` (
+  `id` int(11) NOT NULL,
+  `program_studi` text,
+  `fakultas` text,
+  `singkatan` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `studi_program`
+--
+
+INSERT INTO `studi_program` (`id`, `program_studi`, `fakultas`, `singkatan`) VALUES
+(1, 'Agribusiness', 'Faculty of Green Economy and Digital Communication', 'AGR'),
+(2, 'Green Economy', 'Faculty of Green Economy and Digital Communication', 'GRE'),
+(3, 'Digital Communication', 'Faculty of Green Economy and Digital Communication', 'DCC'),
+(4, 'Technopreneurship', 'Faculty of Green Economy and Digital Communication', 'TEC'),
+(5, 'Physics - Energy Engineering', 'Faculty of Clean Energy and Climate Change', 'PHY'),
+(6, 'Chemical and Green Process Engineering', 'Faculty of Clean Energy and Climate Change', 'CHE'),
+(7, 'Environmental Engineering', 'Faculty of Clean Energy and Climate Change', 'ENV'),
+(8, 'Human Computer Interaction', 'Faculty of Life Science', 'HCI'),
+(9, 'Nutrition and Food Technology', 'Faculty of Life Science', 'NFT'),
+(10, 'Biotechnology and Neuroscience', 'Faculty of Life Science', 'BIO'),
+(11, 'Mata Kuliah Dasar Indonesia Jaya', 'MKDIJ', 'MKDIJ');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `term`
 --
 
@@ -1475,6 +1535,31 @@ INSERT INTO `term` (`id`, `term`, `kode_dikti`, `current`) VALUES
 (3, '2014/2015-ganjil', '34567', '0'),
 (4, '2014/2015-genap', '45678', '0'),
 (5, '2016/2017-genap', '213142', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tipe_nilai`
+--
+
+CREATE TABLE `tipe_nilai` (
+  `id` int(11) NOT NULL,
+  `tipe` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tipe_nilai`
+--
+
+INSERT INTO `tipe_nilai` (`id`, `tipe`) VALUES
+(1, 'K1'),
+(2, 'K2'),
+(3, 'K3'),
+(4, 'K4'),
+(5, 'K5'),
+(6, 'UTS'),
+(7, 'UAS'),
+(8, 'Akhir');
 
 -- --------------------------------------------------------
 
@@ -2755,6 +2840,37 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `creat
 (2445, 'Imral Lathif Nasution', 'imral.nasution14@student.surya.ac.id', '$2y$10$otedCm64BBy1bg/o64hhpO9qe8aNLwOPW5/AkBKSYJzeu8UYM.JMm', NULL, '2017-03-23 10:02:13', '2017-03-23 10:02:13'),
 (2446, 'Mut Geisler Sokoy', 'mut16@student.surya.ac.id', '$2y$10$feNuU/GMncm6mVFMUdget.1cDFohP6Es75FFSPFYL6xWRk54FEnX6', NULL, '2017-03-23 10:02:14', '2017-03-23 10:02:14');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_baa`
+--
+
+CREATE TABLE `users_baa` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `users_baa`
+--
+
+INSERT INTO `users_baa` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'ikusa', 'joshuasetiawan@ymail.com', '$2y$10$o5mvqAfAf8xhfI6qKQZzV.2gTfnuwUsZw9n7E3.PZh6kkTg/Jxd2O', '2mKOT5CT6jirvhM7CIbgOkTBvOQQGo2dAUY8mf0iB4WnMdmUXx1f8AxiBNEP', '2017-01-03 19:55:06', '2017-03-10 05:44:53'),
+(10, 'Tjong Hianda', 'tjong.hianda@surya.ac.id', '$2y$10$INiSGLG31.NqYlaJ0kRTO.7Lvg/TQZmOmZvgzOfeYQ9DdoN6ug0TW', 'QviP7xDMBN91OHz9fylkuarHCBlFRnDScCNBsvtl0kSLLK7O33PUHnehyG3d', '2017-04-12 19:46:48', '2017-04-12 19:46:48'),
+(11, 'Rani Sendah Purba', 'rani.purba@surya.ac.id', '$2y$10$lD.OqdWM5ouPJcVx.vYnVuUfc6OHXCxZliVFuiJKgc4raCKvYVRu6', 'pw8484cY3NftQrUfG05GtGVorJpCgveiO6RgLrSEhnZoY2xCGrjNwvrouFhh', '2017-04-12 19:47:51', '2017-04-12 19:47:51'),
+(12, 'Aina Mardiyah', 'aina.mardiyah@surya.ac.id', '$2y$10$zcss62WyeS0IHHiPF0zpaunhTAYxpunrWM281mKklSU4jKYzQHSB2', '5x2Y4DACzu5KcSkXp9FmJuhBkeb0nVlKFq3Q5PmqpjRDefPs4MgW3XC03wWB', '2017-04-12 19:48:48', '2017-04-12 19:48:48'),
+(13, 'Maria Septian', 'maria.septianria@surya.ac.id', '$2y$10$QFCuh5ym2.LJMFh2BhCcZOIUn0xUnlP3cMx7hxa84yOj77vw3ww8q', 'bO4cZl12FC1IYld8ykMXcM2zXvSTeLY1iZeW74E6wBoghd9xscPJPqiCSGKG', '2017-04-12 19:49:44', '2017-04-12 19:49:44'),
+(14, 'Topan Bagaskara', 'topan.bagaskara@surya.ac.id', '$2y$10$MRtm97z.T72/g81gGVNO7ud49HEMphZO75EnoPcKog7MjnXUIowfC', 'Cl85bS43JNqMudujm67EVwMeMqlFQn9RDIfaFhs00rxrnBFw92YHPkf6QOAt', '2017-04-12 19:52:36', '2017-04-12 19:52:36'),
+(15, 'Nada Naura', 'nada.naura@surya.ac.id', '$2y$10$7xTkMf6Pr8ee5Qm1YXVlSOOxn97pKFPtO9HXO/X6PtY2zQw.O9Dfe', '1L6jgnJLYu0J9zwV7R3iMg3hr1DPF0oM47FCJwIYqzLnhyizjbgdnP1W0Mel', '2017-04-12 19:53:25', '2017-04-12 19:53:25'),
+(16, 'Tety Rachmawati', 'tety.rachmawati@surya.ac.id', '$2y$10$r8MZxmPLVL/mYmLKBFMs3.g0ysi4UMVgnMJ4X1QX1lH5VzSSY5RqC', 'sqYNKen6JsDPQhXPIuKN8LzE6H8VIg0MG6qMMm0qyuBXzvguxRiEDTh9Rz6x', '2017-04-12 19:54:12', '2017-04-12 19:54:12'),
+(17, 'Revi Awondatu', 'johnny.awondatu@surya.ac.id', '$2y$10$xMK.Cuv.Biv5fm6ph2gEXeFzfhtpnVIIVVf3xzFpWah5J2TCwb6W.', '7Q4MqaQjxutFaaHKiCgRiIbdGJvDKhHAGFDvkEIxiTY0BJdzqFj960NBEK2l', '2017-04-12 19:55:04', '2017-04-12 19:55:04');
+
 --
 -- Indexes for dumped tables
 --
@@ -2773,6 +2889,14 @@ ALTER TABLE `course`
 ALTER TABLE `dosen`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_program_studi` (`id_program_studi`);
+
+--
+-- Indexes for table `dosen_course`
+--
+ALTER TABLE `dosen_course`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_course` (`id_course`),
+  ADD KEY `id_dosen` (`id_dosen`);
 
 --
 -- Indexes for table `mahasiswa`
@@ -2817,9 +2941,21 @@ ALTER TABLE `student_course`
   ADD KEY `id_course` (`id_course`);
 
 --
+-- Indexes for table `studi_program`
+--
+ALTER TABLE `studi_program`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `term`
 --
 ALTER TABLE `term`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tipe_nilai`
+--
+ALTER TABLE `tipe_nilai`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2828,6 +2964,13 @@ ALTER TABLE `term`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `users_baa`
+--
+ALTER TABLE `users_baa`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -2843,6 +2986,11 @@ ALTER TABLE `course`
 --
 ALTER TABLE `dosen`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+--
+-- AUTO_INCREMENT for table `dosen_course`
+--
+ALTER TABLE `dosen_course`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `mahasiswa`
 --
@@ -2869,15 +3017,30 @@ ALTER TABLE `pengumuman`
 ALTER TABLE `student_course`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 --
+-- AUTO_INCREMENT for table `studi_program`
+--
+ALTER TABLE `studi_program`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
 -- AUTO_INCREMENT for table `term`
 --
 ALTER TABLE `term`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT for table `tipe_nilai`
+--
+ALTER TABLE `tipe_nilai`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2447;
+--
+-- AUTO_INCREMENT for table `users_baa`
+--
+ALTER TABLE `users_baa`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- Constraints for dumped tables
 --
@@ -2886,20 +3049,27 @@ ALTER TABLE `users`
 -- Constraints for table `course`
 --
 ALTER TABLE `course`
-  ADD CONSTRAINT `course_ibfk_1` FOREIGN KEY (`id_term`) REFERENCES `term` (`id`),
-  ADD CONSTRAINT `course_ibfk_2` FOREIGN KEY (`id_program_studi`) REFERENCES `program_studi` (`id`);
+  ADD CONSTRAINT `course_ibfk_3` FOREIGN KEY (`id_term`) REFERENCES `term` (`id`),
+  ADD CONSTRAINT `course_ibfk_4` FOREIGN KEY (`id_program_studi`) REFERENCES `studi_program` (`id`);
 
 --
 -- Constraints for table `dosen`
 --
 ALTER TABLE `dosen`
-  ADD CONSTRAINT `dosen_ibfk_1` FOREIGN KEY (`id_program_studi`) REFERENCES `program_studi` (`id`);
+  ADD CONSTRAINT `dosen_ibfk_1` FOREIGN KEY (`id_program_studi`) REFERENCES `studi_program` (`id`);
+
+--
+-- Constraints for table `dosen_course`
+--
+ALTER TABLE `dosen_course`
+  ADD CONSTRAINT `dosen_course_ibfk_1` FOREIGN KEY (`id_course`) REFERENCES `course` (`id`),
+  ADD CONSTRAINT `dosen_course_ibfk_2` FOREIGN KEY (`id_dosen`) REFERENCES `dosen` (`id`);
 
 --
 -- Constraints for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  ADD CONSTRAINT `mahasiswa_ibfk_1` FOREIGN KEY (`id_program_studi`) REFERENCES `program_studi` (`id`);
+  ADD CONSTRAINT `mahasiswa_ibfk_1` FOREIGN KEY (`id_program_studi`) REFERENCES `studi_program` (`id`);
 
 --
 -- Constraints for table `nilai`
