@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2017 at 10:43 AM
+-- Generation Time: May 04, 2017 at 06:53 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.4
 
@@ -28,19 +28,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `course` (
   `id` int(11) NOT NULL,
-  `kodeMK` varchar(11) NOT NULL,
-  `namaMK` varchar(50) NOT NULL,
-  `sks` int(11) NOT NULL,
-  `id_term` int(11) NOT NULL,
-  `status_terbuka` varchar(10) NOT NULL,
-  `ruang` varchar(20) DEFAULT NULL,
-  `hari` varchar(8) DEFAULT NULL,
-  `jam` varchar(20) DEFAULT NULL,
-  `angkatan` varchar(11) DEFAULT NULL,
-  `max_peserta` int(11) DEFAULT NULL,
-  `peserta` int(11) DEFAULT '0',
-  `id_program_studi` int(11) DEFAULT NULL,
-  `kelas` text
+  `kodeMK` text,
+  `namaMK` text,
+  `sks` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -60,13 +50,34 @@ CREATE TABLE `dosen` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dosen_course`
+-- Table structure for table `dosen_kelas`
 --
 
-CREATE TABLE `dosen_course` (
+CREATE TABLE `dosen_kelas` (
   `id` int(11) NOT NULL,
-  `id_course` int(11) DEFAULT NULL,
+  `id_kelas` int(11) DEFAULT NULL,
   `id_dosen` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kelas`
+--
+
+CREATE TABLE `kelas` (
+  `id` int(11) NOT NULL,
+  `kelas` text,
+  `id_course` int(11) DEFAULT NULL,
+  `id_term` int(11) NOT NULL,
+  `status_terbuka` varchar(10) NOT NULL,
+  `ruang` varchar(20) DEFAULT NULL,
+  `hari` text,
+  `jam` text,
+  `angkatan` text,
+  `max_peserta` int(11) DEFAULT NULL,
+  `peserta` int(11) DEFAULT '0',
+  `id_program_studi` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1428,7 +1439,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `nilai` (
   `id` int(255) NOT NULL,
   `id_mahasiswa` int(11) NOT NULL,
-  `id_course` int(11) NOT NULL,
+  `id_kelas` int(11) NOT NULL,
   `id_tipenilai` int(11) DEFAULT NULL,
   `percentage` double DEFAULT NULL,
   `nilai` double DEFAULT NULL,
@@ -1478,7 +1489,7 @@ CREATE TABLE `pengumuman` (
 CREATE TABLE `student_course` (
   `id` int(11) NOT NULL,
   `id_mahasiswa` int(11) DEFAULT NULL,
-  `id_course` int(11) DEFAULT NULL,
+  `id_kelas` int(11) DEFAULT NULL,
   `final` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2879,9 +2890,7 @@ INSERT INTO `users_baa` (`id`, `name`, `email`, `password`, `remember_token`, `c
 -- Indexes for table `course`
 --
 ALTER TABLE `course`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_term` (`id_term`),
-  ADD KEY `id_program_studi` (`id_program_studi`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `dosen`
@@ -2891,12 +2900,21 @@ ALTER TABLE `dosen`
   ADD KEY `id_program_studi` (`id_program_studi`);
 
 --
--- Indexes for table `dosen_course`
+-- Indexes for table `dosen_kelas`
 --
-ALTER TABLE `dosen_course`
+ALTER TABLE `dosen_kelas`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_course` (`id_course`),
+  ADD KEY `id_course` (`id_kelas`),
   ADD KEY `id_dosen` (`id_dosen`);
+
+--
+-- Indexes for table `kelas`
+--
+ALTER TABLE `kelas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_term` (`id_term`),
+  ADD KEY `id_program_studi` (`id_program_studi`),
+  ADD KEY `id_course` (`id_course`);
 
 --
 -- Indexes for table `mahasiswa`
@@ -2917,7 +2935,7 @@ ALTER TABLE `migrations`
 ALTER TABLE `nilai`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_mahasiswa` (`id_mahasiswa`),
-  ADD KEY `id_course` (`id_course`);
+  ADD KEY `id_course` (`id_kelas`);
 
 --
 -- Indexes for table `password_resets`
@@ -2938,7 +2956,7 @@ ALTER TABLE `pengumuman`
 ALTER TABLE `student_course`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_mahasiswa` (`id_mahasiswa`),
-  ADD KEY `id_course` (`id_course`);
+  ADD KEY `id_course` (`id_kelas`);
 
 --
 -- Indexes for table `studi_program`
@@ -2980,17 +2998,22 @@ ALTER TABLE `users_baa`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=915;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `dosen`
 --
 ALTER TABLE `dosen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `dosen_course`
+-- AUTO_INCREMENT for table `dosen_kelas`
 --
-ALTER TABLE `dosen_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+ALTER TABLE `dosen_kelas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `kelas`
+--
+ALTER TABLE `kelas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `mahasiswa`
 --
@@ -3015,7 +3038,7 @@ ALTER TABLE `pengumuman`
 -- AUTO_INCREMENT for table `student_course`
 --
 ALTER TABLE `student_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `studi_program`
 --
@@ -3046,24 +3069,25 @@ ALTER TABLE `users_baa`
 --
 
 --
--- Constraints for table `course`
---
-ALTER TABLE `course`
-  ADD CONSTRAINT `course_ibfk_3` FOREIGN KEY (`id_term`) REFERENCES `term` (`id`),
-  ADD CONSTRAINT `course_ibfk_4` FOREIGN KEY (`id_program_studi`) REFERENCES `studi_program` (`id`);
-
---
 -- Constraints for table `dosen`
 --
 ALTER TABLE `dosen`
   ADD CONSTRAINT `dosen_ibfk_1` FOREIGN KEY (`id_program_studi`) REFERENCES `studi_program` (`id`);
 
 --
--- Constraints for table `dosen_course`
+-- Constraints for table `dosen_kelas`
 --
-ALTER TABLE `dosen_course`
-  ADD CONSTRAINT `dosen_course_ibfk_1` FOREIGN KEY (`id_course`) REFERENCES `course` (`id`),
-  ADD CONSTRAINT `dosen_course_ibfk_2` FOREIGN KEY (`id_dosen`) REFERENCES `dosen` (`id`);
+ALTER TABLE `dosen_kelas`
+  ADD CONSTRAINT `dosen_kelas_ibfk_1` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id`),
+  ADD CONSTRAINT `dosen_kelas_ibfk_2` FOREIGN KEY (`id_dosen`) REFERENCES `dosen` (`id`);
+
+--
+-- Constraints for table `kelas`
+--
+ALTER TABLE `kelas`
+  ADD CONSTRAINT `kelas_ibfk_3` FOREIGN KEY (`id_term`) REFERENCES `term` (`id`),
+  ADD CONSTRAINT `kelas_ibfk_4` FOREIGN KEY (`id_program_studi`) REFERENCES `studi_program` (`id`),
+  ADD CONSTRAINT `kelas_ibfk_5` FOREIGN KEY (`id_course`) REFERENCES `course` (`id`);
 
 --
 -- Constraints for table `mahasiswa`
@@ -3076,14 +3100,14 @@ ALTER TABLE `mahasiswa`
 --
 ALTER TABLE `nilai`
   ADD CONSTRAINT `nilai_ibfk_1` FOREIGN KEY (`id_mahasiswa`) REFERENCES `mahasiswa` (`id`),
-  ADD CONSTRAINT `nilai_ibfk_2` FOREIGN KEY (`id_course`) REFERENCES `course` (`id`);
+  ADD CONSTRAINT `nilai_ibfk_2` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id`);
 
 --
 -- Constraints for table `student_course`
 --
 ALTER TABLE `student_course`
   ADD CONSTRAINT `student_course_ibfk_1` FOREIGN KEY (`id_mahasiswa`) REFERENCES `mahasiswa` (`id`),
-  ADD CONSTRAINT `student_course_ibfk_2` FOREIGN KEY (`id_course`) REFERENCES `dosen_course` (`id`);
+  ADD CONSTRAINT `student_course_ibfk_2` FOREIGN KEY (`id_kelas`) REFERENCES `dosen_kelas` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

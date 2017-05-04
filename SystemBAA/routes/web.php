@@ -23,11 +23,24 @@ Route::get('/home', 'HomeController@index');
 //blm di implement
 //Route::get('/pengumuman', 'HomeController@index');
 
-//search course, dan mainpage course
-Route::get('/course','KRSController@index');
-Route::get('/course/peserta','PesertaController@index');
-Route::get('/course/edit','KRSController@edit');
-Route::post('/course/edit/submit','KRSController@submitedit');
+//search kelas, dan mainpage kelas
+Route::get('/kelas','KRSController@index');
+Route::get('/kelas/peserta','PesertaController@index');
+//edit kelas
+Route::get('/kelas/edit','KRSController@edit');
+Route::post('/kelas/edit/submit','KRSController@submitedit');
+//insert kelas
+Route::get('/kelas/create','KRSController@create');
+Route::post('/kelas/create/submit','KRSController@submit');
+
+//course
+Route::get('/course','CourseController@index');
+//edit course
+Route::get('/course/edit','CourseController@edit');
+Route::post('/course/edit/submit','CourseController@submitedit');
+//insert kelas
+Route::get('/course/create','CourseController@create');
+Route::post('/course/create/submit','CourseController@submit');
 
 //view dan edit biodata
 Route::get('/biodata/edit','BiodataController@index');
@@ -45,9 +58,7 @@ Route::post('/dosen/create/submit','DosenController@submit');
 Route::get('/term/create','TermController@create');
 Route::post('/term/submit','TermController@submit');
 
-//insert course
-Route::get('/course/create','KRSController@create');
-Route::post('/course/create/submit','KRSController@submit');
+
 
 //insert nilai
 Route::get('/nilai', 'nilaiController@index');//change to course search

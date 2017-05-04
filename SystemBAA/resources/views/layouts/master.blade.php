@@ -78,6 +78,9 @@
                   <li><a href="{{env('URL_KRS')}}"><i class="fa fa-desktop"></i> COURSE </a>
 
                   </li>
+                  <li><a href="{{env('URL_KELAS')}}"><i class="fa fa-desktop"></i> KELAS </a>
+
+                  </li>
                   <li><a href="{{env('URL_BIODATA')}}"><i class="fa fa-table"></i> BIODATA </a>
 
                   </li>

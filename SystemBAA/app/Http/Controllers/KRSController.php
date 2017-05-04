@@ -38,8 +38,9 @@ class KRSController extends Controller
               ->take(1)
               ->get();
      if ($search_param!='null') {
-       $table = \app\course::select('course.*','term')
-                ->join('term', 'term.id', '=', 'course.id_term')
+       $table = \app\kelas::select('namaMK','kodeMK','sks','kelas.*','term')
+                ->join('course','course.id','=','kelas.id_course')
+                ->join('term', 'term.id', '=', 'kelas.id_term')
                 ->where($search_param,'like', '%'.$input.'%')
                 ->get();
 
@@ -47,9 +48,9 @@ class KRSController extends Controller
 
        foreach ($table as $key => $value) {
          # code...
-         $value['dosen'] = DB::table('dosen_course')->select('*')
-                ->join('dosen', 'dosen.id', '=', 'dosen_course.id_dosen')
-                ->where('id_course',$value['id'])
+         $value['dosen'] = DB::table('dosen_kelas')->select('*')
+                ->join('dosen', 'dosen.id', '=', 'dosen_kelas.id_dosen')
+                ->where('id_kelas',$value['id'])
                 ->get();
        }
 
@@ -62,12 +63,13 @@ class KRSController extends Controller
        $dosen = null;
 
      }
-         return view('course', ['table' => $table,'biodata'=>$biodata]);
+         return view('kelas', ['table' => $table,'biodata'=>$biodata]);
      }
 
     public function create(Request $request)
     {
-
+      $course = \app\course::select('*')
+                ->get();
       $term  = \app\term::select('*')
                ->get();
       $dosen = \app\dosen::select('*')
@@ -79,7 +81,9 @@ class KRSController extends Controller
                ->get();
       $program_studi = \app\program_studi::select('*')
                      ->get();
-  		return view('insertcourse',['biodata'=>$biodata,'dosen'=>$dosen,'program_studi'=>$program_studi,'term'=>$term]);
+      Log::info('Special super debug:'.$course);
+      Log::info('Special super debug:'.$term);
+  		return view('insertkelas',['biodata'=>$biodata,'dosen'=>$dosen,'course'=>$course,'program_studi'=>$program_studi,'term'=>$term]);
     }
 
     public function edit(Request $request)
@@ -92,25 +96,28 @@ class KRSController extends Controller
                 ->get();
       $term  = \app\term::select('*')
                ->get();
+      $course  = \app\course::select('*')
+               ->get();
       $dosen = \app\dosen::select('*')
                ->get();
       $program_studi = \app\program_studi::select('*')
                      ->get();
        if ($id!='null') {
-         $table = \app\course::select('course.*','term')
-                  ->join('term', 'term.id', '=', 'course.id_term')
-                  ->where('course.id',$id)
+         $table = \app\kelas::select('namaMK','kodeMK','sks','kelas.*','term')
+                  ->join('course','course.id','=','kelas.id_course')
+                  ->join('term', 'term.id', '=', 'kelas.id_term')
+                  ->where('kelas.id',$id)
                   ->get();
 
                   Log::info('Special super debug:'.$table);
 
          foreach ($table as $key => $value) {
            # code...
-            $array_push= DB::table('dosen_course')->select('dosen.id')
-                  ->join('dosen', 'dosen.id', '=', 'dosen_course.id_dosen')
-                  ->where('id_course',$value['id'])
+            $array_push= DB::table('dosen_kelas')->select('dosen.id')
+                  ->join('dosen', 'dosen.id', '=', 'dosen_kelas.id_dosen')
+                  ->where('id_kelas',$value['id'])
                   ->get();
-            $test=[];
+            $test=[];//temporary array
             foreach ($array_push as $data) {
               array_push($test,$data->id);
             }
@@ -124,24 +131,24 @@ class KRSController extends Controller
        }
        Log::info('Special super debug:'.$table);
 
-      return view('editcourse', ['table' => $table,'biodata'=>$biodata,'dosen'=>$dosen,'program_studi'=>$program_studi,'term'=>$term]);
+      return view('editkelas', ['course'=>$course,'table' => $table,'biodata'=>$biodata,'dosen'=>$dosen,'program_studi'=>$program_studi,'term'=>$term]);
     }
 
     public function submitedit(Request $request)
     {
-    
+
       $input = $request->all();
       $id = $input['id'];
       $array_dosen = $input['id_dosen'];
       unset($input['_token']);
       unset($input['id']);
       unset($input['id_dosen']);
-      DB::table('course')
+      DB::table('kelas')
             ->where('id', $id)
             ->update($input);
-      DB::table('dosen_course')->where('id_course',$id)->delete();
+      DB::table('dosen_kelas')->where('id_kelas',$id)->delete();
       foreach ($array_dosen as $value) {
-        DB::table('dosen_course')->insert(['id_course'=>$id,'id_dosen'=>$value]);
+        DB::table('dosen_kelas')->insert(['id_kelas'=>$id,'id_dosen'=>$value]);
       }
       Log::info('Special super debug:'.print_r($array_dosen,true));
 
@@ -153,9 +160,9 @@ class KRSController extends Controller
       $array_dosen = $input['id_dosen'];
       unset($input['_token']);
       unset($input['id_dosen']);
-      $id=DB::table('course')->insertGetId($input);
+      $id=DB::table('kelas')->insertGetId($input);
       foreach ($array_dosen as $value) {
-        DB::table('dosen_course')->insert(['id_course'=>$id,'id_dosen'=>$value]);
+        DB::table('dosen_kelas')->insert(['id_kelas'=>$id,'id_dosen'=>$value]);
       }
       Log::info('Special super debug:'.print_r($array_dosen,true));
 

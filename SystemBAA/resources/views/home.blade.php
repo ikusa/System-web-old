@@ -93,6 +93,7 @@
               <div class="col-xs-8 col-xs-offset-2">
 
                 <a href="/biodata/create" class="btn btn-info" role="button">New Biodata Mahasiswa</a>
+                <a href="/kelas/create" class="btn btn-info" role="button">New Kelas</a>
                 <a href="/course/create" class="btn btn-info" role="button">New Course</a>
                 <a href="/dosen/create" class="btn btn-info" role="button">New Biodata Dosen</a>
                 <a href="/term/create" class="btn btn-info" role="button">New Term</a>

@@ -34,7 +34,6 @@
       <form  action="/course/create/submit" method="post">
         {{csrf_field()}}
       <input type="submit" class="btn btn-success" value="Submit">
-      <input type="hidden" name='status_terbuka' value='1'  class="form-control" >
 
 
 
@@ -64,79 +63,7 @@
                         </div>
                       </td>
                   </tr>
-                  <tr>
-                      <th>Program Studi</th>
-                      <td><div class="form-group" >
-                        <select name="id_program_studi" class="my_select_box">
-                          @foreach ($program_studi as $data)
-                            <option value="{{$data['id']}}">{{$data['program_studi']}}</option>
-                          @endforeach
 
-                        </select>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                      <th>Term</th>
-                      <td><div class="form-group" >
-                        <select name="id_term" class="my_select_box">
-                          @foreach ($term as $data)
-                            <option value="{{$data['id']}}">{{$data['term']}}</option>
-                          @endforeach
-
-                        </select>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                      <th>Dosen</th>
-                      <td><div class="form-group" >
-                        <select multiple name="id_dosen[]" class="my_select_box">
-                          @foreach ($dosen as $data)
-                            <option value="{{$data['id']}}">{{$data['namaDosen']}}</option>
-                          @endforeach
-
-                        </select>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                      <th>Ruang</th>
-                      <td><div class="form-group">
-                          <input type="text" name='ruang'   class="form-control" >
-                        </div>
-                      </td>
-                  </tr>
-                  <tr>
-                      <th>Hari</th>
-                      <td><div class="form-group">
-                          <input type="text" name='hari'   class="form-control" >
-                        </div>
-                      </td>
-                  </tr>
-                  <tr>
-                      <th>Jam</th>
-                      <td><div class="form-group">
-                          <input type="text" name='jam'   class="form-control" >
-                        </div>
-                      </td>
-                  </tr>
-                  <tr>
-                      <th>Angkatan</th>
-                      <td><div class="form-group">
-                          <input type="number" name='angkatan'   class="form-control" >
-                        </div>
-                      </td>
-                  </tr>
-                  <tr>
-                      <th>Jumlah Maksimal</th>
-                      <td><div class="form-group">
-                          <input type="number" name='max_peserta'   class="form-control" >
-                        </div>
-                      </td>
-                  </tr>
                 </form>
 
               </tbody>
