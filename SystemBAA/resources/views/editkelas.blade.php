@@ -59,7 +59,7 @@
                         @foreach ($course as $data)
                           <option value="{{$data['id']}}" @if ($data['id']==$table[0]->id_course)
                             selected
-                          @endif>{{$data['namaMK']}}</option>
+                          @endif>{{$data['kodeMK']}}-{{$data['namaMK']}}-{{$data['sks']}}</option>
                         @endforeach
 
                       </select>
