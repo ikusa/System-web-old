@@ -9,6 +9,21 @@
           width: "95%"
         });
   });
+
+  function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+   var id = getParameterByName('id');
+   $('#edit').click(function() {
+      window.open('{{env('URL_KELAS')}}/peserta?id={{getParameterByName('id')}}')
+   });
+}
 </script>
 @endsection
 
@@ -30,10 +45,10 @@
           </div>
 
       </div>
-      <br />
+      <br>
       <form  action="/nilai/submit" method="post">
         {{csrf_field()}}
-      <button type="button" class="btn btn-info" onclick='$("input").prop("disabled", false);'>Edit</button>
+      <button type="button" class="btn btn-info" id="edit">Edit</button>
       <input type="submit" class="btn btn-success" value="Submit">
 
 
@@ -45,21 +60,20 @@
                 <th>NIM</th>
                 <th>Nama</th>
                 <th>Program Studi</th>
+                @if ($table != null)
                 @foreach ($table as $key)
                   <tr>
-                    <input type="hidden" name="id[]" value="{{$key->id}}">
+
                     <td>{{$key->nim}}</td>
                     <td>{{$key->nama}}</td>
                     <td>{{$key->program_studi}}</td>
                   </tr>
                 @endforeach
-
-
-                </form>
+                @endif
 
               </tbody>
           </table>
-
+      </form>
       </div>
     </div>
 

@@ -58,7 +58,7 @@
                   <th>Kode Mata Kuliah</th>
                   <th>Nama Mata Kuliah</th>
                   <th>SKS</th>
-                  <th>Edit</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
