@@ -38,16 +38,17 @@ class PesertaController extends Controller
               ->get();
      if ($search_param!='null') {
 
-       $table = \app\student_course::select('nim','nama','mahasiswa.program_studi')
+       $table = \app\student_course::select('id_mahasiswa','id_kelas','nim','program_studi')
                 ->join('mahasiswa', 'mahasiswa.id', '=', 'student_course.id_mahasiswa')
-                ->where('student_course.id_course',$search_param)
+                ->join('studi_program', 'mahasiswa.id_program_studi', '=', 'studi_program.id')
+                ->where('id_kelas',$search_param)
                 ->get();
 
 
      }
      $course = \app\course::select('*')
-              ->join('mahasiswa', 'mahasiswa.id', '=', 'student_course.id_mahasiswa')
-              ->where('student_course.id_course',$search_param)
+              ->join('kelas', 'kelas.id_course', '=', 'course.id')
+              ->where('kelas.id',$search_param)
               ->get();
      Log::info('Special loop debug : '.$table);
 
