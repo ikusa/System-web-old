@@ -43,6 +43,43 @@
 		$('#peserta').append(html.join(''));
   }
 
+  $('#cek').click(function( event ) {
+    //event.preventDefault();
+
+
+    var elements = $('#peserta').serialize();
+
+    //serialize() doesnt work for NodeList object
+    var elements = document.querySelectorAll("#peserta input[type='text']");
+    //alert(elements.length)
+
+    //convert elements to array
+    var elemArray = Array.prototype.slice.apply(elements);
+
+    $.ajax({
+        url: '/kelas/peserta/cek',
+        type: 'get',
+        data: elemArray,
+        dataType: 'json',
+        success: function( response ){
+           console.log(response['testing']);
+           console.log(response['result']);
+
+           var hasil = response['result'];
+           alert(hasil['nama']);
+
+        },
+        error: function( _response ){
+           alert("Fail desu");
+        }
+    });
+  });
+
+  function outerHTML(node){
+    return node.outerHTML || new XMLSerializer().serializeToString(node);
+  }
+
+
 
 </script>
 @endsection
