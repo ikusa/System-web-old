@@ -8,6 +8,10 @@
           no_results_text: "Oops, nothing found!",
           width: "95%"
         });
+
+        $('#tambah').click(function() {
+           addRow(document.getElementById('banyakPeserta').value)
+        });
   });
 
   function getParameterByName(name, url) {
@@ -19,11 +23,85 @@
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-   var id = getParameterByName('id');
-   $('#edit').click(function() {
-      window.open('{{env('URL_KELAS')}}/peserta?id={{getParameterByName('id')}}')
-   });
-}
+
+   // Add new rows in peserta table based on passed number.
+   function addRow(banyak) {
+		var html = [];
+      var oldTotalPesertaBaru = document.getElementById("totalPesertaBaru").value;
+
+      totalPesertaBaru = Number(oldTotalPesertaBaru) + Number(banyak);
+      document.getElementById("totalPesertaBaru").value = totalPesertaBaru;
+
+      var count = oldTotalPesertaBaru;
+      for (; count < totalPesertaBaru; count++) {
+         html.push("<tr><td id='nim", count, "'>"
+          + "<input type='text' id='nim", count, "' name='nim", count, "'></td>"
+          + "<td name='nama", count, "' id='nama", count, "'>Ayy</td>"
+          + "<td name='prodi", count, "' id='prodi", count, "'>LMAO</td></tr>");
+      }
+
+		$('#peserta').append(html.join(''));
+  }
+
+  $('#cek').click(function( event ) {
+    event.preventDefault();
+/*
+    //Select all new peserta input form.
+    var nims = document.querySelectorAll("#peserta input[type='text']")
+     , i
+     , node;
+
+    var daftarNIM = [];
+
+    //Testing
+    console.log(daftarNIM);
+    console.log(daftarNIM.length);
+
+    //Convert NodeList to array
+   for (i in nims) {
+     node = nims[i].value;
+     if (typeof node !== "undefined") {
+        daftarNIM.push(node);
+     }
+   }
+*/
+   console.log($('#daftarPeserta').serialize());
+
+
+    $.ajax({
+        url: '/kelas/peserta/cek',
+        type: 'post',
+        data: $('#daftarPeserta').serialize(),
+        dataType: 'json',
+        success: function( response ){
+           //console.log(response['testing']);
+
+           if(response.length > 0) {
+             console.log(response['result']);
+
+               var trHTML = '';
+               $.each(response['result'], function (key,value) {
+                 trHTML +=
+                    '<tr><td>' + value.nim +
+                    '</td><td>' + value.nama +
+                    '</td><td>' + value.program_studi +
+                    '</td></tr>';
+               });
+               $('#peserta').append(trHTML);
+
+           } else {
+             console.log('Nothing in the DB');
+           }
+
+        },
+        error: function( response ){
+           alert("Fail desu");
+        }
+    });
+
+  });
+
+
 </script>
 @endsection
 
@@ -46,15 +124,22 @@
 
       </div>
       <br>
-      <form  action="/nilai/submit" method="post">
+      <form id="daftarPeserta" action="/nilai/submit" method="post">
         {{csrf_field()}}
-      <button type="button" class="btn btn-info" id="edit">Edit</button>
-      <input type="submit" class="btn btn-success" value="Submit">
+      <input type="number" id="banyakPeserta"
+         value=1 max=40 min=1 style="text-align:right;">
+      <button type="button" class="btn btn-info" id="tambah">Tambah</button>
+      <input type="hidden" value="0" name="totalPesertaBaru" id="totalPesertaBaru">
+
+      <button type="button" class="btn btn-info" id="cek">Cek</button>
+      <div style="float:right;">
+         <input type="submit" class="btn btn-success" value="Submit">
+      </div>
 
 
       <div class="x_panel">
       <div class="x_content">
-          <table class="table table-hover">
+          <table class="table table-hover" id="peserta">
               <tbody>
 
                 <th>NIM</th>
