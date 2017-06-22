@@ -34,7 +34,7 @@ Route::get('/kelas/create','KRSController@create');
 Route::post('/kelas/create/submit','KRSController@submit');
 
 //cek peserta baru dalam kelas
-Route::get('/kelas/peserta/cek','APIController@cekNIM');
+Route::post('/kelas/peserta/cek','APIController@cekNIM');
 Route::post('/kelas/peserta/submit','PesertaController@submit');
 
 //course

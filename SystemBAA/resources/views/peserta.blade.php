@@ -35,7 +35,7 @@
       var count = oldTotalPesertaBaru;
       for (; count < totalPesertaBaru; count++) {
          html.push("<tr><td id='nim", count, "'>"
-          + "<input type='text' name='nim", count, "'></td>"
+          + "<input type='text' id='nim", count, "' name='nim", count, "'></td>"
           + "<td name='nama", count, "' id='nama", count, "'>Ayy</td>"
           + "<td name='prodi", count, "' id='prodi", count, "'>LMAO</td></tr>");
       }
@@ -44,41 +44,62 @@
   }
 
   $('#cek').click(function( event ) {
-    //event.preventDefault();
+    event.preventDefault();
+/*
+    //Select all new peserta input form.
+    var nims = document.querySelectorAll("#peserta input[type='text']")
+     , i
+     , node;
 
+    var daftarNIM = [];
 
-    var elements = $('#peserta').serialize();
+    //Testing
+    console.log(daftarNIM);
+    console.log(daftarNIM.length);
 
-    //serialize() doesnt work for NodeList object
-    var elements = document.querySelectorAll("#peserta input[type='text']");
-    //alert(elements.length)
+    //Convert NodeList to array
+   for (i in nims) {
+     node = nims[i].value;
+     if (typeof node !== "undefined") {
+        daftarNIM.push(node);
+     }
+   }
+*/
+   console.log($('#daftarPeserta').serialize());
 
-    //convert elements to array
-    var elemArray = Array.prototype.slice.apply(elements);
 
     $.ajax({
         url: '/kelas/peserta/cek',
-        type: 'get',
-        data: elemArray,
+        type: 'post',
+        data: $('#daftarPeserta').serialize(),
         dataType: 'json',
         success: function( response ){
-           console.log(response['testing']);
-           console.log(response['result']);
+           //console.log(response['testing']);
 
-           var hasil = response['result'];
-           alert(hasil['nama']);
+           if(response.length > 0) {
+             console.log(response['result']);
+
+               var trHTML = '';
+               $.each(response['result'], function (key,value) {
+                 trHTML +=
+                    '<tr><td>' + value.nim +
+                    '</td><td>' + value.nama +
+                    '</td><td>' + value.program_studi +
+                    '</td></tr>';
+               });
+               $('#peserta').append(trHTML);
+
+           } else {
+             console.log('Nothing in the DB');
+           }
 
         },
-        error: function( _response ){
+        error: function( response ){
            alert("Fail desu");
         }
     });
+
   });
-
-  function outerHTML(node){
-    return node.outerHTML || new XMLSerializer().serializeToString(node);
-  }
-
 
 
 </script>
@@ -103,7 +124,7 @@
 
       </div>
       <br>
-      <form  action="/nilai/submit" method="post">
+      <form id="daftarPeserta" action="/nilai/submit" method="post">
         {{csrf_field()}}
       <input type="number" id="banyakPeserta"
          value=1 max=40 min=1 style="text-align:right;">
