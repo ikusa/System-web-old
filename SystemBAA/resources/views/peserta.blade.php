@@ -13,7 +13,7 @@
            addRow(document.getElementById('banyakPeserta').value)
         });
   });
-
+  // Probably not needed, will be removed later.
   function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -34,68 +34,53 @@
 
       var count = oldTotalPesertaBaru;
       for (; count < totalPesertaBaru; count++) {
-         html.push("<tr><td id='nim", count, "'>"
+         html.push("<tr><td id='peserta", count, "'>"
           + "<input type='text' id='nim", count, "' name='nim", count, "'></td>"
-          + "<td name='nama", count, "' id='nama", count, "'>Ayy</td>"
-          + "<td name='prodi", count, "' id='prodi", count, "'>LMAO</td></tr>");
+          + "<td name='nama", count, "' id='nama", count, "'></td>"
+          + "<td name='prodi", count, "' id='prodi", count, "'></td></tr>");
       }
 
 		$('#peserta').append(html.join(''));
   }
 
+  // Send ajax request to check nim from input in table mahasiswa
+  // and return necessary info.
   $('#cek').click(function( event ) {
-    event.preventDefault();
-/*
-    //Select all new peserta input form.
-    var nims = document.querySelectorAll("#peserta input[type='text']")
-     , i
-     , node;
-
-    var daftarNIM = [];
-
-    //Testing
-    console.log(daftarNIM);
-    console.log(daftarNIM.length);
-
-    //Convert NodeList to array
-   for (i in nims) {
-     node = nims[i].value;
-     if (typeof node !== "undefined") {
-        daftarNIM.push(node);
-     }
-   }
-*/
-   console.log($('#daftarPeserta').serialize());
-
 
     $.ajax({
         url: '/kelas/peserta/cek',
         type: 'post',
         data: $('#daftarPeserta').serialize(),
         dataType: 'json',
+
         success: function( response ){
-           //console.log(response['testing']);
 
-           if(response.length > 0) {
-             console.log(response['result']);
+           var totalPeserta = document.getElementById("totalPesertaBaru").value;
+           // Loop for each nim inputted.
+           for (var count = 0; count < totalPeserta; count++) {
+             // Get each input field id to change color based on response
+             var inputField = 'nim'+count;
 
-               var trHTML = '';
-               $.each(response['result'], function (key,value) {
-                 trHTML +=
-                    '<tr><td>' + value.nim +
-                    '</td><td>' + value.nama +
-                    '</td><td>' + value.program_studi +
-                    '</td></tr>';
-               });
-               $('#peserta').append(trHTML);
+             // Still need error checking for input field.
+             if (response.result[count].doesExist == true) {
+                // Change input field background color to greenish color when found.
+                document.getElementById(inputField).style.backgroundColor = "#a9ff52";
+                // Set the necessary info for each column on the table.
+                $('#nama'+count).text(response.result[count].nama);
+                $('#prodi'+count).text(response.result[count].program_studi);
+             } else {
+                // Set pink color on input field when input wasn't found on the DB.
+                document.getElementById(inputField).style.backgroundColor = "#f67da7";
+                $('#nama'+count).text("[ Student not found ]");
+                $('#prodi'+count).text("");
 
-           } else {
-             console.log('Nothing in the DB');
+             }
            }
 
         },
         error: function( response ){
-           alert("Fail desu");
+           // Do error handling later....
+           alert("Error while checking data.");
         }
     });
 
@@ -106,6 +91,20 @@
 @endsection
 
 @section('content')
+
+<style>
+// Ugly hax to keep consistent column size when the table is empty.
+// Still not working, later.
+th {
+   min-width: 25%;
+   max-width: 33%;
+   }
+td {
+   min-width: 25%;
+   max-width: 33%;
+   }
+</style>
+
 <div class="container">
   <!-- page content -->
   <div class="right_col" role="main">
