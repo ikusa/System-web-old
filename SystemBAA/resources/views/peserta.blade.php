@@ -38,6 +38,12 @@
       return decodeURIComponent(results[2].replace(/\+/g, " "));
    }
 
+   // Already using ajax header, probably not needed.
+   function getMetaContentByName(name,content){
+      var content = (content==null)?'content':content;
+      return document.querySelector("meta[name='"+name+"']").getAttribute(content);
+   }
+
    function disableSubmit() {
       document.getElementById("submitPeserta").disabled = true;
    }
@@ -73,10 +79,13 @@
       tooltip.style.opacity = "0";
    }
 
-   // Remove element based on given id.
+   // Remove element based on given id...
+   // Or not, just removing one row of new inputs.
    function hapus(aku) {
       console.log(aku);
       $("#"+aku).remove();
+      // Need separate value for storing amount of inputed student
+      //document.getElementById("inputTambah").value -= 1;
    }
 
    // Need to check for each class later.
@@ -93,7 +102,8 @@
       var html = [];
       var oldTotalPesertaBaru = document.getElementById("inputTambah").value;
       totalPesertaBaru = Number(oldTotalPesertaBaru) + Number(banyak);
-
+      // Need different variable for storing peserta
+      // totalPesertaBaru should be used for naming the input field only
       if (totalPesertaBaru >= MAX_PESERTA) {
          alert("Class lebih dari batas maximal")
          changeBgColor("banyakPeserta", PINKISH);
@@ -106,7 +116,8 @@
          var count = oldTotalPesertaBaru;
          for (; count < totalPesertaBaru; count++) {
             html.push("<tr id='", count, "'><td id='peserta", count, "'>"
-               + "<input onchange=inputChanged('nim", count,"') class='form-control input-nim'"
+               + "<input type='hidden' id='id", count, "' name='id", count, "'>"
+               + "<input onchange=inputChanged('nim", count,"') class='form-control checked'"
                + "type='text' id='nim", count, "' name='nim", count, "'></td>"
                + "<td name='nama", count, "' id='nama", count, "'></td>"
                + "<td name='prodi", count, "' id='prodi", count, "'></td>"
@@ -122,21 +133,63 @@
       }
    }
 
+   // Store the csrf token meta from app.blade
+   // And then putting it on the master.blade
+   // Need to check later
+   $.ajaxSetup({
+      headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+   });
    // Send ajax request to check nim from input in table mahasiswa
    // and return necessary info.
    $('#cek').click(function( event ) {
+      // Still getting error 500 if using csrf on data as string
+      var stolenToken = '{!! csrf_token() !!}';
 
       $.ajax({
       url: '/kelas/peserta/cek',
       type: 'post',
-      data: $('#daftarPeserta').serialize(),
+      data: $('input.checked').serialize(),
       dataType: 'json',
 
       success: function( response ){
 
-         console.log($('#daftarPeserta').serialize());
+         //console.log(response);
 
          enableSubmit();
+
+         $.each(response.result, function(k, v) {
+            //console.log("K = "+k);
+            //console.log(v);
+
+            mahasiswa = response.result[k];
+            nimCell = 'nim'+k;
+            nameSelector = '#nama'+k;
+            prodiSelector = '#prodi'+k;
+            idSelector = '#id'+k;
+
+            if (mahasiswa.doesExist == true) {
+               var nama = mahasiswa.nama,
+                  prodi = mahasiswa.program_studi,
+                  id = mahasiswa.id;
+
+               // Change input field background color to greenish color when found.
+               changeBgColor(nimCell, GREENISH);
+               // Set the necessary info for each column on the table.
+               $(nameSelector).text(nama);
+               $(prodiSelector).text(prodi);
+               $(idSelector).text(id);
+            } else {
+               // Set pinkish color on input field when input wasn't found on the DB.
+               changeBgColor(nimCell, PINKISH);
+               $(nameSelector).text("[ Student not found ]");
+               $(prodiSelector).text("");
+               disableSubmit();
+            }
+         });
+
+         /* Old version
          var totalPeserta = document.getElementById("inputTambah").value;
          // Loop for each nim inputted.
          //**************
@@ -164,11 +217,12 @@
 
                disableSubmit();
             }
-         }
+         }*/
       },
          error: function( response ){
             // Do error handling later....
-            alert("Error while checking data.");
+            console.log("Error while checking data.");
+
          }
       });
 
@@ -189,6 +243,7 @@
       max-width: 30%;
       }
    td {
+      vertical-align: middle !important;
       min-width: 25%;
       max-width: 30%;
       }
@@ -219,9 +274,16 @@
       margin-right: 6px;
    }
 
-   /* Configuring the padding inside input number. */
+   /* Configuring the padding inside input number.
+      Webkit for any webkit based browser.
+   */
    input::-webkit-outer-spin-button,
    input::-webkit-inner-spin-button { margin-left: 10px;}
+
+   /* IDK any other method to modify that dmn spin button on firefox. */
+   input[type=number] {
+      -moz-appearance: textfield;
+   }
 
    button {
       margin-left: 5px;
@@ -279,8 +341,9 @@
       </div>
       <br>
       <form id="daftarPeserta" action="/kelas/peserta/submit" method="post">
-         {{csrf_field()}}
-
+         <div class="checked">
+            {{csrf_field()}}
+         </div>
       <span class="tooltip" id="tooltipTambah">Input between 1 - 100.</span>
       <input type="number" onchange="banyakPesertaChanged()"
          id="banyakPeserta" placeholder="Banyak peserta baru"
@@ -288,11 +351,11 @@
          class="form-control"/>
 
       <button type="button" class="btn btn-info" id="tambah">Tambah</button>
-      <input type="hidden" value="0" name="inputTambah" id="inputTambah">
+      <input type="hidden" value="0" name="inputTambah" id="inputTambah" class="checked">
 
       <button type="button" class="btn btn-info" id="cek">Cek</button>
       <div style="float:right;">
-         <input type="hidden" id="idKelas" name='idKelas' value='{{$idKelas}}' class="form-control" >
+         <input type="hidden" id="idKelas" name='idKelas' value='{{$idKelas}}' class="form-control checked" >
          <input type="submit" id="submitPeserta" class="btn btn-success" value="Submit">
       </div>
 
