@@ -84,12 +84,20 @@ class PesertaController extends Controller
 
    public function submit(Request $request)
    {
-      $input = $request->except('_token','idKelas','inputTambah');
+      $input = $request->except('_token','idKelas','banyakPeserta');
       $idKelas = intval($request->input('idKelas'));
 
       Log::info('Debug input: '.print_r($input, true));
       Log::info('Debug idkelas: '.$idKelas);
+
       foreach ($input as $key => $value) {
+
+         $value = intval($value);
+
+         Log::info('Debug idmhs: '.$value);
+         Log::info('Debug idmhs type: '.gettype($value));
+
+         /* Old ver with lookup from nim
          $idMahasiswa = \app\mahasiswa::select('mahasiswa.id')
                         ->where('mahasiswa.nim', $value)
                         ->first();
@@ -97,9 +105,8 @@ class PesertaController extends Controller
          $idMahasiswa = $idMahasiswa['id'];
          Log::info('Debug idmhs: '.$idMahasiswa);
          Log::info('Debug idmhs type: '.gettype($idMahasiswa));
-         Log::info('Debug idkls type: '.gettype($idKelas));
 
-         /*
+         // Need confirmation for db model
          DB::table('student_course')->insert(
             ['id_mahasiswa' => $idMahasiswa, 'id_kelas' => $idKelas]
          );*/

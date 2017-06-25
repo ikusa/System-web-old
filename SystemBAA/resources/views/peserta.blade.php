@@ -11,6 +11,11 @@
 
       disableSubmit();
 
+      $('#banyakPeserta').change(function () {
+         changeBgColor(this.id, YELLOWISH);
+         hideTooltip();
+      });
+
       $('#tambah').click(function() {
          addRow($('#banyakPeserta').val());
       });
@@ -64,60 +69,84 @@
          var stolenToken = '{!! csrf_token() !!}';
 
          $.ajax({
-         url: '/kelas/peserta/cek',
-         type: 'post',
-         data: $('input.checked').serialize(),
-         dataType: 'json',
+            url: '/kelas/peserta/cek',
+            type: 'post',
+            data: $('input.checked').serialize(),
+            dataType: 'json',
 
-         success: function( response ){
+            success: function ( response ){
 
-            //console.log(response);
-            enableSubmit();
-            // Variable for storing the actual amount of peserta that will be
-            // enrolled to the class.
-            existingPeserta = 0;
+               //console.log(response);
+               enableSubmit();
+               // Variable for storing the actual amount of peserta that will be
+               // enrolled to the class.
+               existingPeserta = 0;
 
-            $.each(response.result, function(k, v) {
-               //console.log("K = "+k);
-               //console.log(v);
+               $.each(response.result, function(k, v) {
+                  //console.log("K = "+k);
+                  //console.log(v);
 
-               mahasiswa = response.result[k];
-               nimCell = 'nim'+k;
-               nameSelector = '#nama'+k;
-               prodiSelector = '#prodi'+k;
-               idSelector = '#id'+k;
+                  mahasiswa = response.result[k];
+                  nimCell = 'nim'+k;
+                  nameSelector = '#nama'+k;
+                  prodiSelector = '#prodi'+k;
+                  idSelector = '#idMhs'+k;
 
-               if (mahasiswa.doesExist == true) {
-                  var nama = mahasiswa.nama,
-                     prodi = mahasiswa.program_studi,
-                     id = mahasiswa.id;
+                  if (mahasiswa.doesExist == true) {
+                     var nama = mahasiswa.nama,
+                        prodi = mahasiswa.program_studi,
+                        id = mahasiswa.id;
 
-                  existingPeserta += 1;
+                     existingPeserta += 1;
 
-                  // Change input field background color to greenish color when found.
-                  changeBgColor(nimCell, GREENISH);
-                  // Set the necessary info for each column on the table.
-                  $(nameSelector).text(nama);
-                  $(prodiSelector).text(prodi);
-                  $(idSelector).text(id);
-               } else {
-                  // Set pinkish color on input field when input wasn't found on the DB.
-                  changeBgColor(nimCell, PINKISH);
-                  $(nameSelector).text("[ Student not found ]");
-                  $(prodiSelector).text("");
-                  disableSubmit();
-               }
-            });
-         },
-            error: function( response ){
+                     // Change input field background color to greenish color when found.
+                     changeBgColor(nimCell, GREENISH);
+                     // Set the necessary info for each column on the table.
+                     $(nameSelector).text(nama);
+                     $(prodiSelector).text(prodi);
+                     $(idSelector).val(id);
+                  } else {
+                     // Set pinkish color on input field when input wasn't found on the DB.
+                     changeBgColor(nimCell, PINKISH);
+                     $(nameSelector).text("[ Student not found ]");
+                     $(prodiSelector).text("");
+                     disableSubmit();
+                  }
+               });
+            },
+            error: function ( response ){
                // Do error handling later....
                console.log("Error while checking data.");
             }
          });
       });
 
-   });
+      $('#daftarPeserta').on("submit", function (e) {
+         e.preventDefault();
 
+         var ids = $('input.submited').serialize();
+
+         console.log('banyakPeserta='+existingPeserta+'&');
+         console.log(ids);
+
+         $.ajax({
+            url: '/kelas/peserta/submit',
+            type: 'post',
+            data: 'banyakPeserta='+existingPeserta+'&'+ids,
+            dataType: 'json',
+
+            success: function () {
+               console.log("Ye");
+            },
+            error: function () {
+               alert("No");
+
+            }
+
+         });
+
+      });
+   });
 
    // Need to check for each class later.
    MAX_PESERTA = 200;
@@ -159,12 +188,6 @@
       $("#"+elementId).css("background-color", color);
    }
 
-   // Need realtime validation later
-   function banyakPesertaChanged() {
-      changeBgColor("banyakPeserta", YELLOWISH);
-      hideTooltip("tooltipTambah");
-   }
-
    function showTooltip(tooltipId) {
       $("#"+tooltipId).css({
          "visibility": "visible",
@@ -202,7 +225,7 @@
          for (; count < totalPesertaBaru; count++) {
             var index = count + 1;
             html.push("<tr id='", count, "'><td id='peserta", count, "'>"
-               + "<input type='hidden' id='id", count, "' name='id", count, "'>"
+               + "<input class='submited' value='' type='hidden' id='idMhs", count, "' name='idMhs", count, "'>"
                + "<input class='form-control input-nim checked' tabindex='", index, "'"
                + "type='text' id='nim", count, "' name='nim", count, "'></td>"
                + "<td name='nama", count, "' id='nama", count, "'></td>"
@@ -218,7 +241,6 @@
          changeBgColor("banyakPeserta", PINKISH);
       }
    }
-
 
 
 </script>
@@ -335,17 +357,15 @@
       <form id="daftarPeserta" action="/kelas/peserta/submit" method="post">
          {{csrf_field()}}
       <span class="tooltip" id="tooltipTambah">Input between 1 - 100.</span>
-      <input type="number" onchange="banyakPesertaChanged()"
-         id="banyakPeserta" placeholder="Banyak peserta baru"
-         value="1" max="100" min="1"
-         class="form-control"/>
+      <input type="number" id="banyakPeserta" placeholder="Banyak peserta baru"
+         value="1" max="100" min="1" class="form-control"/>
 
       <button type="button" class="btn btn-info" id="tambah">Tambah</button>
       <input type="hidden" value="0" name="inputTambah" id="inputTambah" class="checked">
 
       <button type="button" class="btn btn-info" id="cek">Cek</button>
       <div style="float:right;">
-         <input type="hidden" id="idKelas" name='idKelas' value='{{$idKelas}}' class="form-control checked" >
+         <input type="hidden" id="idKelas" name='idKelas' value='{{$idKelas}}' class="form-control checked submited" >
          <input type="submit" id="submitPeserta" class="btn btn-success" value="Submit">
       </div>
 
