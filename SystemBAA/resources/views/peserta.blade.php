@@ -4,28 +4,131 @@
    <script type="text/javascript">
    $(document).ready(function () {
 
-         $(".my_select_box").chosen({
-            no_results_text: "Oops, nothing found!",
-            width: "95%"
-         });
+      $(".my_select_box").chosen({
+         no_results_text: "Oops, nothing found!",
+         width: "95%"
+      });
 
-         $('#tambah').click(function() {
-            addRow(document.getElementById('banyakPeserta').value)
-         });
+      disableSubmit();
 
+      $('#tambah').click(function() {
+         addRow($('#banyakPeserta').val());
+      });
+
+      // Change input field bg color when input changed to prevent mistake
+      // when submiting after checking.
+      // Reminder to self: Bind event handler to document if element isn't
+      // created yet when document is ready.
+      $(document).on("change", ".input-nim", function() {
          disableSubmit();
+         changeBgColor(this.id, YELLOWISH);
+         var num = this.id.slice(3);
+         if ($('#nama'+num).text() != "") {
+            $('#nama'+num).text("[NIM changed]");
+            $('#prodi'+num).text("");
+         }
+      });
+
+      // Remove the row based on row number stored in the button.
+      // Need better alternative for removing parent node.
+      $(document).on("click", ".btn-removal", function () {
+         var num = this.value;
+         $('#'+num).remove();
+         existingRow -= 1;
+      });
+
+      // Will be converted to JQuery later?
+      // Event listener for keeping value and clearing previous value
+      // in input tambah when typing.
+      banyakPeserta.addEventListener('focus', function () {
+         banyakPeserta.setAttribute('data-value', this.value);
+         this.value = '';
+      });
+      banyakPeserta.addEventListener('blur', function () {
+         if (this.value === '')
+            this.value = this.getAttribute('data-value');
+      });
+
+      // Store the csrf token meta from app.blade
+      // And then putting it on the master.blade
+      // Need to check later
+      $.ajaxSetup({
+         headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         }
+      });
+      // Send ajax request to check nim from input in table mahasiswa
+      // and return necessary info.
+      $('#cek').click(function( event ) {
+         // Still getting error 500 if using csrf on data as string
+         var stolenToken = '{!! csrf_token() !!}';
+
+         $.ajax({
+         url: '/kelas/peserta/cek',
+         type: 'post',
+         data: $('input.checked').serialize(),
+         dataType: 'json',
+
+         success: function( response ){
+
+            //console.log(response);
+            enableSubmit();
+            // Variable for storing the actual amount of peserta that will be
+            // enrolled to the class.
+            existingPeserta = 0;
+
+            $.each(response.result, function(k, v) {
+               //console.log("K = "+k);
+               //console.log(v);
+
+               mahasiswa = response.result[k];
+               nimCell = 'nim'+k;
+               nameSelector = '#nama'+k;
+               prodiSelector = '#prodi'+k;
+               idSelector = '#id'+k;
+
+               if (mahasiswa.doesExist == true) {
+                  var nama = mahasiswa.nama,
+                     prodi = mahasiswa.program_studi,
+                     id = mahasiswa.id;
+
+                  existingPeserta += 1;
+
+                  // Change input field background color to greenish color when found.
+                  changeBgColor(nimCell, GREENISH);
+                  // Set the necessary info for each column on the table.
+                  $(nameSelector).text(nama);
+                  $(prodiSelector).text(prodi);
+                  $(idSelector).text(id);
+               } else {
+                  // Set pinkish color on input field when input wasn't found on the DB.
+                  changeBgColor(nimCell, PINKISH);
+                  $(nameSelector).text("[ Student not found ]");
+                  $(prodiSelector).text("");
+                  disableSubmit();
+               }
+            });
+         },
+            error: function( response ){
+               // Do error handling later....
+               console.log("Error while checking data.");
+            }
+         });
+      });
+
    });
 
-   // Event listener for keeping value and clearing previous value
-   // in input tambah when typing.
-   banyakPeserta.addEventListener('focus', function () {
-      banyakPeserta.setAttribute('data-value', this.value);
-      this.value = '';
-   });
-   banyakPeserta.addEventListener('blur', function () {
-      if (this.value === '')
-         this.value = this.getAttribute('data-value');
-   });
+
+   // Need to check for each class later.
+   MAX_PESERTA = 200;
+   existingPeserta = 0;
+   existingRow = 0;
+
+   // Color
+   var GREENISH = "#a9ff52",
+      PINKISH = "#f5baf1",
+      YELLOWISH = "#f6ff8b",
+      REDDISH = "#eb4760";
 
    // Probably not needed, will be removed later.
    function getParameterByName(name, url) {
@@ -45,20 +148,15 @@
    }
 
    function disableSubmit() {
-      document.getElementById("submitPeserta").disabled = true;
+      $("#submitPeserta").prop("disabled",true);
    }
 
    function enableSubmit() {
-      document.getElementById("submitPeserta").disabled = false;
+      $("#submitPeserta").prop("disabled",false);
    }
 
    function changeBgColor(elementId, color) {
-      document.getElementById(elementId).style.backgroundColor = color;
-   }
-
-   function inputChanged(elementId) {
-      disableSubmit();
-      changeBgColor(elementId, YELLOWISH);
+      $("#"+elementId).css("background-color", color);
    }
 
    // Need realtime validation later
@@ -68,165 +166,59 @@
    }
 
    function showTooltip(tooltipId) {
-      var tooltip = document.getElementById(tooltipId);
-      tooltip.style.visibility = "visible";
-      tooltip.style.opacity = "1";
+      $("#"+tooltipId).css({
+         "visibility": "visible",
+         "opacity": "1"
+      });
    }
 
    function hideTooltip(tooltipId) {
-      var tooltip = document.getElementById(tooltipId);
-      tooltip.style.visibility = "hidden";
-      tooltip.style.opacity = "0";
+      $("#"+tooltipId).css({
+         "visibility": "hidden",
+         "opacity": "0"
+      });
    }
-
-   // Remove element based on given id...
-   // Or not, just removing one row of new inputs.
-   function hapus(aku) {
-      console.log(aku);
-      $("#"+aku).remove();
-      // Need separate value for storing amount of inputed student
-      //document.getElementById("inputTambah").value -= 1;
-   }
-
-   // Need to check for each class later.
-   var MAX_PESERTA = 200;
-
-   // Color
-   var GREENISH = "#a9ff52",
-       PINKISH = "#f5baf1",
-       YELLOWISH = "#f6ff8b",
-       REDDISH = "#eb4760";
 
    // Add new rows in peserta table based on passed number.
    function addRow(banyak) {
       var html = [];
-      var oldTotalPesertaBaru = document.getElementById("inputTambah").value;
+      var oldTotalPesertaBaru = $("#inputTambah").val();
       totalPesertaBaru = Number(oldTotalPesertaBaru) + Number(banyak);
+      existingRow += Number(banyak);
       // Need different variable for storing peserta
-      // totalPesertaBaru should be used for naming the input field only
-      if (totalPesertaBaru >= MAX_PESERTA) {
-         alert("Class lebih dari batas maximal")
+      // totalPesertaBaru should be used for naming the input field only.
+      // Right now using existingPeserta to store the actual amount.
+      // And existingRow for storing the total input row.
+      if (existingRow >= MAX_PESERTA) {
+         alert("Input lebih dari batas maximal kelas.");
          changeBgColor("banyakPeserta", PINKISH);
 
       } else if (banyak > 0 && banyak <= 100) {
          changeBgColor("banyakPeserta", GREENISH);
          disableSubmit();
-         document.getElementById("inputTambah").value = totalPesertaBaru;
+         $("#inputTambah").val(totalPesertaBaru);
 
-         var count = oldTotalPesertaBaru;
+         var count = Number(oldTotalPesertaBaru);
          for (; count < totalPesertaBaru; count++) {
+            var index = count + 1;
             html.push("<tr id='", count, "'><td id='peserta", count, "'>"
                + "<input type='hidden' id='id", count, "' name='id", count, "'>"
-               + "<input onchange=inputChanged('nim", count,"') class='form-control checked'"
+               + "<input class='form-control input-nim checked' tabindex='", index, "'"
                + "type='text' id='nim", count, "' name='nim", count, "'></td>"
                + "<td name='nama", count, "' id='nama", count, "'></td>"
                + "<td name='prodi", count, "' id='prodi", count, "'></td>"
                + "<td class='action-column'><button type='button' "
-               + "class='btn btn-info btn-removal' onclick=hapus('", count, "')"
-               + " id='kurang'>🗙</button></td></tr>");
+               + "class='btn btn-info btn-removal'"
+               + " value='", count, "'>🗙</button></td></tr>");
          }
-   		$('#peserta').append(html.join(''));
+         $('#peserta').append(html.join(''));
 
       } else {
-         showTooltip("tooltipTambah")
+         showTooltip("tooltipTambah");
          changeBgColor("banyakPeserta", PINKISH);
       }
    }
 
-   // Store the csrf token meta from app.blade
-   // And then putting it on the master.blade
-   // Need to check later
-   $.ajaxSetup({
-      headers: {
-         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-   });
-   // Send ajax request to check nim from input in table mahasiswa
-   // and return necessary info.
-   $('#cek').click(function( event ) {
-      // Still getting error 500 if using csrf on data as string
-      var stolenToken = '{!! csrf_token() !!}';
-
-      $.ajax({
-      url: '/kelas/peserta/cek',
-      type: 'post',
-      data: $('input.checked').serialize(),
-      dataType: 'json',
-
-      success: function( response ){
-
-         //console.log(response);
-
-         enableSubmit();
-
-         $.each(response.result, function(k, v) {
-            //console.log("K = "+k);
-            //console.log(v);
-
-            mahasiswa = response.result[k];
-            nimCell = 'nim'+k;
-            nameSelector = '#nama'+k;
-            prodiSelector = '#prodi'+k;
-            idSelector = '#id'+k;
-
-            if (mahasiswa.doesExist == true) {
-               var nama = mahasiswa.nama,
-                  prodi = mahasiswa.program_studi,
-                  id = mahasiswa.id;
-
-               // Change input field background color to greenish color when found.
-               changeBgColor(nimCell, GREENISH);
-               // Set the necessary info for each column on the table.
-               $(nameSelector).text(nama);
-               $(prodiSelector).text(prodi);
-               $(idSelector).text(id);
-            } else {
-               // Set pinkish color on input field when input wasn't found on the DB.
-               changeBgColor(nimCell, PINKISH);
-               $(nameSelector).text("[ Student not found ]");
-               $(prodiSelector).text("");
-               disableSubmit();
-            }
-         });
-
-         /* Old version
-         var totalPeserta = document.getElementById("inputTambah").value;
-         // Loop for each nim inputted.
-         //**************
-         //* Important
-         //* Must be changed to $.each loop
-         //* Current loop will broke if using remove, probably.
-         //**************
-         for (var count = 0; count < totalPeserta; count++) {
-            // Get each input field id to change color based on response
-            var inputField = 'nim'+count;
-
-            // Still need error checking for input field.
-            if (response.result[count].doesExist == true) {
-               // Change input field background color to greenish color when found.
-               changeBgColor(inputField, GREENISH);
-               // Set the necessary info for each column on the table.
-               $('#nama'+count).text(response.result[count].nama);
-               $('#prodi'+count).text(response.result[count].program_studi);
-
-            } else {
-               // Set pinkish color on input field when input wasn't found on the DB.
-               changeBgColor(inputField, PINKISH);
-               $('#nama'+count).text("[ Student not found ]");
-               $('#prodi'+count).text("");
-
-               disableSubmit();
-            }
-         }*/
-      },
-         error: function( response ){
-            // Do error handling later....
-            console.log("Error while checking data.");
-
-         }
-      });
-
-   });
 
 
 </script>
@@ -341,13 +333,11 @@
       </div>
       <br>
       <form id="daftarPeserta" action="/kelas/peserta/submit" method="post">
-         <div class="checked">
-            {{csrf_field()}}
-         </div>
+         {{csrf_field()}}
       <span class="tooltip" id="tooltipTambah">Input between 1 - 100.</span>
       <input type="number" onchange="banyakPesertaChanged()"
          id="banyakPeserta" placeholder="Banyak peserta baru"
-         value="1" max="99" min="1"
+         value="1" max="100" min="1"
          class="form-control"/>
 
       <button type="button" class="btn btn-info" id="tambah">Tambah</button>
