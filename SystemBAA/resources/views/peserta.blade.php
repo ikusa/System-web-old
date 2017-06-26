@@ -87,10 +87,8 @@
                   //console.log(v);
 
                   mahasiswa = response.result[k];
-                  nimCell = 'nim'+k;
-                  nameSelector = '#nama'+k;
-                  prodiSelector = '#prodi'+k;
-                  idSelector = '#idMhs'+k;
+                  nimCell = '#nim'+k;
+                  idSelector = '#idMhs'+k; // Need to use traversal later?
 
                   if (mahasiswa.doesExist == true) {
                      var nama = mahasiswa.nama,
@@ -100,16 +98,15 @@
                      existingPeserta += 1;
 
                      // Change input field background color to greenish color when found.
-                     changeBgColor(nimCell, GREENISH);
-                     // Set the necessary info for each column on the table.
-                     $(nameSelector).text(nama);
-                     $(prodiSelector).text(prodi);
+                     $(nimCell).css("background-color", GREENISH)
+                        .parent().next().text(nama)
+                        .next().text(prodi);
                      $(idSelector).val(id);
                   } else {
                      // Set pinkish color on input field when input wasn't found on the DB.
-                     changeBgColor(nimCell, PINKISH);
-                     $(nameSelector).text("[ Student not found ]");
-                     $(prodiSelector).text("");
+                     $(nimCell).css("background-color", PINKISH)
+                        .parent().next().text("[ Student not found ]")
+                        .next().text("");
                      disableSubmit();
                   }
                });
@@ -133,13 +130,12 @@
             url: '/kelas/peserta/submit',
             type: 'post',
             data: 'banyakPeserta='+existingPeserta+'&'+ids,
-            dataType: 'json',
 
             success: function () {
                console.log("Ye");
             },
             error: function () {
-               alert("No");
+               console.log("No");
 
             }
 
@@ -225,14 +221,12 @@
          for (; count < totalPesertaBaru; count++) {
             var index = count + 1;
             html.push("<tr id='", count, "'><td id='peserta", count, "'>"
-               + "<input class='submited' value='' type='hidden' id='idMhs", count, "' name='idMhs", count, "'>"
+               + "<input type='hidden' class='submited' value=''  id='idMhs", count, "' name='idMhs", count, "'>"
                + "<input class='form-control input-nim checked' tabindex='", index, "'"
                + "type='text' id='nim", count, "' name='nim", count, "'></td>"
-               + "<td name='nama", count, "' id='nama", count, "'></td>"
-               + "<td name='prodi", count, "' id='prodi", count, "'></td>"
-               + "<td class='action-column'><button type='button' "
-               + "class='btn btn-info btn-removal'"
-               + " value='", count, "'>🗙</button></td></tr>");
+               + "<td></td><td></td><td class='action-column'>"
+               + "<button type='button' class='btn btn-info btn-removal'"
+               + " value='", count, "'>&#x1F5D9</button></td></tr>");
          }
          $('#peserta').append(html.join(''));
 
@@ -267,9 +261,18 @@
    }
 
    .btn-removal {
-      background-color: #eb4760 !important;
-      border-color: #fff !important;
+      background-color: #f993a3 !important;
+      color: #000 !important;
+      border-color: #000 !important;
       border-radius: 6px !important;
+      border-width: thin !important;
+      -webkit-transition-duration: 0.4s !important; /* Safari */
+      transition-duration: 0.4s !important;
+   }
+
+   .btn-removal:hover {
+       background-color: #ef425c !important; /* Green */
+       color: white !important;
    }
 
    .form-control {
