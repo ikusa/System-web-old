@@ -1,6 +1,7 @@
 <?php
 
 namespace app\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,32 +27,29 @@ class ScriptController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     
+
     public function index(Request $request)
     {
-      $MahasiswaArray =\app\mahasiswa::select('id','nama','email','nim')
+        $MahasiswaArray =\app\mahasiswa::select('id', 'nama', 'email', 'nim')
                       ->get();
-      foreach ($MahasiswaArray as $data) {
-        # code...
-        ini_set('max_execution_time', 3000);
-        User_mahasiswa::create([
+        foreach ($MahasiswaArray as $data) {
+            # code...
+            ini_set('max_execution_time', 3000);
+            User_mahasiswa::create([
             'name' => $data->nama,
             'email' => $data->email,
             'password' => bcrypt($data->email),
         ]);
-        $id =\app\user_mahasiswa::select('id')
+            $id =\app\user_mahasiswa::select('id')
                  ->where('email', $data->email)
-                 ->take(1)
-                 ->get();
-        Log::info('Special super debug : '.$id);
-        $user_id = $id[0]->id;
-        DB::table('mahasiswa')
+                 ->first();
+            Log::info('Special super debug : '.$id);
+            $user_id = $id->id;
+            DB::table('mahasiswa')
               ->where('email', $data->email)
               ->update(['user_id'=>$user_id]);
-      }
-
+        }
 
         return 'succes';
     }
-
 }

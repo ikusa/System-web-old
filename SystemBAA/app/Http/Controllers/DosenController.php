@@ -31,12 +31,12 @@ class DosenController extends Controller
     {
 
 
-    $biodata = \app\user::select('name')
+    $name = \app\user::select('name')
              ->where('id', Auth::id())
              ->orderBy('id', 'desc')
              ->take(1)
              ->get();
-		return view('biodata',['biodata'=>$biodata]);
+		return view('name',['name'=>$name]);
     }
 
     public function create(Request $request)
@@ -44,12 +44,12 @@ class DosenController extends Controller
 
       $program_studi = \app\program_studi::select('*')
                        ->get();
-      $biodata = \app\user::select('name')
+      $name = \app\user::select('name')
                ->where('id', Auth::id())
                ->orderBy('id', 'desc')
                ->take(1)
                ->get();
-  		return view('insertdosen',['biodata'=>$biodata,'program_studi'=>$program_studi]);
+  		return view('insertdosen',['name'=>$name,'program_studi'=>$program_studi]);
     }
 
     public function edit(Request $request)

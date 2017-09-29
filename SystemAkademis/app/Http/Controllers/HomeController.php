@@ -25,11 +25,10 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-    $idArray =\app\mahasiswa::select('id')
+    $id =\app\mahasiswa::select('id')
              ->where('user_id', Auth::id())
-             ->take(1)
-             ->get();
-    $id = $idArray[0]->id;
+             ->first();
+    $id->id;
 		$biodata = \app\mahasiswa::select('*')
              ->where('id', $id)
              ->orderBy('id', 'desc')
