@@ -2,8 +2,8 @@
 
 namespace app\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use app\Mahasiswa;
@@ -31,12 +31,11 @@ class HomeController extends Controller
         $input= $request->input('x', null);
         $name = \app\user::select('name')
                ->where('id', Auth::id())
-              //  ->orderBy('id', 'desc')
                ->first();
 
         if (!empty($search_param)) {
             $table = \app\mahasiswa::select('*')
-              ->join('studi_program', 'program_studi.id', '=', 'mahasiswa.id_program_studi')
+              ->join('studi_program', 'studi_program.id', '=', 'mahasiswa.id_program_studi')
               ->where($search_param, 'like', '%'.$input.'%')
               ->get();
         } else {

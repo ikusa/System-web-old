@@ -1,4 +1,8 @@
 @extends('layouts.master')
+@section('scripts')
+
+@endsection
+
 @section('content')
 
                 <div class="row">
@@ -13,147 +17,145 @@
                 </div>
                 <br />
 
-
-
-
                 <div class="x_content">
                   <div class="x_panel">
+                    <button id="tombol" background-color="red">Click him</button>
 
                     <table class="table table-hover">
                         <tbody>
+                            <!--  -->
                             <tr>
                                 <th>1</th>
                                 <th>Nama</th>
-                                <td>{{ $biodata[0]->nama }}</td>
+                                <td>{{ $biodata->nama }}</td>
                             </tr>
-
 
                             <tr>
                                 <th>2</th>
                                 <th>NIM</th>
-                                <td>{{ $biodata[0]->nim }}</td>
+                                <td>{{ $biodata->nim }}</td>
 
                             </tr>
 
                             <tr>
                                 <th>3</th>
                                 <th>Program Studi</th>
-                                <td>{{ $biodata[0]->program_studi }}</td>
+                                <td>{{ $biodata->program_studi }}</td>
 
                             </tr>
                             <tr>
                                 <th>4</th>
                                 <th>Angkatan</th>
-                                <td>{{ $biodata[0]->Angkatan }}</td>
+                                <td>{{ $biodata->angkatan }}</td>
 
                             </tr>
                             <tr>
                                 <th>5</th>
                                 <th>Email</th>
-                                <td>{{ $biodata[0]->email }}</td>
+                                <td>{{ $biodata->email }}</td>
 
                             </tr>
                             <tr>
                                 <th>6</th>
-                                <th>nomor Telepon</th>
-                                <td>{{ $biodata[0]->no_telephone }}</td>
+                                <th>Nomor Telepon</th>
+                                <td>{{ $biodata->no_telephone }}</td>
 
                             </tr>
                             <tr>
                                 <th>7</th>
                                 <th>Agama</th>
-                                <td>{{ $biodata[0]->agama }}</td>
+                                <td>{{ $biodata->agama }}</td>
                             </tr>
                             <tr>
                                 <th>8</th>
                                 <th>Tempat Lahir</th>
-                                <td>{{ $biodata[0]->tempat_lahir }}</td>
+                                <td>{{ $biodata->tempat_lahir }}</td>
 
                             </tr>
                             <tr>
                                 <th>9</th>
                                 <th>Jenis Kelamin</th>
-                                <td>{{ $biodata[0]->jenis_kelamin }}</td>
+                                <td>{{ $biodata->jenis_kelamin }}</td>
                             </tr>
                             <tr>
                                 <th>10</th>
                                 <th>Nama Ibu</th>
-                                <td>{{ $biodata[0]->nama_ibu }}</td>
+                                <td>{{ $biodata->nama_ibu }}</td>
                             </tr>
                             <tr>
                                 <th>11</th>
                                 <th>Nama Ayah</th>
-                                <td>{{ $biodata[0]->nama_ayah }}</td>
+                                <td>{{ $biodata->nama_ayah }}</td>
                             </tr>
                             <tr>
                                 <th>12</th>
                                 <th>Tanggal Lahir</th>
-                                <td>{{ $biodata[0]->tanggal_lahir }}</td>
+                                <td>{{ $biodata->tanggal_lahir }}</td>
                             </tr>
                             <tr>
                                 <th>13</th>
                                 <th>NISN</th>
-                                <td>{{ $biodata[0]->nisn }}</td>
+                                <td>{{ $biodata->nisn }}</td>
                             </tr>
                             <tr>
                                 <th>14</th>
                                 <th>NIK</th>
-                                <td>{{ $biodata[0]->nik }}</td>
+                                <td>{{ $biodata->nik }}</td>
                             </tr>
                             <tr>
                                 <th>15</th>
                                 <th>NPWP</th>
-                                <td>{{ $biodata[0]->npwp }}</td>
+                                <td>{{ $biodata->npwp }}</td>
                             </tr>
                             <tr>
                                 <th>16</th>
                                 <th>Kewarganegaraan</th>
-                                <td>{{ $biodata[0]->kewarganegaraan }}</td>
+                                <td>{{ $biodata->kewarganegaraan }}</td>
                             </tr>
                             <tr>
                                 <th>17</th>
-                                <th>Jalan</th>
-                                <td>{{ $biodata[0]->jalan }}</td>
+                                <th>Alamat</th>
+                                <td>{{ $biodata->jalan }}</td>
                             </tr>
                             <tr>
                                 <th>18</th>
                                 <th>Dusun</th>
-                                <td>{{ $biodata[0]->dusun }}</td>
+                                <td>{{ $biodata->dusun }}</td>
                             </tr>
                             <tr>
                                 <th>19</th>
                                 <th>RT</th>
-                                <td>{{ $biodata[0]->rt }}</td>
+                                <td>{{ $biodata->rt }}</td>
                             </tr>
                             <tr>
                                 <th>20</th>
                                 <th>RW</th>
-                                <td>{{ $biodata[0]->rw }}</td>
+                                <td>{{ $biodata->rw }}</td>
                             </tr>
                             <tr>
                                 <th>21</th>
-                                <th>Kodepos</th>
-                                <td>{{ $biodata[0]->kodepos }}</td>
+                                <th>Kode pos</th>
+                                <td>{{ $biodata->kodepos }}</td>
                             </tr>
                             <tr>
                                 <th>22</th>
-                                <th>Keluarahan</th>
-                                <td>{{ $biodata[0]->kelurahan }}</td>
+                                <th>Kelurahan</th>
+                                <td>{{ $biodata->kelurahan }}</td>
                             </tr>
                             <tr>
                                 <th>23</th>
                                 <th>Kecamatan</th>
-                                <td>{{ $biodata[0]->kecamatan }}</td>
+                                <td>{{ $biodata->kecamatan }}</td>
                             </tr>
                             <tr>
                                 <th>24</th>
                                 <th>Jenis Tinggal</th>
-                                <td>{{ $biodata[0]->jenis_tinggal }}</td>
+                                <td>{{ $biodata->jenis_tinggal }}</td>
                             </tr>
                             <tr>
                                 <th>25</th>
                                 <th>Transportasi</th>
-                                <td>{{ $biodata[0]->transportasi }}</td>
+                                <td>{{ $biodata->transportasi }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -166,5 +168,28 @@
             </div>
         </div>
     </div>
+    <script
+			  src="https://code.jquery.com/jquery-1.12.4.min.js"
+			  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+			  crossorigin="anonymous">
+                  function () {
+                    $('#tombol').click(function() {
+                      alert("Hai");
+                    });
+        $(document).ready(
+
+            $('button').click(function() {
+              console.log("Hai");
+            });
+
+            $("td").each(function(i){
+              console.log(this.text());
+              if (this.text() == "INDONESIA") {
+                this.text("MALAYSIA");
+              }
+          });
+        });
+
+    </script>
     <!-- /page content -->
 @endsection
