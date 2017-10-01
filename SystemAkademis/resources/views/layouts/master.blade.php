@@ -215,6 +215,6 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-    @yield('script')
+    @yield('scripts')
   </body>
 </html>

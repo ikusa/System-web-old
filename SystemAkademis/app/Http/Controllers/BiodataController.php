@@ -32,7 +32,6 @@ class BiodataController extends Controller
             ->join('studi_program', 'studi_program.id', '=', 'mahasiswa.id_program_studi')
             ->where('user_id', Auth::id())
             ->first();
-
           Log::info("Bo = ".$biodata);
 
         return view('biodata', ['biodata'=>$biodata]);

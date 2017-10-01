@@ -28,35 +28,32 @@ class KRSController extends Controller
      */
     public function index(Request $request)
     {
-    $idArray =\app\mahasiswa::select('id')
+        $id =\app\mahasiswa::select('id')
              ->where('user_id', Auth::id())
-             ->take(1)
-             ->get();
-    $id = $idArray[0]->id;
-		$biodata = \app\mahasiswa::select('*')
+             ->first()->id;
+        $biodata = \app\mahasiswa::select('*')
              ->where('id', $id)
-             ->orderBy('id', 'desc')
-             ->take(1)
-             ->get();
-       /*SELECT kodeMK, namaMK, sks, nama, status_terbuka
-       FROM student_course
-       INNER JOIN course ON course.id = student_course.id_course
-       INNER JOIN dosen ON dosen.id = course.id_dosen
-       WHERE id_mahasiswa = 1*/
-       $KRS = \app\student_course::join('course', 'course.id', '=', 'student_course.id_course')
-              ->select('student_course.id','kodeMK', 'namaMK', 'sks', 'dosen', 'status_terbuka')
-              ->where('id_mahasiswa',$id)
-              ->get();
-
-		return view('krs',['biodata'=>$biodata,'course'=>$KRS]);
+             ->first();
+        /*SELECT kodeMK, namaMK, sks, nama, status_terbuka
+        FROM student_course
+        INNER JOIN course ON course.id = student_course.id_course
+        INNER JOIN dosen_kelas on dosen_kelas.id_kelas = student_course.id_kelas
+        INNER JOIN dosen ON dosen.id = dosen_kelas.id_dosen
+        WHERE id_mahasiswa = 1*/
+        // $KRS = \app\student_course::join('course', 'course.id', '=', 'student_course.id_course')
+        //       ->join('dosen_kelas', 'dosen_kelas.id_kelas', '=', 'student_course.id_kelas')
+        //       ->join('dosen', 'dosen.id', '=', 'dosen_kelas.id_dosen')
+        //       ->select('student_course.id', 'kodeMK', 'namaMK', 'sks', 'dosen', 'status_terbuka')
+        //       ->where('id_mahasiswa', $id)
+        //       ->get();
+        $KRS = null;
+        return view('krs', ['biodata'=>$biodata,'course'=>$KRS]);
     }
     public function delete(Request $request)
     {
+        $idstudent_course = $request->input('subject');
+        DB::table('student_course')->where('id', '=', $idstudent_course)->delete();
 
-    $idstudent_course = $request->input('subject');
-    DB::table('student_course')->where('id', '=', $idstudent_course)->delete();
-
-		return redirect('/krs');
+        return redirect('/krs');
     }
-
 }

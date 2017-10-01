@@ -1,6 +1,15 @@
 @extends('layouts.master')
 @section('scripts')
-
+  <script type="text/javascript">
+    $(document).ready(function () {
+      // Need better empty string handling obviously...
+      // $("td").each(function(i){
+      //   if ($(this).text() == "") {
+      //     $(this).text("-");
+      //   }
+      // });
+    });
+  </script>
 @endsection
 
 @section('content')
@@ -19,8 +28,6 @@
 
                 <div class="x_content">
                   <div class="x_panel">
-                    <button id="tombol" background-color="red">Click him</button>
-
                     <table class="table table-hover">
                         <tbody>
                             <!--  -->
@@ -64,18 +71,18 @@
                             <tr>
                                 <th>7</th>
                                 <th>Agama</th>
-                                <td>{{ $biodata->agama }}</td>
+                                <td>{{ ucfirst(strtolower($biodata->agama)) }}</td>
                             </tr>
                             <tr>
                                 <th>8</th>
                                 <th>Tempat Lahir</th>
-                                <td>{{ $biodata->tempat_lahir }}</td>
+                                <td>{{ ($biodata->tempat_lahir=='') ? '-' : $biodata->tempat_lahir }}</td>
 
                             </tr>
                             <tr>
                                 <th>9</th>
                                 <th>Jenis Kelamin</th>
-                                <td>{{ $biodata->jenis_kelamin }}</td>
+                                <td>{{ ucfirst(strtolower($biodata->jenis_kelamin)) }}</td>
                             </tr>
                             <tr>
                                 <th>10</th>
@@ -95,67 +102,67 @@
                             <tr>
                                 <th>13</th>
                                 <th>NISN</th>
-                                <td>{{ $biodata->nisn }}</td>
+                                <td>{{ ($biodata->nisn=='') ? '-' : $biodata->nisn }}</td>
                             </tr>
                             <tr>
                                 <th>14</th>
                                 <th>NIK</th>
-                                <td>{{ $biodata->nik }}</td>
+                                <td>{{ ($biodata->nik=='') ? '-' : $biodata->nik }}</td>
                             </tr>
                             <tr>
                                 <th>15</th>
                                 <th>NPWP</th>
-                                <td>{{ $biodata->npwp }}</td>
+                                <td>{{ ($biodata->npwp=='') ? '-' : $biodata->npwp }}</td>
                             </tr>
                             <tr>
                                 <th>16</th>
                                 <th>Kewarganegaraan</th>
-                                <td>{{ $biodata->kewarganegaraan }}</td>
+                                <td>{{ ucfirst(strtolower($biodata->kewarganegaraan)) }}</td>
                             </tr>
                             <tr>
                                 <th>17</th>
                                 <th>Alamat</th>
-                                <td>{{ $biodata->jalan }}</td>
+                                <td>{{ ($biodata->jalan=='') ? '-' : $biodata->jalan }}</td>
                             </tr>
                             <tr>
                                 <th>18</th>
                                 <th>Dusun</th>
-                                <td>{{ $biodata->dusun }}</td>
+                                <td>{{ ($biodata->dusun=='') ? '-' : $biodata->dusun }}</td>
                             </tr>
                             <tr>
                                 <th>19</th>
                                 <th>RT</th>
-                                <td>{{ $biodata->rt }}</td>
+                                <td>{{ ($biodata->rt=='') ? '-' : $biodata->rt }}</td>
                             </tr>
                             <tr>
                                 <th>20</th>
                                 <th>RW</th>
-                                <td>{{ $biodata->rw }}</td>
+                                <td>{{ ($biodata->rw=='') ? '-' : $biodata->rw }}</td>
                             </tr>
                             <tr>
                                 <th>21</th>
-                                <th>Kode pos</th>
-                                <td>{{ $biodata->kodepos }}</td>
+                                <th>Kode Pos</th>
+                                <td>{{ ($biodata->kodepos=='') ? '-' : $biodata->kodepos }}</td>
                             </tr>
                             <tr>
                                 <th>22</th>
                                 <th>Kelurahan</th>
-                                <td>{{ $biodata->kelurahan }}</td>
+                                <td>{{ ($biodata->kelurahan=='') ? '-' : $biodata->kelurahan }}</td>
                             </tr>
                             <tr>
                                 <th>23</th>
                                 <th>Kecamatan</th>
-                                <td>{{ $biodata->kecamatan }}</td>
+                                <td>{{ ($biodata->kecamatan=='') ? '-' : $biodata->kecamatan }}</td>
                             </tr>
                             <tr>
                                 <th>24</th>
                                 <th>Jenis Tinggal</th>
-                                <td>{{ $biodata->jenis_tinggal }}</td>
+                                <td>{{ ($biodata->jenis_tinggal=='') ? '-' : $biodata->jenis_tinggal }}</td>
                             </tr>
                             <tr>
                                 <th>25</th>
                                 <th>Transportasi</th>
-                                <td>{{ $biodata->transportasi }}</td>
+                                <td>{{ ($biodata->transportasi=='') ? '-' : $biodata->transportasi }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -168,28 +175,5 @@
             </div>
         </div>
     </div>
-    <script
-			  src="https://code.jquery.com/jquery-1.12.4.min.js"
-			  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-			  crossorigin="anonymous">
-                  function () {
-                    $('#tombol').click(function() {
-                      alert("Hai");
-                    });
-        $(document).ready(
-
-            $('button').click(function() {
-              console.log("Hai");
-            });
-
-            $("td").each(function(i){
-              console.log(this.text());
-              if (this.text() == "INDONESIA") {
-                this.text("MALAYSIA");
-              }
-          });
-        });
-
-    </script>
     <!-- /page content -->
 @endsection
