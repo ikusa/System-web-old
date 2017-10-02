@@ -49,7 +49,7 @@
             </div><!-- end col-md-9 -->
             <!-- searchbox -->
         </div>
-        @if ($table != null)
+        @if (!empty($table))
           <div class="x_panel">
             <!-- table -->
             <table class="table">

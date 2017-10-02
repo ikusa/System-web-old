@@ -1,9 +1,12 @@
 <?php
 
 namespace app\Http\Controllers;
+
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
 use app\mahasiswa;
 
 class BiodataController extends Controller
@@ -25,28 +28,22 @@ class BiodataController extends Controller
      */
     public function index(Request $request)
     {
-    $idArray =\app\mahasiswa::select('id')
-             ->where('user_id', Auth::id())
-             ->take(1)
-             ->get();
-		$id = $idArray[0]->id;
-		$biodata = \app\mahasiswa::select('*')
-             ->where('id', $id)
-             ->orderBy('id', 'desc')
-             ->take(1)
-             ->get();
-		return view('biodata',['biodata'=>$biodata]);
+        $biodata = \app\mahasiswa::select('*')
+            ->join('studi_program', 'studi_program.id', '=', 'mahasiswa.id_program_studi')
+            ->where('user_id', Auth::id())
+            ->first();
+        // Log::info("Bo = ".$biodata);
+
+        return view('biodata', ['biodata'=>$biodata]);
     }
     public function coloumn(Request $request)
     {
-      $email = $request->input('email');
+        $email = $request->input('email');
 
-
-      $table = \app\mahasiswa::select('*')
+        $table = \app\mahasiswa::select('*')
              ->where('email', $email)
              ->orderBy('id', 'desc')
-             ->take(1)
-             ->get();
+             ->first();
         return $table ;
     }
 }

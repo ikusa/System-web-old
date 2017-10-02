@@ -39,8 +39,8 @@
                           <th>Kode</th>
                           <th>Nama</th>
                           <th>SKS</th>
-                          <th>angkatan</th>
-                          <th>Semester</th>
+                          <th>Angkatan</th>
+                          <th>TA</th>
                           <th>Dosen</th>
                           <th>Prodi</th>
                           <th>Ruang</th>
@@ -54,23 +54,21 @@
 					  <form action = "/submit" method = "post">
 					   {{ csrf_field() }}
 
-					  @foreach ($course as $pelajaran)
+					  @foreach ($Classes as $kelas)
                         <tr>
                           <td>
-
-							 <input type="checkbox"  name="checkbox[]" value="{{ $pelajaran->id }}">
-							 <span ><i ></i></span>
-						  </td>
-                          <td>{{ $pelajaran->kodeMK }}</td>
-                          <td>{{ $pelajaran->namaMK }}</td>
-                          <td>{{ $pelajaran->sks }}</td>
-                          <td>{{ $pelajaran->angkatan }}</td>
-                          <td>{{ $pelajaran->term }}</td>
-                          <td>{{ $pelajaran->dosen }}</td>
-                          <td>{{ $pelajaran->program_studi }}</td>
-                          <td>{{ $pelajaran->ruang }}</td>
-                          <td>{{ $pelajaran->hari }}</td>
-                          <td>{{ $pelajaran->jam }}</td>
+            							 <input type="checkbox"  name="checkbox[]" value="{{ $kelas->id }}">
+            						  </td>
+                          <td>{{ $kelas->kodeMK }}</td>
+                          <td>{{ $kelas->namaMK }}</td>
+                          <td>{{ $kelas->sks }}</td>
+                          <td>{{ $kelas->angkatan }}</td>
+                          <td>{{ $kelas->term }}</td>
+                          <td>{{ $kelas->namaDosen }}</td>
+                          <td>{{ $kelas->program_studi }}</td>
+                          <td>{{ $kelas->ruang }}</td>
+                          <td>{{ $kelas->hari }}</td>
+                          <td>{{ $kelas->jam }}</td>
                         </tr>
                         @endforeach
                       </tbody>
@@ -78,10 +76,8 @@
                   </div>
                 </div>
               </div>
-				<input type = "submit" class="btn btn-primary btn-block" value = "Ambil Matakuliah" />
-                  </form>
-
-
+				      <input type = "submit" class="btn btn-primary btn-block" value = "Ambil Matakuliah" />
+            </form>
 
             </div>
           </div>

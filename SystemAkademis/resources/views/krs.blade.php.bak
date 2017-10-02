@@ -14,7 +14,7 @@
           </div>
           <br />
           @if ($biodata->status_krs==1)
-            <a href="{{env('URL_TAMBAH_KRS')}}" class="btn btn-info btn-lg btn-block"><i class="fa fa-pencil"></i> Tambah Matakuliah</a>
+            <a href="{{env('URL_TAMBAH_KRS')}}" class="btn btn-info btn-lg btn-block"><i class="fa fa-pencil"></i>Tambah Matakuliah</a>
 
           @endif
           <div class="">
@@ -57,29 +57,31 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($classesTaken as $class)
+					            @if (!empty($course)) foreach ($course as k$)
+                      @endif
+
                         <tr>
-                          <td>{{ $class->kodeMK }}</td>
+                          <td>k$->kodeMK</td>
                           <td>
-                            <a>{{ $class->namaMK }}</a>
+                            <a>k$->namaMK</a>
                             <br />
 
                           </td>
                           <td>
-                            <a>{{ $class->sks }}</a>
+                            <a>k$->sks</a>
                           </td>
                           <td class="project_progress">
-                            <a>{{ $class->namaDosen }}</a>
+                            <a>k$->dosen</a>
                           </td>
 						              <td class="project_progress">
-                            <a>{{ $class->status_terbuka }}</a>
+                            <a>k$->status_terbuka</a>
                           </td>
 
                           <td>
                             @if ($biodata->status_krs==1)
                               <form action="/delete" method="post">
                                 {{ csrf_field() }}
-                               <button class="btn btn-danger btn-xs" name="subject" type="submit">
+                               <button class="btn btn-danger btn-xs" name="subject" type="submit" value="k$->id">
                               <i class="fa fa-trash-o"></i> Delete
                             </button>
                             </form>
@@ -87,7 +89,8 @@
 
                           </tr>
                           </td>
-                      @endforeach
+                        @if (!empty($course)) endforeach
+                        @endif
                       </tbody>
                     </table>
                     <!-- end project list -->
@@ -118,6 +121,12 @@
 @section('script')
 <script>
 var id_krs = []
+@if (!empty($course)) foreach ($course as k$)
+@endif
+
+//id_krs.push('{{k$->id}}')
+@if (!empty($course)) endforeach
+@endif
 
 function press(){
   var r =  confirm('Mata kuliah yang sudah disubmit tidak bisa diubah.\nApakah anda yakin ingin submit mata kuliah?');
