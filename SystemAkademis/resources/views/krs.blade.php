@@ -14,7 +14,7 @@
           </div>
           <br />
           @if ($biodata->status_krs==1)
-            <a href="{{env('URL_TAMBAH_KRS')}}" class="btn btn-info btn-lg btn-block"><i class="fa fa-pencil"></i>Tambah Matakuliah</a>
+            <a href="{{env('URL_TAMBAH_KRS')}}" class="btn btn-info btn-lg btn-block"><i class="fa fa-pencil"></i> Tambah Matakuliah</a>
 
           @endif
           <div class="">
@@ -57,22 +57,22 @@
                         </tr>
                       </thead>
                       <tbody>
-
+                        @foreach ($classesTaken as $class)
                         <tr>
-                          <td>kodeMK</td>
+                          <td>{{ $class->kodeMK }}</td>
                           <td>
-                            <a>namaMK</a>
+                            <a>{{ $class->namaMK }}</a>
                             <br />
 
                           </td>
                           <td>
-                            <a>sks</a>
+                            <a>{{ $class->sks }}</a>
                           </td>
                           <td class="project_progress">
-                            <a>dosen</a>
+                            <a>{{ $class->namaDosen }}</a>
                           </td>
 						              <td class="project_progress">
-                            <a>status_terbuka</a>
+                            <a>{{ $class->status_terbuka }}</a>
                           </td>
 
                           <td>
@@ -87,6 +87,7 @@
 
                           </tr>
                           </td>
+                      @endforeach
                       </tbody>
                     </table>
                     <!-- end project list -->

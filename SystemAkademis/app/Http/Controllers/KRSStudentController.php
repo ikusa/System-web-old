@@ -33,7 +33,7 @@ class KRSStudentController extends Controller
      */
     public function index(Request $request)
     {
-        $biodata = \app\mahasiswa::select('*')
+        $biodata = \app\mahasiswa::select('user_id', 'mahasiswa.id', 'nama', 'nim', 'program_studi', 'status_krs')
             ->join('studi_program', 'studi_program.id', '=', 'mahasiswa.id_program_studi')
             ->where('user_id', Auth::id())
             ->first();
@@ -49,9 +49,9 @@ class KRSStudentController extends Controller
         //         ])
         //       ->get();
         $ClassesAlreadyTaken=DB::table('student_course')
-              ->select('*')
               ->join('kelas', 'kelas.id', '=', 'student_course.id_kelas')
               ->join('term', 'term.id', '=', 'kelas.id_term')
+              ->select('term.current', 'student_course.id_mahasiswa', 'kelas.id', 'student_course.id_kelas')
               ->where([
                     ['term.current', '=', 1],
                     ['student_course.id_mahasiswa', '=', $id],
@@ -68,12 +68,17 @@ class KRSStudentController extends Controller
         //ambil course dari database -> change into select kelas
         // $possibleClasses=\app\kelas::select('*')
         $possibleClasses=DB::table('kelas')
-              ->select('*')
               ->join('dosen_kelas', 'dosen_kelas.id_kelas', '=', 'kelas.id')
               ->join('dosen', 'dosen.id', '=', 'dosen_kelas.id_dosen')
               ->join('term', 'term.id', '=', 'kelas.id_term')
               ->join('course', 'course.id', '=', 'kelas.id_course')
               ->join('studi_program', 'studi_program.id', '=', 'kelas.id_program_studi')
+              ->select(['kodeMK', 'namaMK', 'sks', 'namaDosen', 'status_terbuka'
+              , 'angkatan', 'term.term', 'program_studi', 'ruang', 'hari'
+              , 'jam', 'dosen_kelas.id_kelas', 'kelas.id'
+              , 'dosen.id', 'dosen_kelas.id_dosen'
+              , 'term.id', 'kelas.id_term', 'course.id'
+              , 'studi_program.id', 'kelas.id_program_studi'])
               ->where([
                     ['kelas.id_term', '=', $idTerm],
                     ['kelas.status_terbuka', '=', 1],

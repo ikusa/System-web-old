@@ -57,10 +57,8 @@
 					  @foreach ($Classes as $kelas)
                         <tr>
                           <td>
-
-							 <input type="checkbox"  name="checkbox[]" value="{{ $kelas->id }}">
-							 <span ><i ></i></span>
-						  </td>
+            							 <input type="checkbox"  name="checkbox[]" value="{{ $kelas->id }}">
+            						  </td>
                           <td>{{ $kelas->kodeMK }}</td>
                           <td>{{ $kelas->namaMK }}</td>
                           <td>{{ $kelas->sks }}</td>
@@ -78,10 +76,8 @@
                   </div>
                 </div>
               </div>
-				<input type = "submit" class="btn btn-primary btn-block" value = "Ambil Matakuliah" />
-                  </form>
-
-
+				      <input type = "submit" class="btn btn-primary btn-block" value = "Ambil Matakuliah" />
+            </form>
 
             </div>
           </div>
