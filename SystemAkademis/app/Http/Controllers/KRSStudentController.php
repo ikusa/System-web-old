@@ -7,8 +7,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-use app\mahasiswa;
 use app\course;
+use app\dosen;
+use app\dosen_kelas;
+use app\kelas;
+use app\mahasiswa;
+use app\term;
 
 class KRSStudentController extends Controller
 {
@@ -29,31 +33,60 @@ class KRSStudentController extends Controller
      */
     public function index(Request $request)
     {
-        $id =\app\mahasiswa::select('id')
-             ->where('user_id', Auth::id())
-             ->first()->id;
         $biodata = \app\mahasiswa::select('*')
-             ->where('id', $id)
-             ->first();
-        //looping course yang sudah diambil
-        $idKRS=\app\student_course::select('id_kelas')
-                ->where('id_mahasiswa', $id)
-                ->get();
-        $array=array();
-        foreach ($idKRS as $idK) {
-            array_push($array, $idK->id_course);
+            ->join('studi_program', 'studi_program.id', '=', 'mahasiswa.id_program_studi')
+            ->where('user_id', Auth::id())
+            ->first();
+        $id = $biodata->id;
+        //looping course yang sudah diambil -> should be replaced with kelas
+        // Select student_course join dosen_kelas join kelas join course join term
+        // $ClassesAlreadyTaken=\app\student_course::select('student_course.id_kelas,student_course.id_mahasiswa,term.current')
+        //       ->join('kelas', 'kelas.id', '=', 'student_course.id_kelas')
+        //       ->join('term', 'term.id', '=', 'kelas.id_term')
+        //       ->where([
+        //             ['term.current', '=', 1],
+        //             ['student_course.id_mahasiswa', '=', $id],
+        //         ])
+        //       ->get();
+        $ClassesAlreadyTaken=DB::table('student_course')
+              ->select('*')
+              ->join('kelas', 'kelas.id', '=', 'student_course.id_kelas')
+              ->join('term', 'term.id', '=', 'kelas.id_term')
+              ->where([
+                    ['term.current', '=', 1],
+                    ['student_course.id_mahasiswa', '=', $id],
+                ])
+              ->get();
+        $idClassesTaken=array();
+        foreach ($ClassesAlreadyTaken as $kelas) {
+            array_push($idClassesTaken, $kelas->id_kelas);
         }
         //ambil term aktif
         $idTerm=\app\term::select('id')
                 ->where('current', 1)
                 ->first()->id;
-        //ambil course dari database
-        $course = \app\course::select('*')
-            //  ->where('program_studi', $biodata->id_program_studi)
-      //  ->where('status_terbuka','terbuka')
-      //  ->where('id_term',$idTerm)
-      //  ->whereNotIn('id', $array)//menghindari menampilkan course yang sudah diambil
-             ->get();
-        return view('krsstudent', ['biodata'=>$biodata,'course'=>$course]);
+        //ambil course dari database -> change into select kelas
+        // $possibleClasses=\app\kelas::select('*')
+        $possibleClasses=DB::table('kelas')
+              ->select('*')
+              ->join('dosen_kelas', 'dosen_kelas.id_kelas', '=', 'kelas.id')
+              ->join('dosen', 'dosen.id', '=', 'dosen_kelas.id_dosen')
+              ->join('term', 'term.id', '=', 'kelas.id_term')
+              ->join('course', 'course.id', '=', 'kelas.id_course')
+              ->join('studi_program', 'studi_program.id', '=', 'kelas.id_program_studi')
+              ->where([
+                    ['kelas.id_term', '=', $idTerm],
+                    ['kelas.status_terbuka', '=', 1],
+                ])
+              ->whereNotIn('kelas.id', $idClassesTaken)
+              ->get();
+        // $kelas = \app\course::select('*')
+        //  ->where('program_studi', $biodata->id_program_studi)
+        //  ->where('status_terbuka','terbuka')
+        //  ->where('id_term',$idTerm)
+        //  ->whereNotIn('id', $idClassesTaken)//menghindari menampilkan course yang sudah diambil
+        //  ->get();
+
+        return view('krsstudent', ['biodata'=>$biodata,'Classes'=>$possibleClasses]);
     }
 }

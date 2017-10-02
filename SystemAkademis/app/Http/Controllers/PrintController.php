@@ -29,33 +29,34 @@ class PrintController extends Controller
     public function index(Request $request)
     {
 
-      $idArray =\app\mahasiswa::select('id')
-               ->where('user_id', Auth::id())
-               ->take(1)
-               ->get();
-      $id = $idArray[0]->id;
-      $biodata = \app\mahasiswa::select('*')
-               ->where('id', $id)
-               ->orderBy('id', 'desc')
-               ->take(1)
-               ->get();
-      $idTerm=\app\term::select('*')
-             ->where('current',1)
+      // $idArray =\app\mahasiswa::select('id')
+        //          ->where('user_id', Auth::id())
+        //          ->take(1)
+        //          ->get();
+        // $id = $idArray[0]->id;
+        // $biodata = \app\mahasiswa::select('*')
+        //          ->where('id', $id)
+        //          ->orderBy('id', 'desc')
+        //          ->take(1)
+        //          ->get();
+
+        $biodata = \app\mahasiswa::select('*')
+          ->join('studi_program', 'studi_program.id', '=', 'mahasiswa.id_program_studi')
+          ->where('user_id', Auth::id())
+          ->first();
+        $idTerm=\app\term::select('*')
+             ->where('current', 1)
              ->get();
-         /*SELECT kodeMK, namaMK, sks, nama, status_terbuka
-         FROM student_course
-         INNER JOIN course ON course.id = student_course.id_course
-         INNER JOIN dosen ON dosen.id = course.id_dosen
-         WHERE id_mahasiswa = 1*/
-         $KRS = \app\student_course::join('course', 'course.id', '=', 'student_course.id_course')
-                ->select('student_course.id','kodeMK', 'namaMK', 'sks', 'dosen', 'status_terbuka','hari','ruang','jam','program_studi','angkatan')
-                ->where('id_mahasiswa',$id)
+        /*SELECT kodeMK, namaMK, sks, nama, status_terbuka
+        FROM student_course
+        INNER JOIN course ON course.id = student_course.id_course
+        INNER JOIN dosen ON dosen.id = course.id_dosen
+        WHERE id_mahasiswa = 1*/
+        $KRS = \app\student_course::join('course', 'course.id', '=', 'student_course.id_course')
+                ->select('student_course.id', 'kodeMK', 'namaMK', 'sks', 'dosen', 'status_terbuka', 'hari', 'ruang', 'jam', 'program_studi', 'angkatan')
+                ->where('id_mahasiswa', $id)
                 ->get();
 
-
-
-      return view('print_krs',['biodata'=>$biodata,'course'=>$KRS,'term'=>$idTerm]);
-
+        return view('print_krs', ['biodata'=>$biodata,'course'=>$KRS,'term'=>$idTerm]);
     }
-
 }

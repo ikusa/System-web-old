@@ -28,12 +28,10 @@ class KRSController extends Controller
      */
     public function index(Request $request)
     {
-        $id =\app\mahasiswa::select('id')
-             ->where('user_id', Auth::id())
-             ->first()->id;
         $biodata = \app\mahasiswa::select('*')
-             ->where('id', $id)
-             ->first();
+            ->join('studi_program', 'studi_program.id', '=', 'mahasiswa.id_program_studi')
+            ->where('user_id', Auth::id())
+            ->first();
         /*SELECT kodeMK, namaMK, sks, nama, status_terbuka
         FROM student_course
         INNER JOIN course ON course.id = student_course.id_course

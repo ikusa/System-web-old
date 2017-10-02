@@ -33,7 +33,6 @@ class KRSController extends Controller
         $input= $request->input('x', null);
         $name = \app\user::select('name')
               ->where('id', Auth::id())
-              ->orderBy('id', 'desc')
               ->first();
         if (!empty($search_param)) {
             $table = \app\kelas::select('namaMK', 'kodeMK', 'sks', 'kelas.*', 'term')
@@ -68,9 +67,7 @@ class KRSController extends Controller
                ->get();
         $name = \app\user::select('name')
                ->where('id', Auth::id())
-               ->orderBy('id', 'desc')
-               ->take(1)
-               ->get();
+               ->first();
         $program_studi = \app\program_studi::select('*')
                      ->get();
         Log::info('Special super debug:'.$course);

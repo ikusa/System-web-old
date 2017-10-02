@@ -27,25 +27,18 @@ class SettingController extends Controller
      */
     public function index(Request $request)
     {
-    $idArray =\app\mahasiswa::select('id')
-             ->where('user_id', Auth::id())
-             ->take(1)
-             ->get();
-    $id = $idArray[0]->id;
-		$biodata = \app\mahasiswa::select('*')
-             ->where('id', $id)
-             ->orderBy('id', 'desc')
-             ->take(1)
-             ->get();
+        $biodata = \app\mahasiswa::select('*')
+            ->join('studi_program', 'studi_program.id', '=', 'mahasiswa.id_program_studi')
+            ->where('user_id', Auth::id())
+            ->first();
 
-		return view('setting',['biodata'=>$biodata]);
+        return view('setting', ['biodata'=>$biodata]);
     }
     public function coloumn(Request $request)
     {
-      $email = $request->input('email');
+        $email = $request->input('email');
 
-
-      $table = \app\mahasiswa::select('*')
+        $table = \app\mahasiswa::select('*')
              ->where('email', $email)
              ->orderBy('id', 'desc')
              ->take(1)
