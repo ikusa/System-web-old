@@ -4,20 +4,15 @@
    <script type="text/javascript">
    $(document).ready(function () {
 
-      $(".my_select_box").chosen({
-        no_results_text: "Oops, nothing found!",
-        width: "95%"
-      });
-
       disableSubmit();
 
       $('#banyakPeserta').change(function () {
-        changeBgColor(this.id, YELLOWISH);
-        hideTooltip();
+         changeBgColor(this.id, YELLOWISH);
+         hideTooltip();
       });
 
       $('#tambah').click(function() {
-        addRow($('#banyakPeserta').val());
+         addRow($('#banyakPeserta').val());
       });
 
       // Change input field bg color when input changed to prevent mistake

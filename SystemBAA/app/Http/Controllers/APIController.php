@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use app\Mahasiswa;
 use app\User;
 
+
 class APIController extends Controller
 {
     /**
@@ -39,6 +40,7 @@ class APIController extends Controller
                 Log::info("Value = ".$value);
 
                 $peserta = \app\mahasiswa::select('mahasiswa.id', 'nim', 'program_studi', 'nama')
+
                        ->join('studi_program', 'mahasiswa.id_program_studi', '=', 'studi_program.id')
                        ->where('mahasiswa.nim', $value)
                        ->first();
@@ -66,4 +68,5 @@ class APIController extends Controller
 
         return response()->json(['result' => $listPeserta]);
     }
+
 }
